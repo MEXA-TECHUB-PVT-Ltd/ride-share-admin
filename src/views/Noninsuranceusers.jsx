@@ -103,7 +103,7 @@ const NonInsuranceUsers = () => {
 
                         <div>
                             <Eye
-                                style={{ color: "#00cfe8", fontSize: "15px" }}
+                                style={{ cursor: "pointer", color: "#00cfe8", fontSize: "15px" }}
                                 id="viewTooltip"
                                 onClick={() => modalopenview()}
                                 onMouseEnter={toggleTooltipview}
@@ -238,7 +238,7 @@ const NonInsuranceUsers = () => {
 
                         <Col xs='12' className="">
                             <h6 className="text-right">
-                            Insurance costs can be a significant factor. He might delay or avoid getting insurance due to financial constraints or perceiving insurance expenses as excessive.
+                                Insurance costs can be a significant factor. He might delay or avoid getting insurance due to financial constraints or perceiving insurance expenses as excessive.
                             </h6>
                         </Col>
 

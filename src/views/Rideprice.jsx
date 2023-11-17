@@ -72,7 +72,7 @@ const RidePrice = () => {
 
                         <div>
                             <Edit
-                                style={{ color: "#00cfe8", fontSize: "15px" }}
+                                style={{ cursor: "pointer", color: "#00cfe8", fontSize: "15px" }}
                                 id="editTooltip"
                                 onClick={() => modalopenedit()}
                                 onMouseEnter={toggleTooltipEdit}
@@ -85,7 +85,7 @@ const RidePrice = () => {
 
                         <div>
                             <Trash2
-                                style={{ fontSize: "15px", color: "red" }}
+                                style={{ cursor: "pointer", fontSize: "15px", color: "red" }}
                                 id="deleteTooltip"
                                 onClick={() => modalopendelete()}
                                 onMouseEnter={toggleTooltipDelete}
@@ -100,7 +100,7 @@ const RidePrice = () => {
                 </>
             ),
         },
-    ]; 
+    ];
 
     const [emptyfieldalert, setEmptyfieldalert] = useState(false);
 
@@ -108,7 +108,7 @@ const RidePrice = () => {
 
     const modalopen = () => {
         setModalOpen(!modalOpen);
-    }; 
+    };
 
     const [modaledit, setModaledit] = useState(false);
     const modalopenedit = () => {
@@ -170,7 +170,7 @@ const RidePrice = () => {
 
     const handleSelect = option => {
         setSelectedOption(option);
-        setDropdownOpen(false);
+        setDropdownOpen(true);
         // Perform any other actions based on the selected option
     };
 
@@ -183,7 +183,7 @@ const RidePrice = () => {
                 </Col>
                 <Col xs="2" md="1" className="text-right">
                     <PlusCircle
-                        style={{ fontSize: "15px", color: "" }}
+                        style={{ cursor: "pointer", fontSize: "15px", color: "" }}
                         id="addTooltip"
                         onClick={() => modalopen()}
                         onMouseEnter={toggleTooltipadd}

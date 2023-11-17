@@ -73,7 +73,7 @@ const CarType = () => {
 
                         <div>
                             <Edit
-                                style={{ color: "#00cfe8", fontSize: "15px" }}
+                                style={{cursor:"pointer", color: "#00cfe8", fontSize: "15px" }}
                                 id="editTooltip"
                                 onClick={() => modalopenedit()}
                                 onMouseEnter={toggleTooltipEdit}
@@ -86,7 +86,7 @@ const CarType = () => {
 
                         <div>
                             <Trash2
-                                style={{ fontSize: "15px", color: "red" }}
+                                style={{ cursor:"pointer",fontSize: "15px", color: "red" }}
                                 id="deleteTooltip"
                                 onClick={() => modalopendelete()}
                                 onMouseEnter={toggleTooltipDelete}
@@ -203,7 +203,7 @@ const CarType = () => {
                 </Col>
                 <Col xs="2" md="1" className="text-right">
                     <PlusCircle
-                        style={{ fontSize: "15px", color: "" }}
+                        style={{ cursor:"pointer",fontSize: "15px", color: "" }}
                         id="addTooltip"
                         onClick={() => modalopen()}
                         onMouseEnter={toggleTooltipadd}

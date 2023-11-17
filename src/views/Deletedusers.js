@@ -7,23 +7,23 @@ import {
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import userimage from "@src/assets/images/logo/avatar.jpg";
-import adimage from "@src/assets/images/pages/adimage.png"; 
+import adimage from "@src/assets/images/pages/adimage.png";
 
-const Deletedusers = () => { 
+const Deletedusers = () => {
 
-    const [tooltipOpenview, setTooltipOpenview] = useState(false); 
+    const [tooltipOpenview, setTooltipOpenview] = useState(false);
 
-    const toggleTooltipview = () => setTooltipOpenview(!tooltipOpenview); 
+    const toggleTooltipview = () => setTooltipOpenview(!tooltipOpenview);
 
     const data = [
-        { id: 1, name: 'John', email: "john@gmail.com", deleted_date: "20 Jan,2000", gender: "male", age: "30", remainingdays:"10",status: "active" },
-        { id: 2, name: 'John', email: "john@gmail.com", deleted_date: "20 Jan,2000", gender: "male", age: "30", remainingdays:"1",status: "active" },
-        { id: 1, name: 'John', email: "john@gmail.com", deleted_date: "20 Jan,2000", gender: "male", age: "30", remainingdays:"80",status: "active" },
-        { id: 2, name: 'John', email: "john@gmail.com", deleted_date: "20 Jan,2000", gender: "male", age: "30", remainingdays:"10",status: "active" },
-        { id: 1, name: 'John', email: "john@gmail.com", deleted_date: "20 Jan,2000", gender: "male", age: "30", remainingdays:"0",status: "active" },
-        { id: 2, name: 'John', email: "john@gmail.com", deleted_date: "20 Jan,2000", gender: "male", age: "30", remainingdays:"10",status: "active" },
-        { id: 1, name: 'John', email: "john@gmail.com", deleted_date: "20 Jan,2000", gender: "male", age: "30", remainingdays:"10",status: "active" },
-        { id: 2, name: 'John', email: "john@gmail.com", deleted_date: "20 Jan,2000", gender: "male", age: "30", remainingdays:"70",status: "active" },
+        { id: 1, name: 'John', email: "john@gmail.com", deleted_date: "20 Jan,2000", gender: "male", age: "30", remainingdays: "10", status: "active" },
+        { id: 2, name: 'John', email: "john@gmail.com", deleted_date: "20 Jan,2000", gender: "male", age: "30", remainingdays: "1", status: "active" },
+        { id: 1, name: 'John', email: "john@gmail.com", deleted_date: "20 Jan,2000", gender: "male", age: "30", remainingdays: "80", status: "active" },
+        { id: 2, name: 'John', email: "john@gmail.com", deleted_date: "20 Jan,2000", gender: "male", age: "30", remainingdays: "10", status: "active" },
+        { id: 1, name: 'John', email: "john@gmail.com", deleted_date: "20 Jan,2000", gender: "male", age: "30", remainingdays: "0", status: "active" },
+        { id: 2, name: 'John', email: "john@gmail.com", deleted_date: "20 Jan,2000", gender: "male", age: "30", remainingdays: "10", status: "active" },
+        { id: 1, name: 'John', email: "john@gmail.com", deleted_date: "20 Jan,2000", gender: "male", age: "30", remainingdays: "10", status: "active" },
+        { id: 2, name: 'John', email: "john@gmail.com", deleted_date: "20 Jan,2000", gender: "male", age: "30", remainingdays: "70", status: "active" },
     ];
 
     const columns = [
@@ -38,10 +38,10 @@ const Deletedusers = () => {
             ),
         },
         { name: 'Name', selector: 'name', sortable: true },
-        { name: 'Email', selector: 'email', sortable: true }, 
-        { name: 'Deleted Date', selector: 'deleted_date', sortable: true },   
-        { name: 'Remaining Days', selector: 'remainingdays', sortable: true }, 
-         
+        { name: 'Email', selector: 'email', sortable: true },
+        { name: 'Deleted Date', selector: 'deleted_date', sortable: true },
+        { name: 'Remaining Days', selector: 'remainingdays', sortable: true },
+
         // {
         //     name: 'Status',
         //     cell: row => (
@@ -65,7 +65,7 @@ const Deletedusers = () => {
 
                         <div>
                             <Eye
-                                style={{ color: "#00cfe8", fontSize: "15px" }}
+                                style={{ cursor: "pointer", color: "#00cfe8", fontSize: "15px" }}
                                 id="viewTooltip"
                                 onClick={() => modalopenview()}
                                 onMouseEnter={toggleTooltipview}
@@ -134,7 +134,7 @@ const Deletedusers = () => {
                 pagination
                 highlightOnHover
                 responsive
-                customStyles={customStyles} 
+                customStyles={customStyles}
             />
 
             <Modal isOpen={modalview} toggle={modalopenview} centered>
