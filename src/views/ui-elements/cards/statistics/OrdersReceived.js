@@ -11,7 +11,7 @@ import StatsWithAreaChart from '@components/widgets/stats/StatsWithAreaChart'
 const OrdersReceived = ({ kFormatter, warning }) => {
   // ** State
   const [data, setData] = useState([{
-    name: 'advace subscription',
+    name: 'Cars',
     data: [31, 40, 28, 51, 42, 109, 100]
   },
   ])
@@ -71,7 +71,7 @@ const OrdersReceived = ({ kFormatter, warning }) => {
       icon={<Package size={21} />}
       color='warning'
       stats="567"
-      statTitle='Advanced Subscription'
+      statTitle='Cars'
       options={options}
       series={data}
       type='area'

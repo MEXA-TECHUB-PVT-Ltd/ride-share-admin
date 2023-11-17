@@ -40,6 +40,7 @@ const SetNewPassword = lazy(() => import("../../views/Setnewpassword"));
 const Error = lazy(() => import("../../views/Error"));
 const AnalyticsDashboard = lazy(() => import("../../views/dashboard/analytics"));
 const UserList = lazy(() => import('../../views/user/list'));
+const RidePrice = lazy(() => import('../../views/Rideprice')); 
 const Users = lazy(() => import('../../views/Users'));
 const Complaints = lazy(() => import('../../views/Complaints')); 
 const NonInsuranceUsers = lazy(() => import('../../views/Noninsuranceusers'));  
@@ -90,6 +91,10 @@ const Routes = [
   {
     path: '/cartype',
     element: <CarType />
+  }, 
+  {
+    path: '/ridefair',
+    element: <RidePrice />
   }, 
   {
     path: '/users',

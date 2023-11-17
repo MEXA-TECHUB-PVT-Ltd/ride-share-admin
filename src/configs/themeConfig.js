@@ -6,7 +6,7 @@ import logo from "@src/assets/images/logo/logo-info.png";
 //Template config options
 const themeConfig = {
   app: {
-    appName: "Require Sign",
+    appName: "Ride Share",
     appLogoImage: logo,
   },
   layout: {

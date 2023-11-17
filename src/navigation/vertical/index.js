@@ -1,4 +1,4 @@
-import { Mail, Home, Activity, Book, UserX, Users, MessageSquare, UserMinus, HelpCircle } from "react-feather";
+import { Mail, Home, Truck, Activity, Book, UserX, Users, MessageSquare, UserMinus, HelpCircle } from "react-feather";
 
 export default [
   {
@@ -18,6 +18,12 @@ export default [
     title: "Car Type",
     icon: <Book size={20} />,
     navLink: "/cartype",
+  },
+  {
+    id: "ridefair",
+    title: "Ride Fair",
+    icon: <Truck size={20} />,
+    navLink: "/ridefair",
   },
   {
     id: "users",

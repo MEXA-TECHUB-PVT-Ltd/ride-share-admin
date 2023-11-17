@@ -16,7 +16,7 @@ import adimage from "@src/assets/images/pages/adimage.png";
 
 // ** Context
 import { ThemeColors } from '@src/utility/context/ThemeColors'
-import './table.css' 
+import './table.css'
 import SupportTracker from '../../ui-elements/cards/analytics/SupportTracker'
 
 import SubscribersGained from '../../ui-elements/cards/statistics/SubscribersGained'
@@ -38,8 +38,8 @@ const AnalyticsDashboard = () => {
   const [rowsPerPage, setRowsPerPage] = useState(10)
   // ** Context
   const { colors } = useContext(ThemeColors)
- 
-  
+
+
   const data = [
     { id: 1, name: 'John', email: "john@gmail.com", dob: "20 Jan,2000", gender: "male", age: "30", status: "active" },
     { id: 2, name: 'John', email: "john@gmail.com", dob: "20 Jan,2000", gender: "male", age: "30", status: "active" },
@@ -49,18 +49,18 @@ const AnalyticsDashboard = () => {
     { id: 6, name: 'John', email: "john@gmail.com", dob: "20 Jan,2000", gender: "male", age: "30", status: "active" },
     { id: 7, name: 'John', email: "john@gmail.com", dob: "20 Jan,2000", gender: "male", age: "30", status: "active" },
     { id: 8, name: 'John', email: "john@gmail.com", dob: "20 Jan,2000", gender: "male", age: "30", status: "active" },
-];
+  ];
 
-const columns = [
+  const columns = [
     {
-        name: 'Profile Image',
-        cell: row => (
-            <>
-                <div style={{ display: "flex", justifyContent: "center", alignContent: "center", gap: "10px" }}>
-                    <img src={adimage} alt="..." style={{ borderRadius: "50px", width: "40px", height: "40px" }} />
-                </div>
-            </>
-        ),
+      name: 'Profile Image',
+      cell: row => (
+        <>
+          <div style={{ display: "flex", justifyContent: "center", alignContent: "center", gap: "10px" }}>
+            <img src={adimage} alt="..." style={{ borderRadius: "50px", width: "40px", height: "40px" }} />
+          </div>
+        </>
+      ),
     },
     { name: 'Name', selector: 'name', sortable: true },
     { name: 'Email', selector: 'email', sortable: true },
@@ -76,14 +76,14 @@ const columns = [
     //                     color='success'
     //                     onClick={()=>{console.log(row)}}
     //                 >
-                       
+
     //                     Active
     //                 </Button>
     //             </div>
     //         </>
     //     ),
     // }, 
-];
+  ];
 
   const handlePagination = page => {
     dispatch(
@@ -123,24 +123,24 @@ const columns = [
       />
     )
   }
-  
+
   const customStyles = {
     table: {
-        style: {
-            marginBottom: "5px",
-        },
+      style: {
+        marginBottom: "5px",
+      },
     },
     headCells: {
-        style: {
-            display: "flex", justifyContent: "center", alignContent: "center"
-        },
+      style: {
+        display: "flex", justifyContent: "center", alignContent: "center"
+      },
     },
     cells: {
-        style: {
-            display: "flex", justifyContent: "center", alignContent: "center"
-        },
+      style: {
+        display: "flex", justifyContent: "center", alignContent: "center"
+      },
     },
-};
+  };
 
   return (
     <div id='dashboard-analytics'>
@@ -148,18 +148,20 @@ const columns = [
         {/* <Col lg='6' xs='12'>
           <CardCongratulations />
         </Col> */}
-        <Col lg='4' xs='12' sm='6'>
-          <SubscribersGained  
+        <Col lg='4' xs='12' sm='4'>
+          <SubscribersGained
           />
         </Col>
-        <Col lg='4' xs='12' sm='6'>
-          <OrdersReceived 
+
+        <Col lg='4'  sm='4' xs='12'>
+          <OrdersBarChart warning={colors.warning.main} />
+        </Col>
+
+        <Col lg='4' xs='12' sm='4'>
+          <OrdersReceived
             warning={colors.warning.main} />
         </Col>
 
-        <Col lg='4' md='4' xs='12'>
-        <OrdersBarChart warning={colors.warning.main} />
-        </Col>
         {/* <Col lg='4' md='4' xs='12'>
         <ProfitLineChart info={colors.info.main} />
 
@@ -176,24 +178,24 @@ const columns = [
         </Col> */}
       </Row>
       <Row className='match-height'>
-        
+
 
         {/* <Col lg='12' md='12' xs='12'>
         <CompanyTable />
         </Col> */}
 
 
-        </Row>
+      </Row>
       <Row className='match-height mb-4'>
         <Col lg='12' xs='12'>
-        <DataTable
-                columns={columns}
-                data={data}
-                // pagination
-                highlightOnHover
-                responsive
-                customStyles={customStyles} 
-            />
+          <DataTable
+            columns={columns}
+            data={data}
+            // pagination
+            highlightOnHover
+            responsive
+            customStyles={customStyles}
+          />
         </Col>
       </Row>
 
