@@ -16,14 +16,14 @@ const Complaints = () => {
     const toggleTooltipview = () => setTooltipOpenview(!tooltipOpenview);
 
     const data = [
-        { id: 1, name: 'John', email: "john@gmail.com", complain: "Driver arrived late without prior notice, causing delays", gender: "male", age: "30", status: "block" },
-        { id: 2, name: 'John', email: "john@gmail.com", complain: "Unprofessional behavior from the driver during the trip", gender: "male", age: "30", status: "unblock" },
-        { id: 3, name: 'John', email: "john@gmail.com", complain: "Car cleanliness was subpar, affecting the ride experience.", gender: "male", age: "30", status: "block" },
-        { id: 4, name: 'John', email: "john@gmail.com", complain: "Unsafe driving practices observed during the journey.", gender: "male", age: "30", status: "unblock" },
-        { id: 5, name: 'John', email: "john@gmail.com", complain: "Unexpected route taken, significantly prolonging the trip.", gender: "male", age: "30", status: "block" },
-        { id: 6, name: 'John', email: "john@gmail.com", complain: "Driver didn't follow the specified drop-off location", gender: "male", age: "30", status: "unblock" },
-        { id: 7, name: 'John', email: "john@gmail.com", complain: "Charged an incorrect fare amount for the distance traveled.", gender: "male", age: "30", status: "block" },
-        { id: 8, name: 'John', email: "john@gmail.com", complain: "Driver canceled the ride abruptly without explanation, inconveniencing plans.", gender: "male", age: "30", status: "unblock" },
+        { id: 1, detail: "123456", name: 'John', email: "john@gmail.com", complain: "Driver arrived late without prior notice, causing delays", gender: "male", age: "30", status: "block" },
+        { id: 2, detail: "123456", name: 'John', email: "john@gmail.com", complain: "Unprofessional behavior from the driver during the trip", gender: "male", age: "30", status: "unblock" },
+        { id: 3, detail: "123456", name: 'John', email: "john@gmail.com", complain: "Car cleanliness was subpar, affecting the ride experience.", gender: "male", age: "30", status: "block" },
+        { id: 4, detail: "6375827", name: 'John', email: "john@gmail.com", complain: "Unsafe driving practices observed during the journey.", gender: "male", age: "30", status: "unblock" },
+        { id: 5, detail: "83982632", name: 'John', email: "john@gmail.com", complain: "Unexpected route taken, significantly prolonging the trip.", gender: "male", age: "30", status: "block" },
+        { id: 6, detail: "123456", name: 'John', email: "john@gmail.com", complain: "Driver didn't follow the specified drop-off location", gender: "male", age: "30", status: "unblock" },
+        { id: 7, detail: "123456", name: 'John', email: "john@gmail.com", complain: "Charged an incorrect fare amount for the distance traveled.", gender: "male", age: "30", status: "block" },
+        { id: 8, detail: "123456", name: 'John', email: "john@gmail.com", complain: "Driver canceled the ride abruptly without explanation, inconveniencing plans.", gender: "male", age: "30", status: "unblock" },
     ];
 
     // search
@@ -54,17 +54,8 @@ const Complaints = () => {
     };
 
     const columns = [
+        { name: 'Car Detail', selector: 'detail', sortable: true },
         {
-            name: 'Car Detail',
-            cell: row => (
-                <>
-                    <div style={{ display: "flex", justifyContent: "center", alignContent: "center", gap: "10px" }}>
-                        <img src={adimage} alt="..." style={{ borderRadius: "5px", width: "100px", height: "40px" }} />
-                    </div>
-                </>
-            ),
-        },
-         {
             name: 'User Name',
             cell: row => (
                 <>
@@ -83,7 +74,7 @@ const Complaints = () => {
 
                         <div>
                             <Eye
-                                style={{ color: "#00cfe8", fontSize: "15px" }}
+                                style={{ cursor: "pointer", color: "#00cfe8", fontSize: "15px" }}
                                 id="viewTooltip"
                                 onClick={() => modalopenview()}
                                 onMouseEnter={toggleTooltipview}

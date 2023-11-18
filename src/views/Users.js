@@ -103,7 +103,7 @@ const Users = () => {
 
                         <div>
                             <Eye
-                                style={{ color: "#00cfe8", fontSize: "15px" }}
+                                style={{ cursor: "pointer",color: "#00cfe8", fontSize: "15px" }}
                                 id="viewTooltip"
                                 onClick={() => modalopenview()}
                                 onMouseEnter={toggleTooltipview}

@@ -3,13 +3,14 @@ import DataTable from 'react-data-table-component';
 import { Edit, Trash2, PlusCircle, UploadCloud, X } from "react-feather";
 import {
     Row,
-    Col, Tooltip,
+    Col, Tooltip, Dropdown, DropdownToggle, DropdownMenu, DropdownItem,
     Input, Label, Button, Modal, ModalHeader, ModalBody, ModalFooter,
 } from "reactstrap";
 import { Formik, Field, ErrorMessage, Form } from 'formik';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import adimage from "@src/assets/images/pages/adimage.png";
+import "./Rideprice.css"
 
 const btnchnge = {
     letterSpacing: "1px",
@@ -31,7 +32,7 @@ const btnchnge = {
     textTransform: "capitalize"
 }
 
-const CarType = () => {
+const RidePrice = () => {
 
     const [tooltipOpenEdit, setTooltipOpenEdit] = useState(false);
     const [tooltipOpenDelete, setTooltipOpenDelete] = useState(false);
@@ -42,29 +43,27 @@ const CarType = () => {
     const toggleTooltipadd = () => setTooltipOpenadd(!tooltipOpenadd);
 
     const data = [
-        { id: 1, image: "", name: "Honda City", title: "banner 1", noofseats: "4", enddate: "14 Nov, 2023", status: "Active" },
-        { id: 2, image: "", name: "Parado", title: "banner 2", noofseats: "4", enddate: "14 Nov, 2023", status: "Inactive" },
-        { id: 3, image: "", name: "Civic", title: "banner 3", noofseats: "4", enddate: "14 Nov, 2023", status: "Inactive" },
-        { id: 4, image: "", name: "Audi", title: "banner 4", noofseats: "4", enddate: "14 Nov, 2023", status: "Inactive" },
-        { id: 5, image: "", name: "Mehran", title: "banner 5", noofseats: "4", enddate: "14 Nov, 2023", status: "Inactive" },
-        { id: 6, image: "", name: "Alto", title: "banner 6", noofseats: "4", enddate: "14 Nov, 2023", status: "Inactive" },
-        { id: 7, image: "", name: "Passo", title: "banner 7", noofseats: "4", enddate: "14 Nov, 2023", status: "Inactive" },
-        { id: 8, image: "", name: "Texla", title: "banner 8", noofseats: "4", enddate: "14 Nov, 2023", status: "Inactive" },
+        { id: 1, miles: "10", driver_charges: "200", extra_person_Charges: "300" },
+        { id: 2, miles: "15", driver_charges: "150", extra_person_Charges: "250" },
+        { id: 3, miles: "20", driver_charges: "250", extra_person_Charges: "350" },
+        { id: 4, miles: "10", driver_charges: "200", extra_person_Charges: "300" },
+        { id: 5, miles: "10", driver_charges: "200", extra_person_Charges: "300" },
+        { id: 6, miles: "10", driver_charges: "200", extra_person_Charges: "300" },
+        { id: 7, miles: "15", driver_charges: "150", extra_person_Charges: "250" },
+        { id: 8, miles: "20", driver_charges: "250", extra_person_Charges: "350" },
     ];
 
     const columns = [
         {
-            name: 'Image',
+            name: 'Distance',
             cell: row => (
                 <>
-                    <div style={{ display: "flex", justifyContent: "center", alignContent: "center", gap: "10px" }}>
-                        <img src={adimage} alt="..." style={{ width: "100px", height: "40px" }} />
-                    </div>
+                    {row.miles} miles
                 </>
             ),
         },
-        { name: 'Name', selector: 'name', sortable: true },
-        { name: 'No Of Seats', selector: 'noofseats', sortable: true },
+        { name: 'Driver Charges', selector: 'driver_charges', sortable: true },
+        { name: 'Extra Person Charges', selector: 'extra_person_Charges', sortable: true },
         {
             name: 'Actions',
             cell: row => (
@@ -73,7 +72,7 @@ const CarType = () => {
 
                         <div>
                             <Edit
-                                style={{cursor:"pointer", color: "#00cfe8", fontSize: "15px" }}
+                                style={{ cursor: "pointer", color: "#00cfe8", fontSize: "15px" }}
                                 id="editTooltip"
                                 onClick={() => modalopenedit()}
                                 onMouseEnter={toggleTooltipEdit}
@@ -86,7 +85,7 @@ const CarType = () => {
 
                         <div>
                             <Trash2
-                                style={{ cursor:"pointer",fontSize: "15px", color: "red" }}
+                                style={{ cursor: "pointer", fontSize: "15px", color: "red" }}
                                 id="deleteTooltip"
                                 onClick={() => modalopendelete()}
                                 onMouseEnter={toggleTooltipDelete}
@@ -103,44 +102,12 @@ const CarType = () => {
         },
     ];
 
-    // image
-    const [hidelabel, setHidelabel] = useState(false);
-    const [hidecrossicon, setHidecrossicon] = useState(false);
-    const [selectedFile, setSelectedFile] = useState(null);
-
-    const handleImageChange = (e) => {
-        console.log(e.target.files[0])
-        setSelectedFile(e.target.files[0]);
-        setHidecrossicon(true);
-        setHidelabel(true);
-    };
-
-    const clearpreviewimage = () => {
-        setSelectedFile(null);
-        setHidecrossicon(false);
-        setHidelabel(false);
-    }
-
     const [emptyfieldalert, setEmptyfieldalert] = useState(false);
 
     const [modalOpen, setModalOpen] = useState(false);
 
     const modalopen = () => {
         setModalOpen(!modalOpen);
-    };
-
-    // update image
-    const [hideupdateimage, setUpdateimage] = useState(false);
-    const [selectedImagepreview, setSelectedImagepreview] = useState(null);
-    const [imageupdate, setImageupdate] = useState(null);
-    const handleImageupdate = (e) => {
-        const file = e.target.files[0];
-        setImageupdate(e.target.files[0]);
-        if (file) {
-            const imageURL = URL.createObjectURL(file);
-            setSelectedImagepreview(imageURL);
-            setUpdateimage(true);
-        }
     };
 
     const [modaledit, setModaledit] = useState(false);
@@ -155,7 +122,7 @@ const CarType = () => {
 
     const handedelete = () => {
         setTimeout(() => {
-            toast.success('Car type deleted Successfully !', {
+            toast.success('Ride fair deleted Successfully !', {
                 position: toast.POSITION.BOTTOM_RIGHT  // Apply a custom class for styling
             });
             setModaldelete(false);
@@ -194,16 +161,29 @@ const CarType = () => {
         },
     };
 
+    const [dropdownOpen, setDropdownOpen] = useState(false);
+    const [selectedOption, setSelectedOption] = useState("");
+
+    const toggleDropdown = () => {
+        setDropdownOpen(prevState => !prevState);
+    };
+
+    const handleSelect = option => {
+        setSelectedOption(option);
+        setDropdownOpen(true);
+        // Perform any other actions based on the selected option
+    };
+
     return (
         <>
 
             <Row>
                 <Col xs="10" md="11">
-                    <h1 >Car Type</h1>
+                    <h1 >Ride Fair</h1>
                 </Col>
                 <Col xs="2" md="1" className="text-right">
                     <PlusCircle
-                        style={{ cursor:"pointer",fontSize: "15px", color: "" }}
+                        style={{ cursor: "pointer", fontSize: "15px", color: "" }}
                         id="addTooltip"
                         onClick={() => modalopen()}
                         onMouseEnter={toggleTooltipadd}
@@ -226,37 +206,38 @@ const CarType = () => {
             />
 
             <Modal isOpen={modalOpen} toggle={modalopen} centered>
-                <ModalHeader toggle={modalopen}>Add Car Type</ModalHeader>
+                <ModalHeader toggle={modalopen}>Add Ride Fair</ModalHeader>
 
                 <ModalBody>
 
                     <Formik
 
-                        initialValues={{ name: '', noofseats: '' }}
+                        initialValues={{ drivercharges: '', extrapersoncharges: '' }}
                         validate={values => {
                             const errors = {};
-                            if (!values.name) {
-                                errors.name = 'Name is Required';
-                            } else if (!values.noofseats) {
-                                errors.noofseats = 'Seats number is Required';
+                            if (!values.drivercharges) {
+                                errors.drivercharges = 'Value is Required';
+                            } else if (!values.extrapersoncharges) {
+                                errors.extrapersoncharges = 'Value is Required';
                             }
                             return errors;
                         }}
                         onSubmit={async (values, { setSubmitting }) => {
                             console.log(values);
-                            if (selectedFile == null) {
+                            if (selectedOption == "") {
                                 setEmptyfieldalert(true);
                                 setTimeout(async () => {
                                     setEmptyfieldalert(false);
                                 }, 3000)
                             } else {
-                                setTimeout(() => {
-                                    toast.success('Car Type Added Successfully !', {
-                                        position: toast.POSITION.BOTTOM_RIGHT  // Apply a custom class for styling
-                                    });
-                                    setModalOpen(false);
-                                    setSelectedFile(null);
-                                }, 1000);
+
+                                toast.success('Ride Fair Added Successfully !', {
+                                    position: toast.POSITION.BOTTOM_RIGHT  // Apply a custom class for styling
+                                });
+                                setEmptyfieldalert(false);
+                                setModalOpen(false);
+                                setSelectedOption("");
+
                             }
 
                         }}
@@ -266,48 +247,37 @@ const CarType = () => {
                                 <ModalBody>
                                     <Form   >
 
-                                        <div >
-                                            {
-                                                hidecrossicon ?
-                                                    <div sx={{ display: "flex", justifyContent: "right", alignContent: "right" }}>
-                                                        <X style={{ padding: 0.2, backgroundColor: "rgba(195, 0, 0,0.2)", borderRadius: "50px", color: "white", marginLeft: "410px" }} onClick={() => clearpreviewimage()} />
-                                                    </div>
-                                                    :
-                                                    null
-                                            }
+                                        <div className="mb-2">
+                                            <Label className='form-label' for='login-email'>
+                                                Miles
+                                            </Label>
+                                            <Dropdown isOpen={dropdownOpen} toggle={toggleDropdown}>
+                                                <DropdownToggle
+                                                    tag="span"
+                                                    data-toggle="dropdown"
+                                                    aria-expanded={dropdownOpen}
+                                                    className="dropdown-input"
+                                                >
+                                                    {selectedOption}
+                                                </DropdownToggle>
+                                                <DropdownMenu className="dropdown-menu">
+                                                    <DropdownItem onClick={() => handleSelect('20')}>
+                                                        20
+                                                    </DropdownItem>
+                                                    <DropdownItem onClick={() => handleSelect('30')}>
+                                                        30
+                                                    </DropdownItem>
+                                                    <DropdownItem onClick={() => handleSelect('40')}>
+                                                        40
+                                                    </DropdownItem>
+                                                    {/* Add more DropdownItems as needed */}
+                                                </DropdownMenu>
+                                            </Dropdown>
 
-                                            <div style={{ pt: 1, width: "100%", height: "160px", p: "0.5px", border: "1px dashed rgba(195, 0, 0,0.2)", borderSpacing: "20px", float: "center", borderRadius: "5px" }} >
-                                                {hidelabel ?
-                                                    null
-                                                    :
-                                                    <div align="">
-                                                        <label htmlFor="fileInput" style={{ display: "flex", justifyContent: "center", alignContent: "center", color: "#606060" }}>
-                                                            <div style={{ marginTop: "50px", display: "flex", justifyContent: "center", alignContent: "center", flexDirection: "column", gap: "5px" }}>
-                                                                <div style={{ display: "flex", justifyContent: "center", alignContent: "center" }}>
-                                                                    <UploadCloud sx={{ fontSize: "50px", color: "#606060", ml: 3.5, pb: 0 }} />
-                                                                </div>
-                                                                <span style={{ paddingBottom: "2vh", fontFamily: "Inter" }}>Upload Image</span>
-                                                            </div>
-                                                        </label>
-                                                        <input
-                                                            style={{ display: "none" }}
-                                                            id="fileInput"
-                                                            type="file"
-                                                            onChange={handleImageChange}
-                                                            accept="image/*"
-                                                        />
-                                                    </div>
-                                                }
-                                                <div style={{ display: "flex", justifyContent: "center", alignContent: "center" }}>
-                                                    {selectedFile && <img src={URL.createObjectURL(selectedFile)} alt="Preview" style={{ alignSelf: "center", width: "80%", height: "155px" }} />}
-                                                </div>
-
-                                            </div>
-
-                                            <div align="left" sx={{ pt: 1, height: "20px" }}>
+                                            <div align="left" sx={{ pt: 0, height: "1px" }}>
                                                 {emptyfieldalert ?
-                                                    <span style={{ marginTop: "2px", fontSize: "14px", color: "red" }}>
-                                                        Image is required
+                                                    <span style={{ marginTop: "1px", fontSize: "14px", color: "red" }}>
+                                                        Value is required
                                                     </span>
                                                     :
                                                     <></>}
@@ -317,32 +287,32 @@ const CarType = () => {
 
                                         <div className='mb-2'>
                                             <Label className='form-label' for='login-email'>
-                                                Name
+                                                Driver Charges
                                             </Label>
                                             <Field
-                                                name='name'
+                                                name='drivercharges'
                                                 autoFocus
                                                 as={Input}
-                                                type='text'
+                                                type='number'
                                             />
 
-                                            <ErrorMessage name="name">
+                                            <ErrorMessage name="drivercharges">
                                                 {msg => <div className="error" style={{ color: 'red' }}>{msg}</div>}
                                             </ErrorMessage>
                                         </div>
 
                                         <div className='mb-2'>
                                             <Label className='form-label' for='login-email'>
-                                                No of seats
+                                                Extra Person Charges
                                             </Label>
                                             <Field
-                                                name='noofseats'
+                                                name='extrapersoncharges'
                                                 autoFocus
                                                 as={Input}
                                                 type='number'
                                             />
 
-                                            <ErrorMessage name="noofseats">
+                                            <ErrorMessage name="extrapersoncharges">
                                                 {msg => <div className="error" style={{ color: 'red' }}>{msg}</div>}
                                             </ErrorMessage>
                                         </div>
@@ -368,32 +338,40 @@ const CarType = () => {
             </Modal>
 
             <Modal isOpen={modaledit} toggle={modalopenedit} centered>
-                <ModalHeader toggle={modalopenedit}>Edit Car Type</ModalHeader>
+                <ModalHeader toggle={modalopenedit}>Edit Ride Fair</ModalHeader>
 
                 <ModalBody>
 
                     <Formik
 
-                        initialValues={{ name: '', noofseats: '' }}
+                        initialValues={{ drivercharges: '', extrapersoncharges: '' }}
                         validate={values => {
                             const errors = {};
-                            if (!values.name) {
-                                errors.name = 'Name is Required';
-                            } else if (!values.noofseats) {
-                                errors.noofseats = 'Seats number Required';
+                            if (!values.drivercharges) {
+                                errors.drivercharges = 'Value is Required';
+                            } else if (!values.extrapersoncharges) {
+                                errors.extrapersoncharges = 'Value is Required';
                             }
                             return errors;
                         }}
                         onSubmit={async (values, { setSubmitting }) => {
                             console.log(values);
+                            if (selectedOption == "") {
+                                setEmptyfieldalert(true);
+                                setTimeout(async () => {
+                                    setEmptyfieldalert(false);
+                                }, 3000)
+                            } else {
 
-                            setTimeout(() => {
-                                toast.success('Car Type updated Successfully !', {
+                                toast.success('Ride Fair updated Successfully !', {
                                     position: toast.POSITION.BOTTOM_RIGHT  // Apply a custom class for styling
                                 });
+                                setEmptyfieldalert(false);
                                 setModaledit(false);
-                                setSelectedFile(null);
-                            }, 1000);
+                                setSelectedOption("");
+
+                            }
+
                         }}
                     >
                         {({ isSubmitting }) => (
@@ -401,48 +379,37 @@ const CarType = () => {
                                 <ModalBody>
                                     <Form   >
 
-                                        <div >
-                                            {
-                                                hidecrossicon ?
-                                                    <div sx={{ display: "flex", justifyContent: "right", alignContent: "right" }}>
-                                                        <X style={{ padding: 0.2, backgroundColor: "rgba(195, 0, 0,0.2)", borderRadius: "50px", color: "white", marginLeft: "410px" }} onClick={() => clearpreviewimage()} />
-                                                    </div>
-                                                    :
-                                                    null
-                                            }
+                                        <div className="mb-2">
+                                            <Label className='form-label' for='login-email'>
+                                                Miles
+                                            </Label>
+                                            <Dropdown isOpen={dropdownOpen} toggle={toggleDropdown}>
+                                                <DropdownToggle
+                                                    tag="span"
+                                                    data-toggle="dropdown"
+                                                    aria-expanded={dropdownOpen}
+                                                    className="dropdown-input"
+                                                >
+                                                    {selectedOption}
+                                                </DropdownToggle>
+                                                <DropdownMenu className="dropdown-menu">
+                                                    <DropdownItem onClick={() => handleSelect('20')}>
+                                                        20
+                                                    </DropdownItem>
+                                                    <DropdownItem onClick={() => handleSelect('30')}>
+                                                        30
+                                                    </DropdownItem>
+                                                    <DropdownItem onClick={() => handleSelect('40')}>
+                                                        40
+                                                    </DropdownItem>
+                                                    {/* Add more DropdownItems as needed */}
+                                                </DropdownMenu>
+                                            </Dropdown>
 
-                                            <div style={{ pt: 1, width: "100%", height: "160px", p: "0.5px", border: "1px dashed rgba(195, 0, 0,0.2)", borderSpacing: "20px", float: "center", borderRadius: "5px" }} >
-                                                {hidelabel ?
-                                                    null
-                                                    :
-                                                    <div align="">
-                                                        <label htmlFor="fileInput" style={{ display: "flex", justifyContent: "center", alignContent: "center", color: "#606060" }}>
-                                                            <div style={{ marginTop: "50px", display: "flex", justifyContent: "center", alignContent: "center", flexDirection: "column", gap: "5px" }}>
-                                                                <div style={{ display: "flex", justifyContent: "center", alignContent: "center" }}>
-                                                                    <UploadCloud sx={{ fontSize: "50px", color: "#606060", ml: 3.5, pb: 0 }} />
-                                                                </div>
-                                                                <span style={{ paddingBottom: "2vh", fontFamily: "Inter" }}>Upload Image</span>
-                                                            </div>
-                                                        </label>
-                                                        <input
-                                                            style={{ display: "none" }}
-                                                            id="fileInput"
-                                                            type="file"
-                                                            onChange={handleImageChange}
-                                                            accept="image/*"
-                                                        />
-                                                    </div>
-                                                }
-                                                <div style={{ display: "flex", justifyContent: "center", alignContent: "center" }}>
-                                                    {selectedFile && <img src={URL.createObjectURL(selectedFile)} alt="Preview" style={{ alignSelf: "center", width: "80%", height: "155px" }} />}
-                                                </div>
-
-                                            </div>
-
-                                            <div align="left" sx={{ pt: 1, height: "20px" }}>
+                                            <div align="left" sx={{ pt: 0, height: "1px" }}>
                                                 {emptyfieldalert ?
-                                                    <span style={{ marginTop: "2px", fontSize: "14px", color: "red" }}>
-                                                        Image is required
+                                                    <span style={{ marginTop: "1px", fontSize: "14px", color: "red" }}>
+                                                        Value is required
                                                     </span>
                                                     :
                                                     <></>}
@@ -452,32 +419,32 @@ const CarType = () => {
 
                                         <div className='mb-2'>
                                             <Label className='form-label' for='login-email'>
-                                                Name
+                                                Driver Charges
                                             </Label>
                                             <Field
-                                                name='name'
+                                                name='drivercharges'
                                                 autoFocus
                                                 as={Input}
-                                                type='text'
+                                                type='number'
                                             />
 
-                                            <ErrorMessage name="name">
+                                            <ErrorMessage name="drivercharges">
                                                 {msg => <div className="error" style={{ color: 'red' }}>{msg}</div>}
                                             </ErrorMessage>
                                         </div>
 
                                         <div className='mb-2'>
                                             <Label className='form-label' for='login-email'>
-                                                No Of Seats
+                                                Extra Person Charges
                                             </Label>
                                             <Field
-                                                name='noofseats'
+                                                name='extrapersoncharges'
                                                 autoFocus
                                                 as={Input}
                                                 type='number'
                                             />
 
-                                            <ErrorMessage name="noofseats">
+                                            <ErrorMessage name="extrapersoncharges">
                                                 {msg => <div className="error" style={{ color: 'red' }}>{msg}</div>}
                                             </ErrorMessage>
                                         </div>
@@ -507,7 +474,7 @@ const CarType = () => {
 
                 <ModalBody className="text-center mt-1 mb-1">
                     <div >
-                        <p >Do you want to delete this car type?</p>
+                        <p >Do you want to delete eise fair?</p>
                     </div>
                 </ModalBody>
 
@@ -555,4 +522,4 @@ const CarType = () => {
     );
 };
 
-export default CarType;
+export default RidePrice;

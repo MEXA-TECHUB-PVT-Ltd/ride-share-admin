@@ -59,26 +59,9 @@ const VerticalMenuHeader = (props) => {
   return (
     <div className="navbar-header">
       <ul className="nav navbar-nav flex-row">
-        <li className="nav-item me-auto">
-          <NavLink
-            to={user ? getHomeRouteForLoggedInUser(user.role) : "/"}
-            className="navbar-brand"
-          >
-            <span className="brand-logo">
-              <img className="img-fluid" src={logo} alt="Login Cover" style={{ width: '35%' }} />
-               
-                <span style={{   fontWeight: "bold",fontSize:"20px", marginTop: "5vh", marginLeft: "5px" }}>
-                  Ride Share
-                </span>
-                
-              {/* <img src={themeConfig.app.appLogoImage} alt="logo" /> */}
-            </span>
-            {/* <h2 className="brand-text mb-0">{themeConfig.app.appName}</h2> */}
-          </NavLink>
-        </li>
 
-        <li className="nav-item nav-toggle">
-          <div className="nav-link modern-nav-toggle cursor-pointer">
+      <li className="">
+          <div className="">
             {/* <Toggler /> */}
             <X
               onClick={() => setMenuVisibility(false)}
@@ -87,6 +70,25 @@ const VerticalMenuHeader = (props) => {
             />
           </div>
         </li>
+        
+        <li className="nav-item me-auto">
+          <NavLink
+            to={user ? getHomeRouteForLoggedInUser(user.role) : "/"}
+            className="navbar-brand"
+          >
+            <span className="brand-logo">
+              <img className="img-fluid" src={logo} alt="Login Cover" style={{ width: '95px' }} />
+
+              {/* <span style={{ fontWeight: "bold", fontSize: "20px", marginTop: "5vh", marginLeft: "5px" }}>
+                Ride Share
+              </span> */}
+
+              {/* <img src={themeConfig.app.appLogoImage} alt="logo" /> */}
+            </span>
+            <h2 className="brand-text mb-0">{themeConfig.app.appName}</h2>
+          </NavLink>
+        </li> 
+       
       </ul>
     </div>
   );

@@ -59,7 +59,7 @@ const UserDropdown = () => {
             status="online"
           />
         </DropdownToggle>
-        <DropdownMenu end>
+        <DropdownMenu style={{width:"200px"}} end>
           {/* <DropdownItem tag={Link} to="/" onClick={(e) => e.preventDefault()}>
           <User size={14} className="me-75" />
           <span className="align-middle">Profile</span>
