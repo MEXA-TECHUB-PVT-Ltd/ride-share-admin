@@ -21,9 +21,15 @@ export default [
   },
   {
     id: "ridefair",
-    title: "Ride Fair",
+    title: "Driver Fair",
     icon: <Truck size={20} />,
-    navLink: "/ridefair",
+    navLink: "/driver-fair",
+  },
+  {
+    id: "passenger_fair",
+    title: "Passenger Fair",
+    icon: <Truck size={20} />,
+    navLink: "/passenger-fair",
   },
   {
     id: "users",
@@ -54,5 +60,5 @@ export default [
   //   title: "User List",
   //   icon: <Mail size={20} />,
   //   navLink: "/apps/user/list",
-  // }, 
+  // },
 ];
