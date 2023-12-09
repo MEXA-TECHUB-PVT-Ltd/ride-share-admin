@@ -14,6 +14,7 @@ import PublicRoute from "@components/routes/PublicRoute";
 import { isObjEmpty } from "@utils";
 import InvoicePreview from "../../views/invoice/preview";
 import AddDocument from "../../views/addDocument";
+import PassengerFair from "../../views/PassengerFair";
 
 const getLayout = {
   blank: <BlankLayout />,
@@ -72,53 +73,58 @@ const Routes = [
   {
     path: "/privacypolicy",
     element: <PrivacyPolicy />,
-  }, {
+  },
+  {
     path: "/termsandconditions",
     element: <TermsAndConditions />,
-  },  
+  },
   {
     path: "/file-upload",
     element: <FileUpload />,
   },
   {
-    path: '/apps/user/list',
-    element: <UserList />
+    path: "/apps/user/list",
+    element: <UserList />,
   },
   {
-    path: '/presetquestions',
-    element: <PresetQuestions />
+    path: "/presetquestions",
+    element: <PresetQuestions />,
   },
   {
-    path: '/cartype',
-    element: <CarType />
-  }, 
-  {
-    path: '/ridefair',
-    element: <RidePrice />
-  }, 
-  {
-    path: '/users',
-    element: <Users />
+    path: "/cartype",
+    element: <CarType />,
   },
   {
-    path: '/complaints',
-    element: <Complaints />
-  }, 
-  {
-    path: '/noninsuranceusers',
-    element: <NonInsuranceUsers />
-  }, 
-  {
-    path: '/deleteduseraccounts',
-    element: <Deletedusers />
-  },  
-  {
-    path: '/add_document/:id',
-    element: <AddDocument />
+    path: "/driver-fair",
+    element: <RidePrice />,
   },
   {
-    path: '/apps/invoice/preview/:id',
-    element: <InvoicePreview />
+    path: "/passenger-fair",
+    element: <PassengerFair />,
+  },
+  {
+    path: "/users",
+    element: <Users />,
+  },
+  {
+    path: "/complaints",
+    element: <Complaints />,
+  },
+  {
+    path: "/noninsuranceusers",
+    element: <NonInsuranceUsers />,
+  },
+  {
+    path: "/deleteduseraccounts",
+    element: <Deletedusers />,
+  },
+  {
+    path: "/add_document/:id",
+    element: <AddDocument />,
+  },
+  {
+    path: "/apps/invoice/preview/:id",
+    element: <InvoicePreview />,
   },
   {
     path: "/login",
@@ -154,7 +160,7 @@ const Routes = [
     meta: {
       layout: "blank",
     },
-  },  
+  },
   {
     path: "/error",
     element: <Error />,
