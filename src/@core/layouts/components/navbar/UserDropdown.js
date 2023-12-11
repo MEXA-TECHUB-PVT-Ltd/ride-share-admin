@@ -35,8 +35,10 @@ const UserDropdown = () => {
     setModaldelete(!modaldelete);
   };
 
+  
   const handedelete = () => {
-    navigate("/")
+    localStorage.removeItem('admin');
+    navigate('/')
   }
 
   return (

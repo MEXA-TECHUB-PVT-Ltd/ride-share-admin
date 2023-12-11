@@ -167,7 +167,7 @@ const Rideprice = () => {
 
     const handedelete = () => {
         setTimeout(() => {
-            toast.success("Ride fair deleted Successfully !", {
+            toast.success("Driver fair deleted Successfully !", {
                 position: toast.POSITION.BOTTOM_RIGHT, // Apply a custom class for styling
             });
             setModaldelete(false);
@@ -280,7 +280,7 @@ const Rideprice = () => {
         )}
 
         <Modal isOpen={modalOpen} toggle={modalopen} centered>
-          <ModalHeader toggle={modalopen}>Add Ride Fair</ModalHeader>
+          <ModalHeader toggle={modalopen}>Add Driver Fair</ModalHeader>
 
           <ModalBody>
             <Formik
@@ -311,7 +311,7 @@ const Rideprice = () => {
                     end_range: values.end_range,
                     rate_per_mile: values.rate_per_mile,
                   }).unwrap();
-                  toast.success("Ride Fair Added Successfully !", {
+                  toast.success("Driver Fair Added Successfully !", {
                     position: toast.POSITION.BOTTOM_RIGHT, // Apply a custom class for styling
                   });
                   refetch();
@@ -442,7 +442,7 @@ const Rideprice = () => {
                     rate_per_mile: values.rate_per_mile,
                   }).unwrap();
                   refetch();
-                  toast.success(" !", {
+                  toast.success("Driver Fair Updated Successfully !", {
                     position: toast.POSITION.BOTTOM_RIGHT, // Apply a custom class for styling
                   });
                   setEmptyfieldalert(false);
@@ -545,7 +545,7 @@ const Rideprice = () => {
 
           <ModalBody className="text-center mt-1 mb-1">
             <div>
-              <p>Do you want to delete eise fair?</p>
+              <p>Do you want to delete driver fair?</p>
             </div>
           </ModalBody>
 
