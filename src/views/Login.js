@@ -102,7 +102,7 @@ const Login = () => {
                     "admin",
                     JSON.stringify(response?.result)
                   );
-                  navigate("/home");
+                  navigate("/dashbaord/default");
                 } catch (error) {
                   console.error("Failed :", error);
                   setError(error.data.message);

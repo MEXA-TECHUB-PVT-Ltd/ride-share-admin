@@ -201,13 +201,12 @@ const PassengerFair = () => {
   };
 
   const handleDelete = async () => {
-    console.log("deleted");
     try {
       await deletePR({
         id: deleteData?.id,
       }).unwrap();
       refetch();
-      toast.success("Deleted Successfully", {
+      toast.success("Passenger fair Deleted Successfully", {
         position: toast.POSITION.BOTTOM_RIGHT, // Apply a custom class for styling
       });
       setModaldelete(false);
@@ -270,7 +269,7 @@ const PassengerFair = () => {
       )}
 
       <Modal isOpen={modalOpen} toggle={modalopen} centered>
-        <ModalHeader toggle={modalopen}>Add Ride Fair</ModalHeader>
+        <ModalHeader toggle={modalopen}>Add Passenger Fair</ModalHeader>
 
         <ModalBody>
           <Formik
@@ -289,7 +288,7 @@ const PassengerFair = () => {
                 await createPR({
                   rate: values.rate,
                 }).unwrap();
-                toast.success("Ride Fair Added Successfully !", {
+                toast.success("Passenger Fair Added Successfully !", {
                   position: toast.POSITION.BOTTOM_RIGHT, // Apply a custom class for styling
                 });
                 refetch();
@@ -365,7 +364,7 @@ const PassengerFair = () => {
                   rate: values.rate,
                 }).unwrap();
                 refetch();
-                toast.success(" !", {
+                toast.success("Passenger Fair Added Successfully !", {
                   position: toast.POSITION.BOTTOM_RIGHT, // Apply a custom class for styling
                 });
                 setEmptyfieldalert(false);
@@ -425,7 +424,7 @@ const PassengerFair = () => {
 
         <ModalBody className="text-center mt-1 mb-1">
           <div>
-            <p>Do you want to delete eise fair?</p>
+            <p>Do you want to delete passenger fair?</p>
           </div>
         </ModalBody>
 
