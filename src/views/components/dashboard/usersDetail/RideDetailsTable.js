@@ -5,6 +5,9 @@ import moment from "moment";
 const RideDetailsTable = ({ rideDetails }) => {
   const [currentPage, setCurrentPage] = useState(0);
   const pageSize = 5; // Number of items per page
+    if (!Array.isArray(rideDetails) || rideDetails?.length === 0) {
+      return <p>No ride details available.</p>;
+    }
   const pageCount = Math.ceil(rideDetails?.length / pageSize);
 
   const handlePageClick = (e, index) => {

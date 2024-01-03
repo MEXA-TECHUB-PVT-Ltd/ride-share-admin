@@ -21,6 +21,7 @@ import BankDetailsSection from "./components/dashboard/usersDetail/BankDetailsSe
 import UserDetailCard from "./components/dashboard/usersDetail/UserDetailCard";
 import RideDetailsTable from "./components/dashboard/usersDetail/RideDetailsTable";
 import UserProfileHeader from "./components/dashboard/usersDetail/UserProfileHeader";
+import { ToastContainer } from "react-toastify";
 
 const UserDetails = () => {
   const location = useLocation();
@@ -28,21 +29,21 @@ const UserDetails = () => {
 
   return (
     <div className="user-details-container p-4">
-      <UserProfileHeader userData={rowData}  />
-
+      <UserProfileHeader userData={rowData} />
       <UserDetailCard title="User Information" rowData={rowData} />
       <AboutSection about={rowData?.about} />
       <BankDetailsSection bankDetails={rowData?.bank_details} />
       <VehiclesDetailsSection vehiclesDetails={rowData?.vehicles_details} />
       <PreferencesDetailsSection
         userPreferences={{
-          chattiness_preferences: rowData.chattiness_preferences,
-          music_preferences: rowData.music_preferences,
-          pets_preferences: rowData.pets_preferences,
-          smoking_preferences: rowData.smoking_preferences,
+          chattiness_preferences: rowData?.chattiness_preferences,
+          music_preferences: rowData?.music_preferences,
+          pets_preferences: rowData?.pets_preferences,
+          smoking_preferences: rowData?.smoking_preferences,
         }}
       />
       <RideDetailsTable rideDetails={rowData?.ride_details} />
+      <ToastContainer />
     </div>
   );
 };
@@ -55,6 +56,5 @@ const AboutSection = ({ about }) => (
     </CardBody>
   </Card>
 );
-
 
 export default UserDetails;

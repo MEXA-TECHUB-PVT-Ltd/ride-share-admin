@@ -30,7 +30,7 @@ const VehiclesDetailsSection = ({ vehiclesDetails }) => {
     <Card className="mb-3 vehicle-details-card">
       <CardBody>
         <CardTitle tag="h5">Vehicles</CardTitle>
-        {vehiclesDetails.map((vehicle, index) => (
+        {vehiclesDetails?.map((vehicle, index) => (
           <div key={index} className="vehicle-section">
             <Button
               color="info"

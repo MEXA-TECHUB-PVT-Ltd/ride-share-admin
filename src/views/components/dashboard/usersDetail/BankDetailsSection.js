@@ -18,9 +18,12 @@ import { User, CreditCard, Calendar, Lock } from "react-feather";
 const BankDetailsSection = ({ bankDetails }) => {
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 5;
-  const pages = Math.ceil(bankDetails.length / itemsPerPage);
+    if (!Array.isArray(bankDetails) || bankDetails?.length === 0) {
+      return <p>No bank details available.</p>;
+    }
+  const pages = Math.ceil(bankDetails?.length / itemsPerPage);
 
-  const currentBankDetails = bankDetails.slice(
+  const currentBankDetails = bankDetails?.slice(
     (currentPage - 1) * itemsPerPage,
     currentPage * itemsPerPage
   );
@@ -33,7 +36,7 @@ const BankDetailsSection = ({ bankDetails }) => {
     <Card className="mb-3">
       <CardBody>
         <CardTitle tag="h5">Bank Details</CardTitle>
-        {currentBankDetails.map((detail, index) => (
+        {currentBankDetails?.map((detail, index) => (
           <BankDetail
             key={index}
             detail={detail}
@@ -41,7 +44,7 @@ const BankDetailsSection = ({ bankDetails }) => {
           />
         ))}
         <Pagination aria-label="Bank details pagination">
-          {[...Array(pages)].map((_, pageIndex) => (
+          {[...Array(pages)]?.map((_, pageIndex) => (
             <PaginationItem
               key={pageIndex}
               active={pageIndex + 1 === currentPage}

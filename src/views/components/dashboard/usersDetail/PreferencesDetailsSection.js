@@ -16,32 +16,37 @@ const PreferencesDetailsSection = ({ userPreferences }) => {
     return selectedPreferenceType ? userPreferences[selectedPreferenceType] : [];
   };
 
-  return (
-    <Card className="mb-3">
-      <CardBody>
-        <CardTitle tag="h5">Preferences</CardTitle>
-        <Dropdown isOpen={dropdownOpen} toggle={toggleDropdown}>
-          <DropdownToggle caret>
-            {selectedPreferenceType ? selectedPreferenceType : 'Select Preference Type'}
-          </DropdownToggle>
-          <DropdownMenu>
-            {Object.keys(userPreferences).map((type, index) => (
-              <DropdownItem key={index} onClick={() => handlePreferenceTypeSelect(type)}>
-                {type}
-              </DropdownItem>
+    return (
+      <Card className="mb-3">
+        <CardBody>
+          <CardTitle tag="h5">Preferences</CardTitle>
+          <Dropdown isOpen={dropdownOpen} toggle={toggleDropdown}>
+            <DropdownToggle caret>
+              {selectedPreferenceType
+                ? selectedPreferenceType
+                : "Select Preference Type"}
+            </DropdownToggle>
+            <DropdownMenu>
+              {Object.keys(userPreferences)?.map((type, index) => (
+                <DropdownItem
+                  key={index}
+                  onClick={() => handlePreferenceTypeSelect(type)}
+                >
+                  {type}
+                </DropdownItem>
+              ))}
+            </DropdownMenu>
+          </Dropdown>
+          <Row>
+            {getPreferencesToShow()?.map((preference, index) => (
+              <Col key={index} xs="12" md="6" lg="4" className="mb-3">
+                <PreferenceDetail detail={preference} />
+              </Col>
             ))}
-          </DropdownMenu>
-        </Dropdown>
-        <Row>
-          {getPreferencesToShow().map((preference, index) => (
-            <Col key={index} xs="12" md="6" lg="4" className="mb-3">
-              <PreferenceDetail detail={preference} />
-            </Col>
-          ))}
-        </Row>
-      </CardBody>
-    </Card>
-  );
+          </Row>
+        </CardBody>
+      </Card>
+    );
 };
 
 const PreferenceDetail = ({ detail }) => (

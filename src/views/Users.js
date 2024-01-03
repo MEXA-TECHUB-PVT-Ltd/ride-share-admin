@@ -88,8 +88,8 @@ const Users = () => {
             }}
           >
             <img
-              src={adimage}
-              alt="..."
+              src={`${imgUrl}${row?.profile_picture_details?.file_name}`}
+              alt={`${row?.profile_picture_details?.file_type}`}
               style={{ borderRadius: "50px", width: "40px", height: "40px" }}
             />
           </div>
@@ -150,7 +150,9 @@ const Users = () => {
                 }}
                 id="viewTooltip"
                 onClick={() =>
-                  navigate("/user-details", { state: { user: row } })
+                  navigate("/user-details", {
+                    state: { user: row },
+                  })
                 }
                 onMouseEnter={toggleTooltipview}
                 onMouseLeave={toggleTooltipview}
