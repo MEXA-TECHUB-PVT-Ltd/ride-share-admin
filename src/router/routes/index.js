@@ -15,6 +15,7 @@ import { isObjEmpty } from "@utils";
 import InvoicePreview from "../../views/invoice/preview";
 import AddDocument from "../../views/addDocument";
 import PassengerFair from "../../views/PassengerFair";
+import UserDetails from "../../views/UserDetails";
 
 const getLayout = {
   blank: <BlankLayout />,
@@ -65,6 +66,10 @@ const Routes = [
   {
     path: "/dashbaord/default",
     element: <AnalyticsDashboard />,
+  },
+  {
+    path: "/user-details",
+    element: <UserDetails />,
   },
   {
     path: "/updatepassword",

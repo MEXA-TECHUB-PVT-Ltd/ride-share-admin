@@ -10,6 +10,7 @@ export const dashboardApi = createApi({
     "forgotPassword",
     "verifyOtp",
     "resetPassword",
+    "updateBlockStatus",
     "updatePassword",
     "createPR",
     "getAllPR",
@@ -19,13 +20,20 @@ export const dashboardApi = createApi({
     "getAllDR",
     "updateDR",
     "deleteDR",
+    "createCT",
+    "updateCT",
+    "deleteCT",
+    "getAllCT",
+    "deleteComplaints",
+    "getAllComplaints",
+    "getAllUsers",
   ],
   endpoints: (builder) => ({
     // dashboard page api's
     // all users api also use on the all users page
     getAllUsers: builder.query({
       query: ({ page = 1, sortColumn = "id", sortOrder = "asc" }) =>
-        `users/getAll?page=${page}&sortColumn=${sortColumn}&sortOrder=${sortOrder}`,
+        `users/getAllUsersWithDetails?page=${page}&limit=${100}&sortColumn=${sortColumn}&sortOrder=${sortOrder}`,
       providesTags: ["getAllUsers"],
     }),
     // ! auth
@@ -84,6 +92,22 @@ export const dashboardApi = createApi({
       },
       invalidatesTags: ["updatePassword"],
     }),
+    // users
+    getAllUsers: builder.query({
+      query: () => `users/getAllUsersWithDetails`,
+      providesTags: ["getAllUsers"],
+    }),
+
+    updateBlockStatus: builder.mutation({
+      query: (body) => {
+        return {
+          url: `users/updateBlockStatus`,
+          method: "PUT",
+          body: body,
+        };
+      },
+      invalidatesTags: ["updateBlockStatus"],
+    }),
     // passenger price
     createPR: builder.mutation({
       query: (body) => ({
@@ -140,6 +164,46 @@ export const dashboardApi = createApi({
       }),
       invalidatesTags: ["deleteDR"],
     }),
+    // car/vehicle types
+    createCT: builder.mutation({
+      query: (body) => ({
+        url: `vehicle_types/create`,
+        method: "POST",
+        body: body,
+      }),
+      invalidatesTags: ["createCT"],
+    }),
+    updateCT: builder.mutation({
+      query: (body) => ({
+        url: `vehicle_types/update`,
+        method: "PUT",
+        body: body,
+      }),
+      invalidatesTags: ["updateCT"],
+    }),
+    deleteCT: builder.mutation({
+      query: (body) => ({
+        url: `vehicle_types/delete/${body.id}`,
+        method: "Delete",
+      }),
+      invalidatesTags: ["deleteCT"],
+    }),
+    getAllCT: builder.query({
+      query: () => `vehicle_types/getAll`,
+      providesTags: ["getAllCT"],
+    }),
+    // complaints
+    getAllComplaints: builder.query({
+      query: () => `complaints/getAll`,
+      providesTags: ["getAllComplaints"],
+    }),
+    deleteComplaints: builder.mutation({
+      query: (body) => ({
+        url: `complaints/delete/${body.id}`,
+        method: "Delete",
+      }),
+      invalidatesTags: ["deleteComplaints"],
+    }),
   }),
 });
 
@@ -158,4 +222,11 @@ export const {
   useUpdateDRMutation,
   useDeleteDRMutation,
   useGetAllDRQuery,
+  useCreateCTMutation,
+  useUpdateCTMutation,
+  useDeleteCTMutation,
+  useGetAllCTQuery,
+  useGetAllComplaintsQuery,
+  useDeleteComplaintsMutation,
+  useUpdateBlockStatusMutation,
 } = dashboardApi;
