@@ -8,7 +8,7 @@ import { UserPlus } from 'react-feather'
 // ** Custom Components
 import StatsWithAreaChart from '@components/widgets/stats/StatsWithAreaChart'
 
-const SubscribersGained = () => {
+const SubscribersGained = ({count}) => {
   // ** State
   const [data, setData] = useState([{
     name: 'Non Insurance Users',
@@ -21,7 +21,7 @@ const SubscribersGained = () => {
     <StatsWithAreaChart
       icon={<UserPlus size={21} />}
       color='primary'
-      stats='43'
+      stats={count}
       statTitle='Non Insurance Users'
       series={data}
       type='area'

@@ -38,15 +38,15 @@ const StatsWithAreaChart = (props) => {
           color={`light-${color}`}
           icon={icon}
         />
-        <h2 className="fw-bolder mt-1">{stats}</h2>
         <p className="card-text">{statTitle}</p>
+        <h2 className="fw-bolder mt-1">{stats}</h2>
       </CardBody>
-      <Chart
+      {/* <Chart
         options={options}
         series={series}
         type={type}
         height={height ? height : 100}
-      />
+      /> */}
     </Card>
   );
 };
