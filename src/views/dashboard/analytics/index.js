@@ -238,24 +238,24 @@ const AnalyticsDashboard = () => {
         {/* <Col lg='6' xs='12'>
           <CardCongratulations />
         </Col> */}
-        <Col lg="2" xs="12" sm="4">
+        <Col lg="2" md="12" xs="12" sm="12">
           <SubscribersGained count={allCount?.result?.insuranceUsersCount} />
         </Col>
 
-        <Col lg="2" sm="4" xs="12">
+        <Col lg="2" md="12" sm="12" xs="12">
           <OrdersBarChart
             warning={colors.warning.main}
             count={allCount?.result?.usersCount}
           />
         </Col>
 
-        <Col lg="2" xs="12" sm="4">
+        <Col lg="2" md="12" xs="12" sm="12">
           <OrdersReceived
             warning={colors.warning.main}
             count={allCount?.result?.complaintCount}
           />
         </Col>
-        <Col lg="6" xs="12" sm="4">
+        <Col lg="6" md="12" xs="12" sm="12">
           <AppLink
             warning={colors.warning.main}
             count={allCount?.result?.complaintCount}

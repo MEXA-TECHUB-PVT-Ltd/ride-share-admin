@@ -16,6 +16,7 @@ import InvoicePreview from "../../views/invoice/preview";
 import AddDocument from "../../views/addDocument";
 import PassengerFair from "../../views/PassengerFair";
 import UserDetails from "../../views/UserDetails";
+import CarColor from "../../views/CarColors";
 
 const getLayout = {
   blank: <BlankLayout />,
@@ -27,7 +28,7 @@ const getLayout = {
 const TemplateTitle = "%s - Vuexy React Admin Template";
 
 // ** Default Route
-const DefaultRoute = "/login";
+const DefaultRoute = "/dashbaord/default";
 
 const Home = lazy(() => import("../../views/Home"));
 const UpdatePassword = lazy(() => import("../../views/UpdatePassword"));
@@ -52,90 +53,186 @@ const CarType = lazy(() => import('../../views/Cartype'));
 const FileUpload = lazy(() => import('../../views/FileUpload'))
 
 
+const isAdminLoggedIn = () => {
+  return localStorage.getItem("admin") !== null;
+};
+
+const PublicOnlyRoute = ({ children }) => {
+  if (isAdminLoggedIn()) {
+    console.log("your are logged in")
+    return <Navigate to={DefaultRoute} />;
+  }
+  return children;
+};
+
+const PrivateRoute = ({ children }) => {
+  if (!isAdminLoggedIn()) {
+    console.log("your are not logged in")
+    return <Navigate to="/login" />;
+  }
+  return children;
+};
+
 // ** Merge Routes
 const Routes = [
   {
     path: "/",
-    index: true,
-    element: <Navigate replace to={DefaultRoute} />,
-  },
-  {
-    path: "/home",
-    element: <Home />,
+    element: isAdminLoggedIn() ? (
+      <Navigate replace to={DefaultRoute} />
+    ) : (
+      <Navigate replace to="/login" />
+    ),
   },
   {
     path: "/dashbaord/default",
     element: <AnalyticsDashboard />,
+    meta: {
+      // layout: "blank",
+      publicOnly: false,
+    },
   },
   {
     path: "/user-details",
     element: <UserDetails />,
+    meta: {
+      // layout: "blank",
+      publicOnly: false,
+    },
   },
   {
     path: "/updatepassword",
     element: <PasswordUpdate />,
+    meta: {
+      // layout: "blank",
+      publicOnly: false,
+    },
+  },
+  {
+    path: "/car-colors",
+    element: <CarColor />,
+    meta: {
+      // layout: "blank",
+      publicOnly: false,
+    },
   },
   {
     path: "/privacypolicy",
     element: <PrivacyPolicy />,
+    meta: {
+      // layout: "blank",
+      publicOnly: false,
+    },
   },
   {
     path: "/termsandconditions",
     element: <TermsAndConditions />,
+    meta: {
+      // layout: "blank",
+      publicOnly: false,
+    },
   },
   {
     path: "/file-upload",
     element: <FileUpload />,
+    meta: {
+      // layout: "blank",
+      publicOnly: false,
+    },
   },
   {
     path: "/apps/user/list",
     element: <UserList />,
+    meta: {
+      // layout: "blank",
+      publicOnly: false,
+    },
   },
   {
     path: "/presetquestions",
     element: <PresetQuestions />,
+    meta: {
+      // layout: "blank",
+      publicOnly: false,
+    },
   },
   {
     path: "/cartype",
     element: <CarType />,
+    meta: {
+      // layout: "blank",
+      publicOnly: false,
+    },
   },
   {
     path: "/driver-fair",
     element: <RidePrice />,
+    meta: {
+      // layout: "blank",
+      publicOnly: false,
+    },
   },
   {
     path: "/passenger-fair",
     element: <PassengerFair />,
+    meta: {
+      // layout: "blank",
+      publicOnly: false,
+    },
   },
   {
     path: "/users",
     element: <Users />,
+    meta: {
+      // layout: "blank",
+      publicOnly: false,
+    },
   },
   {
     path: "/complaints",
     element: <Complaints />,
+    meta: {
+      // layout: "blank",
+      publicOnly: false,
+    },
   },
   {
     path: "/noninsuranceusers",
     element: <NonInsuranceUsers />,
+    meta: {
+      // layout: "blank",
+      publicOnly: false,
+    },
   },
   {
     path: "/deleteduseraccounts",
     element: <Deletedusers />,
+    meta: {
+      // layout: "blank",
+      publicOnly: false,
+    },
   },
   {
     path: "/add_document/:id",
     element: <AddDocument />,
+    meta: {
+      // layout: "blank",
+      publicOnly: false,
+    },
   },
   {
     path: "/apps/invoice/preview/:id",
     element: <InvoicePreview />,
+    meta: {
+      // layout: "blank",
+      publicOnly: false,
+    },
   },
   {
     path: "/login",
     element: <Login />,
     meta: {
       layout: "blank",
+      publicOnly: true,
     },
   },
   {
@@ -143,6 +240,7 @@ const Routes = [
     element: <Register />,
     meta: {
       layout: "blank",
+      publicOnly: true,
     },
   },
   {
@@ -150,6 +248,7 @@ const Routes = [
     element: <ForgotPassword />,
     meta: {
       layout: "blank",
+      publicOnly: true,
     },
   },
   {
@@ -157,6 +256,7 @@ const Routes = [
     element: <Otpverification />,
     meta: {
       layout: "blank",
+      publicOnly: true,
     },
   },
   {
@@ -164,6 +264,7 @@ const Routes = [
     element: <SetNewPassword />,
     meta: {
       layout: "blank",
+      publicOnly: true,
     },
   },
   {
@@ -171,9 +272,12 @@ const Routes = [
     element: <Error />,
     meta: {
       layout: "blank",
+      publicOnly: false,
     },
   },
 ];
+
+
 
 const getRouteMeta = (route) => {
   if (isObjEmpty(route.element.props)) {
@@ -192,34 +296,30 @@ const MergeLayoutRoutes = (layout, defaultLayout) => {
   if (Routes) {
     Routes.filter((route) => {
       let isBlank = false;
-      // ** Checks if Route layout or Default layout matches current layout
+
       if (
         (route.meta && route.meta.layout && route.meta.layout === layout) ||
         ((route.meta === undefined || route.meta.layout === undefined) &&
           defaultLayout === layout)
       ) {
-        const RouteTag = PublicRoute;
+        const RouteTag =
+          route.meta && route.meta.layout === "blank"
+            ? PublicOnlyRoute
+            : PrivateRoute;
 
-        // ** Check for public or private route
-        if (route.meta) {
-          route.meta.layout === "blank" ? (isBlank = true) : (isBlank = false);
-        }
-        if (route.element) {
-          const Wrapper =
-            // eslint-disable-next-line multiline-ternary
-            isObjEmpty(route.element.props) && isBlank === false
-              ? // eslint-disable-next-line multiline-ternary
-                LayoutWrapper
-              : Fragment;
+        isBlank = route.meta && route.meta.layout === "blank";
 
-          route.element = (
-            <Wrapper {...(isBlank === false ? getRouteMeta(route) : {})}>
-              <RouteTag route={route}>{route.element}</RouteTag>
-            </Wrapper>
-          );
-        }
+        const Wrapper =
+          isObjEmpty(route.element.props) && !isBlank
+            ? LayoutWrapper
+            : Fragment;
 
-        // Push route to LayoutRoutes
+        route.element = (
+          <Wrapper {...(!isBlank ? getRouteMeta(route) : {})}>
+            <RouteTag>{route.element}</RouteTag>
+          </Wrapper>
+        );
+
         LayoutRoutes.push(route);
       }
       return LayoutRoutes;
@@ -227,6 +327,7 @@ const MergeLayoutRoutes = (layout, defaultLayout) => {
   }
   return LayoutRoutes;
 };
+
 
 const getRoutes = (layout) => {
   const defaultLayout = layout || "vertical";

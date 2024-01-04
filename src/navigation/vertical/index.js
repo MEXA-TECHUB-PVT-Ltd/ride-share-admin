@@ -20,6 +20,12 @@ export default [
     navLink: "/cartype",
   },
   {
+    id: "carcolors",
+    title: "Car Colors",
+    icon: <Book size={20} />,
+    navLink: "/car-colors",
+  },
+  {
     id: "ridefair",
     title: "Driver Fair",
     icon: <Truck size={20} />,
