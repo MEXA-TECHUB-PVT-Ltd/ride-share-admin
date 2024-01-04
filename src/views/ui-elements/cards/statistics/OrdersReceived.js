@@ -8,7 +8,7 @@ import { Package } from 'react-feather'
 // ** Custom Components
 import StatsWithAreaChart from '@components/widgets/stats/StatsWithAreaChart'
 
-const OrdersReceived = ({ kFormatter, warning }) => {
+const OrdersReceived = ({ kFormatter, warning, count }) => {
   // ** State
   const [data, setData] = useState([{
     name: 'Cars',
@@ -70,8 +70,8 @@ const OrdersReceived = ({ kFormatter, warning }) => {
     <StatsWithAreaChart
       icon={<Package size={21} />}
       color='warning'
-      stats="567"
-      statTitle='Cars'
+      stats={count}
+      statTitle='Complaints'
       options={options}
       series={data}
       type='area'

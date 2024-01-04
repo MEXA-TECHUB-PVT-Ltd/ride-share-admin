@@ -9,7 +9,7 @@ import { Users } from 'react-feather'
 import TinyChartStats from '@components/widgets/stats/TinyChartStats'
 import StatsWithAreaChart from '@components/widgets/stats/StatsWithAreaChart'
 
-const OrdersBarChart = ({ warning }) => {
+const OrdersBarChart = ({ warning, count }) => {
   // ** State
   const [data, setData] = useState([{
     name: 'users',
@@ -81,7 +81,7 @@ const OrdersBarChart = ({ warning }) => {
     <StatsWithAreaChart
     icon={<Users size={21} />}
     color='secondary'
-    stats='43'
+    stats={count}
     statTitle='Users'
     series={data}
     type='bar'

@@ -27,7 +27,16 @@ export const dashboardApi = createApi({
     "deleteComplaints",
     "getAllComplaints",
     "getAllUsers",
+    "getAllCount",
+    "getGraphicRepresent",
+    "createAppLink",
+    "getAppLink",
+    "getAllContactUs",
+    "updateCUStatus",
+    "getAllByIns",
+    "updateInsStatus",
   ],
+
   endpoints: (builder) => ({
     // dashboard page api's
     // all users api also use on the all users page
@@ -35,6 +44,30 @@ export const dashboardApi = createApi({
       query: ({ page = 1, sortColumn = "id", sortOrder = "asc" }) =>
         `users/getAllUsersWithDetails?page=${page}&limit=${100}&sortColumn=${sortColumn}&sortOrder=${sortOrder}`,
       providesTags: ["getAllUsers"],
+    }),
+    // universal api for getting all counts on the dashboard
+    getAllCount: builder.query({
+      query: () => `universal/getAllCount`,
+      providesTags: ["getAllCount"],
+    }),
+    // graph API for users
+    getGraphicRepresent: builder.query({
+      query: ({ interval }) =>
+        `users/getGraphicalRepresent?interval=${interval}`,
+      providesTags: ["getGraphicRepresent"],
+    }),
+    // app link
+    createAppLink: builder.mutation({
+      query: (body) => ({
+        url: `app_link/create`,
+        method: "POST",
+        body: body,
+      }),
+      invalidatesTags: ["createAppLink"],
+    }),
+    getAppLink: builder.query({
+      query: ({ id }) => `app_link/get/${id}`,
+      providesTags: ["getAppLink"],
     }),
     // ! auth
     //  login
@@ -204,6 +237,33 @@ export const dashboardApi = createApi({
       }),
       invalidatesTags: ["deleteComplaints"],
     }),
+    // contact us
+    getAllContactUs: builder.query({
+      query: ({ limit, page }) =>
+        `contact_us/getAll?limit=${limit}&page=${page}`,
+      providesTags: ["getAllContactUs"],
+    }),
+    updateCUStatus: builder.mutation({
+      query: (body) => ({
+        url: `contact_us/updateStatus`,
+        method: "PUT",
+        body: body,
+      }),
+      invalidatesTags: ["updateCUStatus"],
+    }),
+    // users
+    getAllByIns: builder.query({
+      query: () => `users/getAllUserByInsuranceStatus/false`,
+      providesTags: ["getAllByIns"],
+    }),
+    updateInsStatus: builder.mutation({
+      query: (body) => ({
+        url: `users/updateInsuranceStatus`,
+        method: "PUT",
+        body: body,
+      }),
+      invalidatesTags: ["updateInsStatus"],
+    }),
   }),
 });
 
@@ -229,4 +289,12 @@ export const {
   useGetAllComplaintsQuery,
   useDeleteComplaintsMutation,
   useUpdateBlockStatusMutation,
+  useGetAllCountQuery,
+  useGetGraphicRepresentQuery,
+  useCreateAppLinkMutation,
+  useGetAppLinkQuery,
+  useGetAllContactUsQuery,
+  useUpdateCUStatusMutation,
+  useGetAllByInsQuery,
+  useUpdateInsStatusMutation,
 } = dashboardApi;
