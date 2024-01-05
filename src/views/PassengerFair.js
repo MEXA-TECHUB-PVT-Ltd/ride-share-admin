@@ -110,7 +110,7 @@ const PassengerFair = () => {
               </Tooltip>
             </div>
 
-            <div>
+            {/* <div>
               <Trash2
                 style={{ cursor: "pointer", fontSize: "15px", color: "red" }}
                 id="deleteTooltip"
@@ -126,7 +126,7 @@ const PassengerFair = () => {
               >
                 Delete
               </Tooltip>
-            </div>
+            </div> */}
           </div>
         </>
       ),
@@ -238,7 +238,7 @@ const PassengerFair = () => {
             <Col xs="10" md="11">
               <h1>Passenger Fair</h1>
             </Col>
-            <Col xs="2" md="1" className="text-right">
+            {/* <Col xs="2" md="1" className="text-right">
               <PlusCircle
                 style={{ cursor: "pointer", fontSize: "15px" }}
                 id="addTooltip"
@@ -254,7 +254,7 @@ const PassengerFair = () => {
               >
                 Add
               </Tooltip>
-            </Col>
+            </Col> */}
           </Row>
 
           <DataTable

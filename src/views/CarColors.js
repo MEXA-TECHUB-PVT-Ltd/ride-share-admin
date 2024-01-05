@@ -243,7 +243,7 @@ const CarColor = () => {
         <>
           <Row>
             <Col xs="10" md="11">
-              <h1>Car Type</h1>
+              <h1>Car Color</h1>
             </Col>
             <Col xs="2" md="1" className="text-right">
               <PlusCircle

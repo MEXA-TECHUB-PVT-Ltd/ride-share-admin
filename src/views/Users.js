@@ -23,6 +23,7 @@ import { useGetAllUsersQuery } from "../redux/dashboardApi";
 import moment from "moment";
 import { imgUrl } from "../baseUrl";
 import { useNavigate } from "react-router-dom";
+import UpdateBlockStatus from "./components/modals/users/UpdateBlockStatus";
 
 const Users = () => {
   const [currentPage, setCurrentPage] = useState(1);
@@ -88,8 +89,8 @@ const Users = () => {
             }}
           >
             <img
-              src={`${imgUrl}${row?.profile_picture_details?.file_name}`}
-              alt={`${row?.profile_picture_details?.file_type}`}
+              src={row?.profile_uri ? `${imgUrl}${row.profile_uri}` : adimage}
+              alt={row?.profile_uri || "User avatar"}
               style={{ borderRadius: "50px", width: "40px", height: "40px" }}
             />
           </div>
@@ -119,11 +120,11 @@ const Users = () => {
             }}
           >
             <Button
-              color={`${row.status == "block" ? "success" : "danger"}`}
+              color={`${row.block_status ? "success" : "danger"}`}
               onClick={() => modalopenstatus(row)}
               style={{ width: "130px" }}
             >
-              {row.block_status == "block" ? "Block" : "Unblock"}
+              {row.block_status ? "Block" : "Unblock"}
             </Button>
           </div>
         </>
@@ -182,7 +183,7 @@ const Users = () => {
   const [status, setStatus] = useState(false);
   const [modalupdatestatus, setModalupdatestatus] = useState(false);
   const modalopenstatus = (row) => {
-    setStatus(row.id);
+    setRowData(row);
     setModalupdatestatus(!modalupdatestatus);
   };
 
@@ -401,7 +402,7 @@ const Users = () => {
 
         <ModalBody className="text-center mt-1 mb-1">
           <div>
-            <p>Do you want to update the users status?</p>
+            <p>Do you want to { rowData?.block_status ? "Block" : "UnBlock" } the users status?</p>
           </div>
         </ModalBody>
 
@@ -426,6 +427,13 @@ const Users = () => {
           </div>
         </ModalFooter>
       </Modal>
+
+      <UpdateBlockStatus
+        modalupdatestatus={modalupdatestatus}
+        modalopenstatus={modalopenstatus}
+        userData={rowData}
+        refetch={refetch}
+      />
 
       <ToastContainer />
     </>

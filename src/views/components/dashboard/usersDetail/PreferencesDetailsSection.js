@@ -53,7 +53,7 @@ const PreferenceDetail = ({ detail }) => (
   <div className="d-flex align-items-center mt-2">
     {/* Assuming icons are named based on preference_type */}
     <img
-      src={`${imgUrl}${detail?.icon?.file_name}`} // Adjust the path as necessary
+      src={`${imgUrl}${detail?.icon}`} // Adjust the path as necessary
       alt={detail?.preference_type}
       style={{ width: "40px", height: "40px", marginRight: "10px" }}
     />

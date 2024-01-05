@@ -39,6 +39,7 @@ export const dashboardApi = createApi({
     "updateCC",
     "deleteCC",
     "getAllCC",
+    "getAllRecentlyDeleted",
   ],
 
   endpoints: (builder) => ({
@@ -59,6 +60,11 @@ export const dashboardApi = createApi({
       query: ({ interval }) =>
         `users/getGraphicalRepresent?interval=${interval}`,
       providesTags: ["getGraphicRepresent"],
+    }),
+    // deleted users
+    getAllRecentlyDeleted: builder.query({
+      query: () => `users/getAllRecentlyDeleted`,
+      providesTags: ["getAllRecentlyDeleted"],
     }),
     // app link
     createAppLink: builder.mutation({
@@ -333,4 +339,5 @@ export const {
   useCreateCCMutation,
   useUpdateCCMutation,
   useDeleteCCMutation,
+  useGetAllRecentlyDeletedQuery, 
 } = dashboardApi;

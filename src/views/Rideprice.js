@@ -67,80 +67,80 @@ const Rideprice = () => {
     const data = [{ id: 1, rate: "200" }];
 
     const columns = [
-        {
-            name: "id",
-            cell: (row, index) => <>{++index}</>,
-        },
-        {
-            name: "Start Range",
-            selector: "start_range",
-            sortable: true,
-        },
-        {
-            name: "End Range",
-            selector: "end_range",
-            sortable: true,
-        },
-        {
-            name: "Rate Per Mile",
-            selector: "rate_per_mile",
-            sortable: true,
-        },
-        {
-            name: "Actions",
-            cell: (row) => (
-                <>
-                    <div
-                        style={{
-                            display: "flex",
-                            justifyContent: "center",
-                            alignContent: "center",
-                            gap: "10px",
-                        }}
-                    >
-                        <div>
-                            <Edit
-                                style={{
-                                    cursor: "pointer",
-                                    color: "#00cfe8",
-                                    fontSize: "15px",
-                                }}
-                                id="editTooltip"
-                                onClick={() => modalopenedit(row)}
-                                onMouseEnter={toggleTooltipEdit}
-                                onMouseLeave={toggleTooltipEdit}
-                            />
-                            <Tooltip
-                                placement="top"
-                                isOpen={tooltipOpenEdit}
-                                target="editTooltip"
-                                toggle={toggleTooltipEdit}
-                            >
-                                Edit
-                            </Tooltip>
-                        </div>
+      {
+        name: "id",
+        cell: (row, index) => <>{++index}</>,
+      },
+      {
+        name: "Start Range Per Mile",
+        selector: "start_range",
+        sortable: true,
+      },
+      {
+        name: "End Range Per Mile",
+        selector: "end_range",
+        sortable: true,
+      },
+      {
+        name: "Rate Per Mile",
+        selector: "rate_per_mile",
+        sortable: true,
+      },
+      {
+        name: "Actions",
+        cell: (row) => (
+          <>
+            <div
+              style={{
+                display: "flex",
+                justifyContent: "center",
+                alignContent: "center",
+                gap: "10px",
+              }}
+            >
+              <div>
+                <Edit
+                  style={{
+                    cursor: "pointer",
+                    color: "#00cfe8",
+                    fontSize: "15px",
+                  }}
+                  id="editTooltip"
+                  onClick={() => modalopenedit(row)}
+                  onMouseEnter={toggleTooltipEdit}
+                  onMouseLeave={toggleTooltipEdit}
+                />
+                <Tooltip
+                  placement="top"
+                  isOpen={tooltipOpenEdit}
+                  target="editTooltip"
+                  toggle={toggleTooltipEdit}
+                >
+                  Edit
+                </Tooltip>
+              </div>
 
-                        <div>
-                            <Trash2
-                                style={{ cursor: "pointer", fontSize: "15px", color: "red" }}
-                                id="deleteTooltip"
-                                onClick={() => modalopendelete(row)}
-                                onMouseEnter={toggleTooltipDelete}
-                                onMouseLeave={toggleTooltipDelete}
-                            />
-                            <Tooltip
-                                placement="top"
-                                isOpen={tooltipOpenDelete}
-                                target="deleteTooltip"
-                                toggle={toggleTooltipDelete}
-                            >
-                                Delete
-                            </Tooltip>
-                        </div>
-                    </div>
-                </>
-            ),
-        },
+              <div>
+                <Trash2
+                  style={{ cursor: "pointer", fontSize: "15px", color: "red" }}
+                  id="deleteTooltip"
+                  onClick={() => modalopendelete(row)}
+                  onMouseEnter={toggleTooltipDelete}
+                  onMouseLeave={toggleTooltipDelete}
+                />
+                <Tooltip
+                  placement="top"
+                  isOpen={tooltipOpenDelete}
+                  target="deleteTooltip"
+                  toggle={toggleTooltipDelete}
+                >
+                  Delete
+                </Tooltip>
+              </div>
+            </div>
+          </>
+        ),
+      },
     ];
 
     const [emptyfieldalert, setEmptyfieldalert] = useState(false);
@@ -329,7 +329,7 @@ const Rideprice = () => {
                     <Form>
                       <div className="mb-2">
                         <Label className="form-label" for="login-email">
-                          Start Range
+                          Start Range Per Mile
                         </Label>
                         <Field
                           name="start_range"
@@ -348,7 +348,7 @@ const Rideprice = () => {
                       </div>
                       <div className="mb-2">
                         <Label className="form-label" for="login-email">
-                          End Range
+                          End Range Per Mile
                         </Label>
                         <Field
                           name="end_range"
@@ -460,7 +460,7 @@ const Rideprice = () => {
                     <Form>
                       <div className="mb-2">
                         <Label className="form-label" for="login-email">
-                          Start Range
+                          Start Range Per Mile
                         </Label>
                         <Field
                           name="start_range"
@@ -479,7 +479,7 @@ const Rideprice = () => {
                       </div>
                       <div className="mb-2">
                         <Label className="form-label" for="login-email">
-                          End Range
+                          End Range Per Mile
                         </Label>
                         <Field
                           name="end_range"

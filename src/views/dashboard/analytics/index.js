@@ -288,6 +288,7 @@ const AnalyticsDashboard = () => {
       </Row>
       <Row className="match-height mb-4">
         <Col lg="12" xs="12">
+          <h1>Queries</h1>
           <DataTable
             columns={columns}
             data={cuData?.result?.response}
