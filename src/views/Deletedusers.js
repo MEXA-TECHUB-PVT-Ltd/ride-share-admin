@@ -88,7 +88,7 @@ const Users = () => {
               alignContent: "center",
               gap: "10px",
             }}
-          >
+          > 
             <img
               src={row?.profile_uri ? `${imgUrl}${row.profile_uri}` : adimage}
               alt={row?.profile_uri || "User avatar"}
