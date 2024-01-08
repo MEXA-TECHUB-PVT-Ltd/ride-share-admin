@@ -7,6 +7,7 @@ const UpdateBlockStatus = ({
   modalupdatestatus,
   modalopenstatus,
   userData,
+  refetch,
 }) => {
   const [updateBlockStatus, { isLoading: updatedLoading }] =
     useUpdateBlockStatusMutation();
@@ -19,6 +20,9 @@ const UpdateBlockStatus = ({
         block_status: !userData?.block_status,
       }).unwrap();
       modalopenstatus();
+      if (refetch) {
+        refetch();
+      }
       toast.success(`Rider status Updated Successfully !`, {
         position: toast.POSITION.BOTTOM_RIGHT, // Apply a custom class for styling
       });
@@ -33,7 +37,10 @@ const UpdateBlockStatus = ({
 
         <ModalBody className="text-center mt-1 mb-1">
           <div>
-            <p>Do you want to update the rider status?</p>
+            <p>
+              Do you want to {userData?.block_status ? "Block" : "UnBlock"} the
+              rider status?
+            </p>
           </div>
         </ModalBody>
 
@@ -54,7 +61,7 @@ const UpdateBlockStatus = ({
               disabled={updatedLoading}
               onClick={handeupdatestatus}
             >
-              Update
+              {userData?.block_status ? "Block" : "UnBlock"}
             </Button>
           </div>
         </ModalFooter>

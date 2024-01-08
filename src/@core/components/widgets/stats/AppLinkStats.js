@@ -75,7 +75,7 @@ const AppLinkStats = (props) => {
 
   return (
     <Card {...rest}>
-      <CardBody className={classnames("pb-0", { [className]: className })}>
+      <CardBody className={classnames("pb-1", { [className]: className })}>
         <p className="card-text">{statTitle}</p>
         <div className="d-flex">
           <Input

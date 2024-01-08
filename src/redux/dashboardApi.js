@@ -23,7 +23,7 @@ export const dashboardApi = createApi({
     "createCT",
     "updateCT",
     "deleteCT",
-    "getAllCT",
+    "getAllCC",
     "deleteComplaints",
     "getAllComplaints",
     "getAllUsers",
@@ -35,6 +35,11 @@ export const dashboardApi = createApi({
     "updateCUStatus",
     "getAllByIns",
     "updateInsStatus",
+    "createCC",
+    "updateCC",
+    "deleteCC",
+    "getAllCC",
+    "getAllRecentlyDeleted",
   ],
 
   endpoints: (builder) => ({
@@ -55,6 +60,11 @@ export const dashboardApi = createApi({
       query: ({ interval }) =>
         `users/getGraphicalRepresent?interval=${interval}`,
       providesTags: ["getGraphicRepresent"],
+    }),
+    // deleted users
+    getAllRecentlyDeleted: builder.query({
+      query: () => `users/getAllRecentlyDeleted`,
+      providesTags: ["getAllRecentlyDeleted"],
     }),
     // app link
     createAppLink: builder.mutation({
@@ -225,6 +235,34 @@ export const dashboardApi = createApi({
       query: () => `vehicle_types/getAll`,
       providesTags: ["getAllCT"],
     }),
+    // car/vehicle colors
+    createCC: builder.mutation({
+      query: (body) => ({
+        url: `vehicle_colors/create`,
+        method: "POST",
+        body: body,
+      }),
+      invalidatesTags: ["createCT"],
+    }),
+    updateCC: builder.mutation({
+      query: (body) => ({
+        url: `vehicle_colors/update`,
+        method: "PUT",
+        body: body,
+      }),
+      invalidatesTags: ["updateCT"],
+    }),
+    deleteCC: builder.mutation({
+      query: (body) => ({
+        url: `vehicle_colors/delete/${body.id}`,
+        method: "Delete",
+      }),
+      invalidatesTags: ["deleteCT"],
+    }),
+    getAllCC: builder.query({
+      query: () => `vehicle_colors/getAll`,
+      providesTags: ["getAllCC"],
+    }),
     // complaints
     getAllComplaints: builder.query({
       query: () => `complaints/getAll`,
@@ -297,4 +335,9 @@ export const {
   useUpdateCUStatusMutation,
   useGetAllByInsQuery,
   useUpdateInsStatusMutation,
+  useGetAllCCQuery,
+  useCreateCCMutation,
+  useUpdateCCMutation,
+  useDeleteCCMutation,
+  useGetAllRecentlyDeletedQuery, 
 } = dashboardApi;

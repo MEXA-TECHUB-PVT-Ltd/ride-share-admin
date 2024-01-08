@@ -7,14 +7,14 @@ const UserDetailCard = ({ title, rowData }) => (
     <CardBody>
       <CardTitle tag="h5">{title}</CardTitle>
       <Row>
-        <UserInfoSection title="Email" value={rowData?.email} />
-        <UserInfoSection title="Phone" value={rowData?.phone} />
+        <UserInfoSection title="Email" value={rowData?.email || "N/A"} />
+        <UserInfoSection title="Phone" value={rowData?.phone || "N/A"} />
         <UserInfoSection
           title="DOB"
-          value={moment(rowData?.date_of_birth).format("DD-MM-YYYY")}
+          value={moment(rowData?.date_of_birth).format("DD-MM-YYYY") || "N/A"}
         />
-        <UserInfoSection title="Gender" value={rowData?.gender} />
-        <UserInfoSection title="Age" value={rowData?.age} />
+        <UserInfoSection title="Gender" value={rowData?.gender || "N/A"} />
+        <UserInfoSection title="Age" value={rowData?.age || "N/A"} />
         <UserInfoSection
           title="Block Status"
           value={

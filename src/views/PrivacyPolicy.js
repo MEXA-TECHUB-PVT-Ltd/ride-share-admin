@@ -1,102 +1,188 @@
-
-import { } from "@utils";
+import React from "react";
 import {
+  Container,
   Row,
   Col,
+  Card,
+  CardBody,
   CardTitle,
   CardText,
-  Label,
-  Input,
   Button,
 } from "reactstrap";
-// ** Styles
-import "@styles/base/pages/page-misc.scss";
 
 const PrivacyPolicy = () => {
-
-
   return (
     <>
-      <Row>
-        <Col xs="12" md="12">
-          <h1 >Privacy Policy</h1>
-        </Col>
+      <Row className="justify-content-center">
+        <Col md="12">
+          <Card>
+            <CardBody>
+              <CardTitle tag="h1">Privacy Policy for Ride Share App</CardTitle>
+              <CardText>
+                <strong>Effective Date: 28/12/2023</strong>
+              </CardText>
 
-        <Col className="mb-2" xs={12}>
-          <div style={{ borderRadius: "5px", padding: "5px", paddingLeft: "20px", paddingRight: "20px", backgroundColor: "white" }} >
-            <p className="mt-2 mb-2" style={{ letterSpacing: "1px", fontWeight: "" }} align="left" lineHeight="25px" >
-              <span style={{ fontWeight: "normal" }}>
-                At mtechub llc, accessible from https://mtechub.com, one of our main priorities is the privacy of our visitors. This Privacy Policy document contains types of information that is collected and recorded by mtechub llc and how we use it.
-                <br />
-                If you have additional questions or require more information about our Privacy Policy, do not hesitate to contact us.
-                <br />
-                This Privacy Policy applies only to our online activities and is valid for visitors to our website with regards to the information that they shared and/or collect in mtechub llc. This policy is not applicable to any information collected offline or via channels other than this website.
-                <br />
-                <br /><span style={{ fontWeight: 600, fontSize: "18px", marginTop: "10px" }}>Consent</span>
-                <br />
-                By using our website, you hereby consent to our Privacy Policy and agree to its terms.
-                <br />
-                <br /><span style={{ fontWeight: 600, fontSize: "18px", marginTop: "10px" }}>Information we collect</span>
-                <br />
-                The personal information that you are asked to provide, and the reasons why you are asked to provide it, will be made clear to you at the point we ask you to provide your personal information.
-                <br />
-                If you contact us directly, we may receive additional information about you such as your name, email address, phone number, the contents of the message and/or attachments you may send us, and any other information you may choose to provide.
-                <br />
-                When you register for an Account, we may ask for your contact information, including items such as name, company name, address, email address, and telephone number.
-                <br />
-                <br /><span style={{ fontWeight: 600, fontSize: "18px", marginTop: "10px" }}>How we use your information</span>
-                <br />
-                We use the information we collect in various ways, including to:
-                <br />
+              <CardTitle tag="h2">Introduction</CardTitle>
+              <CardText>
+                Welcome to the Ride Share App (the "App"). This Privacy Policy
+                is designed to help you understand how we collect, use, share,
+                and safeguard your personal information. By using the App, you
+                agree to the terms outlined in this Privacy Policy.
+              </CardText>
+
+              <CardTitle tag="h2">Information We Collect</CardTitle>
+              <CardText>
+                <strong>User-Provided Information:</strong> We collect
+                information that you provide when using the App, including but
+                not limited to:
                 <ul>
-                  <li>Provide, operate, and maintain our website</li>
-                  <li>Improve, personalize, and expand our website</li>
-                  <li>Understand and analyze how you use our website</li>
-                  <li>Develop new products, services, features, and functionality</li>
-                  <li>Communicate with you, either directly or through one of our partners, including for customer service, to provide you with updates and other information relating to the website, and for marketing and promotional purposes</li>
-                  <li>Send you emails</li>
-                  <li>Find and prevent fraud</li>
+                  <li>
+                    Personal information: Name, email address, phone number, and
+                    profile picture.
+                  </li>
+                  <li>
+                    Ride details: Starting location, destination, date, time,
+                    and route preferences.
+                  </li>
+                  <li>
+                    Payment information: Credit card details, billing address.
+                  </li>
                 </ul>
-                <br />
-                <br /><span style={{ fontWeight: 600, fontSize: "18px", marginTop: "10px" }}>Log Files</span>
-                <br />
-                mtechub llc follows a standard procedure of using log files. These files log visitors when they visit websites. All hosting companies do this and a part of hosting services' analytics. The information collected by log files include internet protocol (IP) addresses, browser type, Internet Service Provider (ISP), date and time stamp, referring/exit pages, and possibly the number of clicks. These are not linked to any information that is personally identifiable. The purpose of the information is for analyzing trends, administering the site, tracking users' movement on the website, and gathering demographic information.
-                <br />
-                <br /><span style={{ fontWeight: 600, fontSize: "18px", marginTop: "10px" }}>Cookies and Web Beacons</span>
-                <br />
-                Like any other website, mtechub llc uses 'cookies'. These cookies are used to store information including visitors' preferences, and the pages on the website that the visitor accessed or visited. The information is used to optimize the users' experience by customizing our web page content based on visitors' browser type and/or other information.
-                <br />
-                <br /><span style={{ fontWeight: 600, fontSize: "18px", marginTop: "10px" }}>Advertising Partners Privacy Policies</span>
-                <br />
-                You may consult this list to find the Privacy Policy for each of the advertising partners of mtechub llc.
-                <br />
-                Third-party ad servers or ad networks uses technologies like cookies, JavaScript, or Web Beacons that are used in their respective advertisements and links that appear on mtechub llc, which are sent directly to users' browser. They automatically receive your IP address when this occurs. These technologies are used to measure the effectiveness of their advertising campaigns and/or to personalize the advertising content that you see on websites that you visit.
-                <br />
-                Note that mtechub llc has no access to or control over these cookies that are used by third-party advertisers.
-                <br />
-                <br /><span style={{ fontWeight: 600, fontSize: "18px", marginTop: "10px" }}>Third Party Privacy Policies</span>
-                <br />
-                mtechub llc's Privacy Policy does not apply to other advertisers or websites. Thus, we are advising you to consult the respective Privacy Policies of these third-party ad servers for more detailed information. It may include their practices and instructions about how to opt-out of certain options.
-                <br />
-                You can choose to disable cookies through your individual browser options. To know more detailed information about cookie management with specific web browsers, it can be found at the browsers' respective websites.
-                <br />
-                <br /><span style={{ fontWeight: 600, fontSize: "18px", marginTop: "10px" }}>CCPA Privacy Rights (Do Not Sell My Personal Information)</span>
-                <br />
-                Under the CCPA, among other rights, California consumers have the right to:
-                <br />
-                Request that a business that collects a consumer's personal data disclose the categories and specific pieces of personal data that a business has collected about consumers.
-                <br />
-                Request that a business delete any personal data about the consumer that a business has collected.
-                <br />
-                Request that a business that sells a consumer's personal data, not sell the consumer's personal data.
-                <br />
-                If you make a request, we have one month to respond to you. If you would like to exercise any of these rights, please contact us.
-              </span>
-            </p>
-          </div>
+                <strong>Automatically Collected Information:</strong> We may
+                collect information automatically as you use the App, such as:
+                <ul>
+                  <li>
+                    Device information: Device type, operating system, and
+                    unique device identifiers.
+                  </li>
+                  <li>
+                    Usage data: App features used, interactions, and performance
+                    data.
+                  </li>
+                </ul>
+              </CardText>
+
+              <CardTitle tag="h2">How We Use Your Information</CardTitle>
+              <CardText>
+                We use the collected information for the following purposes:
+                <ul>
+                  <li>Facilitating ride matches based on user preferences.</li>
+                  <li>Enabling secure payment processing.</li>
+                  <li>Providing customer support and resolving issues.</li>
+                  <li>Improving and optimizing the App's performance.</li>
+                  <li>
+                    Ensuring compliance with legal and regulatory requirements.
+                  </li>
+                </ul>
+              </CardText>
+
+              <CardTitle tag="h2">Sharing Your Information</CardTitle>
+              <CardText>
+                We may share your information with the following parties:
+                <ul>
+                  <li>
+                    Other Users: To facilitate ride-sharing, your name, profile
+                    picture, and ride details may be shared with other users
+                    participating in the same ride.
+                  </li>
+                  <li>
+                    Service Providers: Third-party service providers may have
+                    access to your information to perform services on our
+                    behalf, such as payment processing and data analytics.
+                  </li>
+                  <li>
+                    Legal Compliance: We may share information when required by
+                    law or to protect our rights, users, and the public.
+                  </li>
+                </ul>
+              </CardText>
+
+              <CardTitle tag="h2">Community-Driven Trust System</CardTitle>
+              <CardText>
+                The App incorporates a rating and review system to foster a
+                community-driven trust environment. Users can rate and review
+                each other based on their ride experiences.
+              </CardText>
+
+              <CardTitle tag="h2">Security Measures</CardTitle>
+              <CardText>
+                We implement industry-standard security measures to protect your
+                information from unauthorized access, disclosure, alteration,
+                and destruction. However, no method of transmission over the
+                Internet or electronic storage is entirely secure; therefore, we
+                cannot guarantee absolute security.
+              </CardText>
+
+              <CardTitle tag="h2">Communication and Marketing</CardTitle>
+              <CardText>
+                By using the App, you agree to receive communication-related to
+                your rides, account updates, and marketing materials. You can
+                opt out of marketing communications at any time.
+              </CardText>
+
+              <CardTitle tag="h2">Children's Privacy</CardTitle>
+              <CardText>
+                The App is not intended for users under the age of 18. We do not
+                knowingly collect personal information from children. If you
+                believe that a child has provided us with their information,
+                please contact us.
+              </CardText>
+
+              <CardTitle tag="h2">Changes to This Privacy Policy</CardTitle>
+              <CardText>
+                We may update this Privacy Policy to reflect changes in our
+                practices. We will notify you of any material changes through
+                the App or other means. Your continued use of the App after such
+                modifications constitutes acceptance of the updated Privacy
+                Policy.
+              </CardText>
+
+              <CardTitle tag="h2">Contact Us</CardTitle>
+              <CardText>
+                If you have questions or concerns about this Privacy Policy,
+                please contact us.
+              </CardText>
+            </CardBody>
+          </Card>
         </Col>
       </Row>
+      {/* <Row className="justify-content-center mt-4">
+        <Col md="8">
+          <Card>
+            <CardBody>
+              <CardTitle tag="h1">Insurance Content</CardTitle>
+
+              <CardTitle tag="h2">Your Well-being Matters Most</CardTitle>
+              <CardText>
+                At the Rideshare App, your safety is paramount. We recognize the
+                significance of ensuring a worry-free ride-sharing experience.
+                To add an extra layer of security and bolster your confidence,
+                we provide the option for additional insurance coverage. Your
+                peace of mind is our commitment.
+              </CardText>
+
+              <CardTitle tag="h2">Empowering Your Choices</CardTitle>
+              <CardText>
+                We believe in empowering you with choices. The decision to opt
+                for insurance is yours, giving you control over the level of
+                protection you desire during your ride-sharing experiences.
+              </CardText>
+
+              <CardTitle tag="h2">Ready to Enhance Your Safety?</CardTitle>
+              <CardText>
+                If you are interested, click the button below to send us an
+                email with your insurance request. Our team will assist you
+                promptly.
+              </CardText>
+              <Button color="primary">
+                Request Insurance
+              </Button>
+            </CardBody>
+          </Card>
+        </Col> */}
+      {/* </Row> */}
     </>
   );
 };
+
 export default PrivacyPolicy;
