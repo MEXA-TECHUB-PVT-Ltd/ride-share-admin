@@ -52,7 +52,7 @@ const AboutSection = ({ about }) => (
   <Card className="mb-3">
     <CardBody>
       <CardTitle tag="h5">About:</CardTitle>
-      <p>{about}</p>
+      <p>{about || "No details provided"}</p>
     </CardBody>
   </Card>
 );

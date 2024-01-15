@@ -24,6 +24,7 @@ import {
   useGetAllCTQuery,
   useUpdateCTMutation,
 } from "../redux/dashboardApi";
+import DeleteModalTF from "./components/modals/DeleteModalTF";
 
 const btnchnge = {
   letterSpacing: "1px",
@@ -58,8 +59,6 @@ const CarType = () => {
   const toggleTooltipEdit = () => setTooltipOpenEdit(!tooltipOpenEdit);
   const toggleTooltipDelete = () => setTooltipOpenDelete(!tooltipOpenDelete);
   const toggleTooltipadd = () => setTooltipOpenadd(!tooltipOpenadd);
-
-  console.log(ctData?.result?.response);
 
   const data = ctData?.result?.response;
 
@@ -180,20 +179,20 @@ const CarType = () => {
     setModaldelete(!modaldelete);
   };
 
-    const handleDelete = async () => {
-      try {
-        await deleteCT({
-          id: rowData?.id,
-        }).unwrap();
-        refetch();
-        toast.success("Deleted Successfully", {
-          position: toast.POSITION.BOTTOM_RIGHT, // Apply a custom class for styling
-        });
-        setModaldelete(false);
-      } catch (error) {
-        console.log(error);
-      }
-    };
+  const handleDelete = async () => {
+    try {
+      await deleteCT({
+        id: rowData?.id,
+      }).unwrap();
+      refetch();
+      toast.success("Deleted Successfully", {
+        position: toast.POSITION.BOTTOM_RIGHT, // Apply a custom class for styling
+      });
+      setModaldelete(false);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   const [modalupdatestatus, setModalupdatestatus] = useState(false);
   const modalopenstatus = () => {
@@ -283,33 +282,15 @@ const CarType = () => {
               if (!values.name) {
                 errors.name = "Name is Required";
               }
-              //   else if (!values.noofseats) {
-              //     errors.noofseats = "Seats number is Required";
-              //   }
               return errors;
             }}
             onSubmit={async (values, { setSubmitting }) => {
-              //   console.log(values);
-              //   if (selectedFile == null) {
-              //     // setEmptyfieldalert(true);
-              //     // setTimeout(async () => {
-              //     //   setEmptyfieldalert(false);
-              //     // }, 3000);
-              //   } else {
-              //   setTimeout(() => {
-              //     toast.success("Car Type Added Successfully !", {
-              //       position: toast.POSITION.BOTTOM_RIGHT, // Apply a custom class for styling
-              //     });
-              //     setModalOpen(false);
-              //     setSelectedFile(null);
-              //   }, 1000);
-              //   }
               try {
                 await createCT({
                   name: values.name,
                 }).unwrap();
                 toast.success("Car Type Added Successfully !", {
-                  position: toast.POSITION.BOTTOM_RIGHT, // Apply a custom class for styling
+                  position: toast.POSITION.BOTTOM_RIGHT,
                 });
                 refetch();
                 setEmptyfieldalert(false);
@@ -319,139 +300,13 @@ const CarType = () => {
                 console.log(error);
               }
             }}
+            validateOnBlur={false}
+            validateOnChange={false}
           >
             {({ isSubmitting }) => (
               <>
                 <ModalBody>
                   <Form>
-                    {/* <div>
-                      {hidecrossicon ? (
-                        <div
-                          sx={{
-                            display: "flex",
-                            justifyContent: "right",
-                            alignContent: "right",
-                          }}
-                        >
-                          <X
-                            style={{
-                              padding: 0.2,
-                              backgroundColor: "rgba(195, 0, 0,0.2)",
-                              borderRadius: "50px",
-                              color: "white",
-                              marginLeft: "410px",
-                            }}
-                            onClick={() => clearpreviewimage()}
-                          />
-                        </div>
-                      ) : null}
-
-                      <div
-                        style={{
-                          pt: 1,
-                          width: "100%",
-                          height: "160px",
-                          p: "0.5px",
-                          border: "1px dashed rgba(195, 0, 0,0.2)",
-                          borderSpacing: "20px",
-                          float: "center",
-                          borderRadius: "5px",
-                        }}
-                      >
-                        {hidelabel ? null : (
-                          <div align="">
-                            <label
-                              htmlFor="fileInput"
-                              style={{
-                                display: "flex",
-                                justifyContent: "center",
-                                alignContent: "center",
-                                color: "#606060",
-                              }}
-                            >
-                              <div
-                                style={{
-                                  marginTop: "50px",
-                                  display: "flex",
-                                  justifyContent: "center",
-                                  alignContent: "center",
-                                  flexDirection: "column",
-                                  gap: "5px",
-                                }}
-                              >
-                                <div
-                                  style={{
-                                    display: "flex",
-                                    justifyContent: "center",
-                                    alignContent: "center",
-                                  }}
-                                >
-                                  <UploadCloud
-                                    sx={{
-                                      fontSize: "50px",
-                                      color: "#606060",
-                                      ml: 3.5,
-                                      pb: 0,
-                                    }}
-                                  />
-                                </div>
-                                <span
-                                  style={{
-                                    paddingBottom: "2vh",
-                                    fontFamily: "Inter",
-                                  }}
-                                >
-                                  Upload Image
-                                </span>
-                              </div>
-                            </label>
-                            <input
-                              style={{ display: "none" }}
-                              id="fileInput"
-                              type="file"
-                              onChange={handleImageChange}
-                              accept="image/*"
-                            />
-                          </div>
-                        )}
-                        <div
-                          style={{
-                            display: "flex",
-                            justifyContent: "center",
-                            alignContent: "center",
-                          }}
-                        >
-                          {selectedFile && (
-                            <img
-                              src={URL.createObjectURL(selectedFile)}
-                              alt="Preview"
-                              style={{
-                                alignSelf: "center",
-                                width: "80%",
-                                height: "155px",
-                              }}
-                            />
-                          )}
-                        </div>
-                      </div>
-
-                      <div align="left" sx={{ pt: 1, height: "20px" }}>
-                        {emptyfieldalert ? (
-                          <span
-                            style={{
-                              marginTop: "2px",
-                              fontSize: "14px",
-                              color: "red",
-                            }}
-                          >
-                            Image is required
-                          </span>
-                        ) : (
-                          <></>
-                        )}
-                      </div>
-                    </div> */}
-
                     <div className="mb-2">
                       <Label className="form-label" for="login-email">
                         Name
@@ -466,27 +321,6 @@ const CarType = () => {
                         )}
                       </ErrorMessage>
                     </div>
-
-                    {/* <div className="mb-2">
-                      <Label className="form-label" for="login-email">
-                        No of seats
-                      </Label>
-                      <Field
-                        name="noofseats"
-                        autoFocus
-                        as={Input}
-                        type="number"
-                      />
-
-                      <ErrorMessage name="noofseats">
-                        {(msg) => (
-                          <div className="error" style={{ color: "red" }}>
-                            {msg}
-                          </div>
-                        )}
-                      </ErrorMessage>
-                    </div> */}
-
                     <div
                       style={{
                         display: "flex",
@@ -546,134 +380,6 @@ const CarType = () => {
               <>
                 <ModalBody>
                   <Form>
-                    {/* <div>
-                      {hidecrossicon ? (
-                        <div
-                          sx={{
-                            display: "flex",
-                            justifyContent: "right",
-                            alignContent: "right",
-                          }}
-                        >
-                          <X
-                            style={{
-                              padding: 0.2,
-                              backgroundColor: "rgba(195, 0, 0,0.2)",
-                              borderRadius: "50px",
-                              color: "white",
-                              marginLeft: "410px",
-                            }}
-                            onClick={() => clearpreviewimage()}
-                          />
-                        </div>
-                      ) : null} */}
-
-                    {/* <div
-                        style={{
-                          pt: 1,
-                          width: "100%",
-                          height: "160px",
-                          p: "0.5px",
-                          border: "1px dashed rgba(195, 0, 0,0.2)",
-                          borderSpacing: "20px",
-                          float: "center",
-                          borderRadius: "5px",
-                        }}
-                      > */}
-                    {/* {hidelabel ? null : (
-                          <div align="">
-                            <label
-                              htmlFor="fileInput"
-                              style={{
-                                display: "flex",
-                                justifyContent: "center",
-                                alignContent: "center",
-                                color: "#606060",
-                              }}
-                            >
-                              <div
-                                style={{
-                                  marginTop: "50px",
-                                  display: "flex",
-                                  justifyContent: "center",
-                                  alignContent: "center",
-                                  flexDirection: "column",
-                                  gap: "5px",
-                                }}
-                              >
-                                <div
-                                  style={{
-                                    display: "flex",
-                                    justifyContent: "center",
-                                    alignContent: "center",
-                                  }}
-                                >
-                                  <UploadCloud
-                                    sx={{
-                                      fontSize: "50px",
-                                      color: "#606060",
-                                      ml: 3.5,
-                                      pb: 0,
-                                    }}
-                                  />
-                                </div>
-                                <span
-                                  style={{
-                                    paddingBottom: "2vh",
-                                    fontFamily: "Inter",
-                                  }}
-                                >
-                                  Upload Image
-                                </span>
-                              </div>
-                            </label>
-                            <input
-                              style={{ display: "none" }}
-                              id="fileInput"
-                              type="file"
-                              onChange={handleImageChange}
-                              accept="image/*"
-                            />
-                          </div>
-                        )} */}
-                    {/* <div
-                          style={{
-                            display: "flex",
-                            justifyContent: "center",
-                            alignContent: "center",
-                          }}
-                        >
-                          {selectedFile && (
-                            <img
-                              src={URL.createObjectURL(selectedFile)}
-                              alt="Preview"
-                              style={{
-                                alignSelf: "center",
-                                width: "80%",
-                                height: "155px",
-                              }}
-                            />
-                          )}
-                        </div> */}
-                    {/* </div> */}
-
-                    {/* <div align="left" sx={{ pt: 1, height: "20px" }}>
-                        {emptyfieldalert ? (
-                          <span
-                            style={{
-                              marginTop: "2px",
-                              fontSize: "14px",
-                              color: "red",
-                            }}
-                          >
-                            Image is required
-                          </span>
-                        ) : (
-                          <></>
-                        )}
-                      </div>
-                    </div> */}
-
                     <div className="mb-2">
                       <Label className="form-label" for="login-email">
                         Name
@@ -688,27 +394,6 @@ const CarType = () => {
                         )}
                       </ErrorMessage>
                     </div>
-
-                    {/* <div className="mb-2">
-                      <Label className="form-label" for="login-email">
-                        No Of Seats
-                      </Label>
-                      <Field
-                        name="noofseats"
-                        autoFocus
-                        as={Input}
-                        type="number"
-                      />
-
-                      <ErrorMessage name="noofseats">
-                        {(msg) => (
-                          <div className="error" style={{ color: "red" }}>
-                            {msg}
-                          </div>
-                        )}
-                      </ErrorMessage>
-                    </div> */}
-
                     <div
                       style={{
                         display: "flex",
@@ -738,7 +423,7 @@ const CarType = () => {
 
         <ModalBody className="text-center mt-1 mb-1">
           <div>
-            <p>Do you want to delete this car type?</p>
+            <DeleteModalTF text="Do you want to delete this car type?" />
           </div>
         </ModalBody>
 

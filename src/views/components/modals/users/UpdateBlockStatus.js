@@ -38,7 +38,7 @@ const UpdateBlockStatus = ({
         <ModalBody className="text-center mt-1 mb-1">
           <div>
             <p>
-              Do you want to {userData?.block_status ? "Block" : "UnBlock"} the
+              Do you want to {!userData?.block_status ? "Block" : "UnBlock"} the
               rider status?
             </p>
           </div>
@@ -61,7 +61,7 @@ const UpdateBlockStatus = ({
               disabled={updatedLoading}
               onClick={handeupdatestatus}
             >
-              {userData?.block_status ? "Block" : "UnBlock"}
+              {!userData?.block_status ? "Block" : "UnBlock"}
             </Button>
           </div>
         </ModalFooter>

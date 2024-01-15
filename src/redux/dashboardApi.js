@@ -26,7 +26,6 @@ export const dashboardApi = createApi({
     "getAllCC",
     "deleteComplaints",
     "getAllComplaints",
-    "getAllUsers",
     "getAllCount",
     "getGraphicRepresent",
     "createAppLink",
@@ -40,14 +39,15 @@ export const dashboardApi = createApi({
     "deleteCC",
     "getAllCC",
     "getAllRecentlyDeleted",
+    "deleteUser",
   ],
 
   endpoints: (builder) => ({
     // dashboard page api's
     // all users api also use on the all users page
     getAllUsers: builder.query({
-      query: ({ page = 1, sortColumn = "id", sortOrder = "asc" }) =>
-        `users/getAllUsersWithDetails?page=${page}&limit=${100}&sortColumn=${sortColumn}&sortOrder=${sortOrder}`,
+      query: ({ page = 1, sortColumn = "id", sortOrder = "desc" }) =>
+        `users/getAllUsersWithDetails?limit=${100000}&sortField=${sortColumn}&sortOrder=${sortOrder}`,
       providesTags: ["getAllUsers"],
     }),
     // universal api for getting all counts on the dashboard
@@ -136,10 +136,10 @@ export const dashboardApi = createApi({
       invalidatesTags: ["updatePassword"],
     }),
     // users
-    getAllUsers: builder.query({
-      query: () => `users/getAllUsersWithDetails`,
-      providesTags: ["getAllUsers"],
-    }),
+    // getAllUsers: builder.query({
+    //   query: () => `users/getAllUsersWithDetails`,
+    //   providesTags: ["getAllUsers"],
+    // }),
 
     updateBlockStatus: builder.mutation({
       query: (body) => {
@@ -302,6 +302,14 @@ export const dashboardApi = createApi({
       }),
       invalidatesTags: ["updateInsStatus"],
     }),
+    // delete user
+    deleteUser: builder.mutation({
+      query: (body) => ({
+        url: `users/delete/${body.id}`,
+        method: "Delete",
+      }),
+      invalidatesTags: ["deleteUser"],
+    }),
   }),
 });
 
@@ -340,4 +348,5 @@ export const {
   useUpdateCCMutation,
   useDeleteCCMutation,
   useGetAllRecentlyDeletedQuery, 
+  useDeleteUserMutation,
 } = dashboardApi;

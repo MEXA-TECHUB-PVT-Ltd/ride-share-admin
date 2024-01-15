@@ -14,6 +14,7 @@ import {
   ModalBody,
   ModalFooter,
   Spinner,
+  Badge,
 } from "reactstrap";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -302,10 +303,18 @@ const Complaints = () => {
         </>
       )}
 
-      <Modal isOpen={modalview} toggle={modalopenview} centered>
+      <Modal
+        isOpen={modalview}
+        toggle={modalopenview}
+        centered
+        style={{ maxWidth: "800px" }}
+      >
         <ModalHeader toggle={modalopenview}>Complain Details</ModalHeader>
 
-        <ModalBody className="mt-0 mb-1" style={{ overflow: "auto" }}>
+        <ModalBody
+          className="mt-0 mb-1"
+          style={{ maxWidth: "800px", overflow: "auto" }}
+        >
           <Row>
             <Col xs="6" md="8" className="mb-1">
               <div
@@ -372,16 +381,13 @@ const Complaints = () => {
                   {rowData?.rider_details?.first_name || "NULL"}
                 </h6>
                 <h6 className="text-right">{rowData?.rider_details?.email}</h6>
-                <Button
-                  className={`text-right ${
-                    rowData?.rider_details?.block_status
-                      ? "btn-danger"
-                      : "btn-success"
+                <Badge
+                  color={`${
+                    rowData?.rider_details?.block_status ? "danger" : "success"
                   }`}
-                  onClick={() => modalopenstatus(rowData)}
                 >
-                  {rowData?.rider_details?.block_status ? "Block" : "UnBlock"}
-                </Button>
+                  {rowData?.rider_details?.block_status ? "Blocked" : "UnBlock"}
+                </Badge>
               </div>
             </Col>
 
@@ -392,6 +398,23 @@ const Complaints = () => {
             <Col xs="12" className="">
               <h6 className="text-right">{rowData?.reason}</h6>
             </Col>
+            <Col xs="12" className="mt-1">
+              <p>
+                {" "}
+                Do you want to {" "}
+                {!rowData?.rider_details?.block_status ? "Block" : "UnBlock"}
+              </p>
+              <Button
+                className={`text-right ${
+                  !rowData?.rider_details?.block_status
+                    ? "btn-danger"
+                    : "btn-success"
+                }`}
+                onClick={() => modalopenstatus(rowData)}
+              >
+                {!rowData?.rider_details?.block_status ? "Block" : "UnBlock"}
+              </Button>
+            </Col>
           </Row>
         </ModalBody>
       </Modal>
@@ -401,7 +424,11 @@ const Complaints = () => {
 
         <ModalBody className="text-center mt-1 mb-1">
           <div>
-            <p>Do you want to update the rider status?</p>
+            <p>
+              Do you want to{" "}
+              {!rowData?.rider_details?.block_status ? "Block" : "UnBlock"} the
+              rider status?
+            </p>
           </div>
         </ModalBody>
 

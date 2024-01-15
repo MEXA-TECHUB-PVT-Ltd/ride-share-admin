@@ -1,60 +1,42 @@
-import React, { useState } from 'react';
-import { Card, CardBody, CardTitle, Row, Col, Dropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
-import { imgUrl } from '../../../../baseUrl';
+import React from "react";
+import { Card, CardBody, CardTitle, Row, Col } from "reactstrap";
+import { imgUrl } from "../../../../baseUrl";
+import user_image from "/dummy_user.png";
+import photo from "/photo.png";
 
 const PreferencesDetailsSection = ({ userPreferences }) => {
-  const [dropdownOpen, setDropdownOpen] = useState(false);
-  const [selectedPreferenceType, setSelectedPreferenceType] = useState(null);
-  
-  const toggleDropdown = () => setDropdownOpen(prevState => !prevState);
-
-  const handlePreferenceTypeSelect = (type) => {
-    setSelectedPreferenceType(type);
-  };
-
-  const getPreferencesToShow = () => {
-    return selectedPreferenceType ? userPreferences[selectedPreferenceType] : [];
-  };
-
-    return (
-      <Card className="mb-3">
-        <CardBody>
-          <CardTitle tag="h5">Preferences</CardTitle>
-          <Dropdown isOpen={dropdownOpen} toggle={toggleDropdown}>
-            <DropdownToggle caret>
-              {selectedPreferenceType
-                ? selectedPreferenceType
-                : "Select Preference Type"}
-            </DropdownToggle>
-            <DropdownMenu>
-              {Object.keys(userPreferences)?.map((type, index) => (
-                <DropdownItem
-                  key={index}
-                  onClick={() => handlePreferenceTypeSelect(type)}
-                >
-                  {type}
-                </DropdownItem>
-              ))}
-            </DropdownMenu>
-          </Dropdown>
-          <Row>
-            {getPreferencesToShow()?.map((preference, index) => (
-              <Col key={index} xs="12" md="6" lg="4" className="mb-3">
-                <PreferenceDetail detail={preference} />
-              </Col>
-            ))}
-          </Row>
-        </CardBody>
-      </Card>
-    );
+  return (
+    <Card className="mb-3">
+      <CardBody>
+        <CardTitle tag="h5">Preferences</CardTitle>
+        {Object.entries(userPreferences).map(
+          ([preferenceType, preferences], index) => (
+            <React.Fragment key={index}>
+              <h4 style={{ fontWeight: "bold" }}>{preferenceType}</h4>
+              {preferences && preferences.length > 0 ? (
+                <Row>
+                  {preferences.map((preference, idx) => (
+                    <Col key={idx} xs="12" md="6" lg="4" className="mb-3">
+                      <PreferenceDetail detail={preference} />
+                    </Col>
+                  ))}
+                </Row>
+              ) : (
+                <p>No records found for {preferenceType}.</p> // Display message when no records are available
+              )}
+            </React.Fragment>
+          )
+        )}
+      </CardBody>
+    </Card>
+  );
 };
 
 const PreferenceDetail = ({ detail }) => (
   <div className="d-flex align-items-center mt-2">
-    {/* Assuming icons are named based on preference_type */}
     <img
-      src={`${imgUrl}${detail?.icon}`} // Adjust the path as necessary
-      alt={detail?.preference_type}
+      src={detail?.icon ? `${imgUrl}${detail?.icon}` : photo}
+      alt={photo}
       style={{ width: "40px", height: "40px", marginRight: "10px" }}
     />
     <div>

@@ -18,6 +18,7 @@ import {
   DropdownToggle,
   DropdownItem,
   DropdownMenu,
+  Spinner,
 } from "reactstrap";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -101,7 +102,7 @@ const NonInsuranceUsers = () => {
     {
       name: "Name",
       cell: (row) => (
-        <>{highlightMatch(row?.email || row?.full_name, searchTerm)}</>
+        <>{highlightMatch(row?.first_name || row?.email, searchTerm)}</>
       ),
     },
     { name: "Email", selector: "email", sortable: true },
@@ -155,6 +156,12 @@ const NonInsuranceUsers = () => {
                     disabled={updatedLoading}
                   >
                     Contacted
+                  </DropdownItem>
+                  <DropdownItem
+                    onClick={() => handleStatusChange("pending", row)}
+                    disabled={updatedLoading}
+                  >
+                    Pending
                   </DropdownItem>
                 </DropdownMenu>
               </Dropdown>
@@ -210,38 +217,47 @@ const NonInsuranceUsers = () => {
 
   return (
     <>
-      <Row>
-        <Col xs="4" md="8">
-          <h1>Non Insurance Users</h1>
-        </Col>
+      {isLoading ? (
+        <Spinner color="primary" />
+      ) : (
+        <>
+          <Row>
+            <Col xs="4" md="8">
+              <h1>Non Insurance Users</h1>
+            </Col>
 
-        <Col xs="8" md="4" className="text-right">
-          <div className="mb-2" style={{ borderRadius: "5px", width: "90%" }}>
-            <InputGroup>
-              <Input
-                placeholder="Search ...."
-                color="secondary"
-                value={searchTerm}
-                onChange={(e) => setSearchTerm(e.target.value)}
-              />
-              <InputGroupText>
-                <Search style={{ width: "15px" }} />
-              </InputGroupText>
-            </InputGroup>
+            <Col xs="8" md="4" className="text-right">
+              <div
+                className="mb-2"
+                style={{ borderRadius: "5px", width: "90%" }}
+              >
+                <InputGroup>
+                  <Input
+                    placeholder="Search ...."
+                    color="secondary"
+                    value={searchTerm}
+                    onChange={(e) => setSearchTerm(e.target.value)}
+                  />
+                  <InputGroupText>
+                    <Search style={{ width: "15px" }} />
+                  </InputGroupText>
+                </InputGroup>
+              </div>
+            </Col>
+          </Row>
+
+          <div className="mb-2">
+            <DataTable
+              columns={columns}
+              data={filteredData}
+              pagination
+              highlightOnHover
+              responsive
+              customStyles={customStyles}
+            />
           </div>
-        </Col>
-      </Row>
-
-      <div className="mb-2">
-        <DataTable
-          columns={columns}
-          data={filteredData}
-          pagination
-          highlightOnHover
-          responsive
-          customStyles={customStyles}
-        />
-      </div>
+        </>
+      )}
 
       <Modal isOpen={modalview} toggle={modalopenview} centered>
         <ModalHeader toggle={modalopenview}>User Details</ModalHeader>

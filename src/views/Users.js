@@ -14,6 +14,7 @@ import {
   ModalBody,
   ModalFooter,
   Spinner,
+  Badge,
 } from "reactstrap";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -24,6 +25,8 @@ import moment from "moment";
 import { imgUrl } from "../baseUrl";
 import { useNavigate } from "react-router-dom";
 import UpdateBlockStatus from "./components/modals/users/UpdateBlockStatus";
+import user_image from "/dummy_user.png";
+
 
 const Users = () => {
   const [currentPage, setCurrentPage] = useState(1);
@@ -89,7 +92,9 @@ const Users = () => {
             }}
           >
             <img
-              src={row?.profile_uri ? `${imgUrl}${row.profile_uri}` : adimage}
+              src={
+                row?.profile_uri ? `${imgUrl}${row.profile_uri}` : user_image
+              }
               alt={row?.profile_uri || "User avatar"}
               style={{ borderRadius: "50px", width: "40px", height: "40px" }}
             />
@@ -99,14 +104,15 @@ const Users = () => {
     },
     {
       name: "Name",
-      cell: (row) => <>{highlightMatch(row?.first_name, searchTerm)}</>,
+      cell: (row) => (
+        <>{highlightMatch(row?.first_name, searchTerm) || "Not Provided"}</>
+      ),
     },
     {
       name: "Email",
       cell: (row) => <>{highlightMatch(row?.email, searchTerm)}</>,
       sortable: true,
     },
-    { name: "Gender", selector: "gender", sortable: true },
     {
       name: "Status",
       cell: (row) => (
@@ -119,13 +125,9 @@ const Users = () => {
               gap: "10px",
             }}
           >
-            <Button
-              color={`${row.block_status ? "success" : "danger"}`}
-              onClick={() => modalopenstatus(row)}
-              style={{ width: "130px" }}
-            >
-              {row.block_status ? "Block" : "Unblock"}
-            </Button>
+            <Badge color={`${row?.block_status ? "danger" : "success"}`}>
+              {row?.block_status ? "Blocked" : "UnBlock"}
+            </Badge>
           </div>
         </>
       ),
@@ -142,6 +144,13 @@ const Users = () => {
               gap: "10px",
             }}
           >
+            <Button
+              color={`${row.block_status ? "success" : "danger"}`}
+              onClick={() => modalopenstatus(row)}
+              style={{ width: "120px" }}
+            >
+              {!row.block_status ? "Block" : "Unblock"}
+            </Button>
             <div>
               <Eye
                 style={{

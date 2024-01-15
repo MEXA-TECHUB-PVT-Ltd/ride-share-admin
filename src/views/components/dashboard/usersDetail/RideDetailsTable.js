@@ -1,18 +1,36 @@
 import React, { useState } from "react";
-import { Table, Pagination, PaginationItem, PaginationLink, Card, CardBody, CardTitle } from "reactstrap";
+import {
+  Table,
+  Pagination,
+  PaginationItem,
+  PaginationLink,
+  Card,
+  CardBody,
+  CardTitle,
+} from "reactstrap";
 import moment from "moment";
 
 const RideDetailsTable = ({ rideDetails }) => {
   const [currentPage, setCurrentPage] = useState(0);
   const pageSize = 5; // Number of items per page
-    if (!Array.isArray(rideDetails) || rideDetails?.length === 0) {
-      return <p>No ride details available.</p>;
-    }
+
+  if (!Array.isArray(rideDetails) || rideDetails?.length === 0) {
+    return <p>No ride details available.</p>;
+  }
+
   const pageCount = Math.ceil(rideDetails?.length / pageSize);
 
   const handlePageClick = (e, index) => {
     e.preventDefault();
     setCurrentPage(index);
+  };
+
+  const formatCoordinates = (coordinates) => {
+    const [latitude, longitude] = coordinates
+      .replace("(", "")
+      .replace(")", "")
+      .split(",");
+    return `Lat: ${latitude}, Long: ${longitude}`;
   };
 
   const currentData = rideDetails?.slice(
@@ -24,7 +42,7 @@ const RideDetailsTable = ({ rideDetails }) => {
     <Card className="mb-3">
       <CardBody>
         <CardTitle tag="h5">Ride Details</CardTitle>
-        <div style={{ overflowX: 'auto' }}> 
+        <div style={{ overflowX: "auto" }}>
           <Table>
             <thead>
               <tr>
@@ -32,7 +50,9 @@ const RideDetailsTable = ({ rideDetails }) => {
                 <th>Pickup Location</th>
                 <th>Drop Off Location</th>
                 <th>Ride Date</th>
-                <th>Status</th>
+                <th>Price per seat</th>
+                <th>Pickup Time</th>
+                <th>Ride Status</th>
                 <th>Caution Details</th>
               </tr>
             </thead>
@@ -40,10 +60,16 @@ const RideDetailsTable = ({ rideDetails }) => {
               {currentData?.map((ride, index) => (
                 <tr key={index}>
                   <th scope="row">{index + 1}</th>
-                  <td>{ride?.pickup_location}</td>
-                  <td>{ride?.drop_off_location}</td>
+                  <td>{ride?.pickup_address}</td>
+                  <td>{ride?.drop_off_address}</td>
                   <td>{moment(ride?.ride_date).format("YYYY-MM-DD")}</td>
-                  <td>{ride?.ride_status || "N/A"}</td>
+                  <td>{ride?.price_per_seat || "Not Provided"}</td>
+                  <td>
+                    {ride?.time_to_pickup
+                      ? moment(ride.time_to_pickup, "HH:mm:ss").format("h:mm A")
+                      : "Not Provided"}
+                  </td>
+                  <td>{ride?.ride_status || "Pending"}</td>
                   <td>
                     {ride?.caution_details.map((caution, idx) =>
                       caution?.name ? (
@@ -56,31 +82,30 @@ const RideDetailsTable = ({ rideDetails }) => {
             </tbody>
           </Table>
         </div>
-          <Pagination>
-            <PaginationItem disabled={currentPage <= 0}>
-              <PaginationLink
-                onClick={(e) => handlePageClick(e, currentPage - 1)}
-                previous
-              />
+        <Pagination>
+          <PaginationItem disabled={currentPage <= 0}>
+            <PaginationLink
+              onClick={(e) => handlePageClick(e, currentPage - 1)}
+              previous
+            />
+          </PaginationItem>
+          {[...Array(pageCount)]?.map((page, i) => (
+            <PaginationItem active={i === currentPage} key={i}>
+              <PaginationLink onClick={(e) => handlePageClick(e, i)}>
+                {i + 1}
+              </PaginationLink>
             </PaginationItem>
-            {[...Array(pageCount)]?.map((page, i) => (
-              <PaginationItem active={i === currentPage} key={i}>
-                <PaginationLink onClick={(e) => handlePageClick(e, i)}>
-                  {i + 1}
-                </PaginationLink>
-              </PaginationItem>
-            ))}
-            <PaginationItem disabled={currentPage >= pageCount - 1}>
-              <PaginationLink
-                onClick={(e) => handlePageClick(e, currentPage + 1)}
-                next
-              />
-            </PaginationItem>
-          </Pagination>
+          ))}
+          <PaginationItem disabled={currentPage >= pageCount - 1}>
+            <PaginationLink
+              onClick={(e) => handlePageClick(e, currentPage + 1)}
+              next
+            />
+          </PaginationItem>
+        </Pagination>
       </CardBody>
     </Card>
   );
 };
 
 export default RideDetailsTable;
-
