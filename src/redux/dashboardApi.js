@@ -47,7 +47,7 @@ export const dashboardApi = createApi({
     // all users api also use on the all users page
     getAllUsers: builder.query({
       query: ({ page = 1, sortColumn = "id", sortOrder = "desc" }) =>
-        `users/getAllUsersWithDetails?limit=${100000}&sortField=${sortColumn}&sortOrder=${sortOrder}`,
+        `users/getAllUsersWithDetails?page=${1}&limit=${100000}&sortField=${sortColumn}&sortOrder=${sortOrder}`,
       providesTags: ["getAllUsers"],
     }),
     // universal api for getting all counts on the dashboard
@@ -63,7 +63,7 @@ export const dashboardApi = createApi({
     }),
     // deleted users
     getAllRecentlyDeleted: builder.query({
-      query: () => `users/getAllRecentlyDeleted`,
+      query: () => `users/getAllRecentlyDeleted?page=${1}&limit=${100000}`,
       providesTags: ["getAllRecentlyDeleted"],
     }),
     // app link
@@ -161,7 +161,7 @@ export const dashboardApi = createApi({
       invalidatesTags: ["createPR"],
     }),
     getAllPR: builder.query({
-      query: () => `passenger_rates/getAll`,
+      query: () => `passenger_rates/getAll?page=${1}&limit=${100000}`,
       providesTags: ["getAllPR"],
     }),
     updatePR: builder.mutation({
@@ -189,7 +189,7 @@ export const dashboardApi = createApi({
       invalidatesTags: ["createDR"],
     }),
     getAllDR: builder.query({
-      query: () => `driver_rates/getAll`,
+      query: () => `driver_rates/getAll?page=${1}&limit=${100000}`,
       providesTags: ["getAllDR"],
     }),
     updateDR: builder.mutation({
@@ -232,7 +232,7 @@ export const dashboardApi = createApi({
       invalidatesTags: ["deleteCT"],
     }),
     getAllCT: builder.query({
-      query: () => `vehicle_types/getAll`,
+      query: () => `vehicle_types/getAll?page=${1}&limit=${100000}`,
       providesTags: ["getAllCT"],
     }),
     // car/vehicle colors
@@ -260,7 +260,7 @@ export const dashboardApi = createApi({
       invalidatesTags: ["deleteCT"],
     }),
     getAllCC: builder.query({
-      query: () => `vehicle_colors/getAll`,
+      query: () => `vehicle_colors/getAll?page=${1}&limit=${100000}`,
       providesTags: ["getAllCC"],
     }),
     // complaints
@@ -277,8 +277,7 @@ export const dashboardApi = createApi({
     }),
     // contact us
     getAllContactUs: builder.query({
-      query: ({ limit, page }) =>
-        `contact_us/getAll?limit=${limit}&page=${page}`,
+      query: ({ limit, page }) => `contact_us/getAll?page=${1}&limit=${100000}`,
       providesTags: ["getAllContactUs"],
     }),
     updateCUStatus: builder.mutation({
@@ -291,7 +290,8 @@ export const dashboardApi = createApi({
     }),
     // users
     getAllByIns: builder.query({
-      query: () => `users/getAllUserByInsuranceStatus/false`,
+      query: () =>
+        `users/getAllUserByInsuranceStatus/false?page=${1}&limit=${100000}`,
       providesTags: ["getAllByIns"],
     }),
     updateInsStatus: builder.mutation({

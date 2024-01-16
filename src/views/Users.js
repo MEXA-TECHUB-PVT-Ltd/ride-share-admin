@@ -161,7 +161,7 @@ const Users = () => {
                 id="viewTooltip"
                 onClick={() =>
                   navigate("/user-details", {
-                    state: { user: row },
+                    state: { user: row, deleted_users: false },
                   })
                 }
                 onMouseEnter={toggleTooltipview}

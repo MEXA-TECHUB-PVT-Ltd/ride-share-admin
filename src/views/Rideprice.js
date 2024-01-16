@@ -17,6 +17,7 @@ import {
   ModalBody,
   ModalFooter,
   Spinner,
+  Alert,
 } from "reactstrap";
 import { Formik, Field, ErrorMessage, Form } from "formik";
 import { ToastContainer, toast } from "react-toastify";
@@ -55,6 +56,8 @@ const Rideprice = () => {
   const [tooltipOpenEdit, setTooltipOpenEdit] = useState(false);
   const [tooltipOpenDelete, setTooltipOpenDelete] = useState(false);
   const [tooltipOpenadd, setTooltipOpenadd] = useState(false);
+
+  const [addError, setAddError] = useState();
 
   const [createDR, { isLoading: createLoading }] = useCreateDRMutation();
   const [updateDR, { isLoading: updatedLoading }] = useUpdateDRMutation();
@@ -248,7 +251,7 @@ const Rideprice = () => {
         <>
           <Row>
             <Col xs="10" md="11">
-              <h1>Driver Fair</h1>
+              <h1>Driver Fare</h1>
             </Col>
             <Col xs="2" md="1" className="text-right">
               <PlusCircle
@@ -281,7 +284,7 @@ const Rideprice = () => {
       )}
 
       <Modal isOpen={modalOpen} toggle={modalopen} centered>
-        <ModalHeader toggle={modalopen}>Add Driver Fair</ModalHeader>
+        <ModalHeader toggle={modalopen}>Add Driver Fare</ModalHeader>
 
         <ModalBody>
           <Formik
@@ -293,19 +296,22 @@ const Rideprice = () => {
             validate={(values) => {
               const errors = {};
 
-              if (!values.start_range) {
+              // Check if start_range is not provided or negative
+              if (!values.start_range && values.start_range !== 0) {
                 errors.start_range = "Start range is Required";
               } else if (values.start_range < 0) {
                 errors.start_range = "Start range cannot be negative";
               }
 
-              if (!values.end_range) {
+              // Check if end_range is not provided or negative
+              if (!values.end_range && values.end_range !== 0) {
                 errors.end_range = "End range is Required";
               } else if (values.end_range < 0) {
                 errors.end_range = "End range cannot be negative";
               }
 
-              if (!values.rate_per_mile) {
+              // Check if rate_per_mile is not provided or negative
+              if (!values.rate_per_mile && values.rate_per_mile !== 0) {
                 errors.rate_per_mile = "Rate per mile is Required";
               } else if (values.rate_per_mile < 0) {
                 errors.rate_per_mile = "Rate per mile cannot be negative";
@@ -322,7 +328,7 @@ const Rideprice = () => {
                   end_range: values.end_range,
                   rate_per_mile: values.rate_per_mile,
                 }).unwrap();
-                toast.success("Driver Fair Added Successfully !", {
+                toast.success("Driver Fare Added Successfully !", {
                   position: toast.POSITION.BOTTOM_RIGHT,
                 });
                 refetch();
@@ -331,6 +337,7 @@ const Rideprice = () => {
                 setSelectedOption("");
               } catch (error) {
                 console.log(error);
+                setAddError(error?.data?.message)
               }
             }}
             validateOnBlur={false}
@@ -341,6 +348,9 @@ const Rideprice = () => {
                 <ModalBody>
                   <Form>
                     <div className="mb-2">
+                      {
+                        addError && <Alert color='danger'>{ addError }</Alert>  
+                      }
                       <Label className="form-label" for="start-range">
                         Starting Mile Range (e.g., 0 miles)
                       </Label>
@@ -429,7 +439,7 @@ const Rideprice = () => {
       </Modal>
 
       <Modal isOpen={modaledit} toggle={modalopenedit} centered>
-        <ModalHeader toggle={modalopenedit}>Edit Passenger Fair</ModalHeader>
+        <ModalHeader toggle={modalopenedit}>Edit Passenger Fare</ModalHeader>
 
         <ModalBody>
           <Formik
@@ -461,7 +471,7 @@ const Rideprice = () => {
                   rate_per_mile: values.rate_per_mile,
                 }).unwrap();
                 refetch();
-                toast.success("Driver Fair Updated Successfully !", {
+                toast.success("Driver Fare Updated Successfully !", {
                   position: toast.POSITION.BOTTOM_RIGHT, // Apply a custom class for styling
                 });
                 setEmptyfieldalert(false);
