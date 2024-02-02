@@ -58,25 +58,24 @@ const AnalyticsDashboard = () => {
   const [rowsPerPage, setRowsPerPage] = useState(10);
   const [tooltipOpenview, setTooltipOpenview] = useState(false);
   const toggleTooltipview = () => setTooltipOpenview(!tooltipOpenview);
-  
-  
+
   const {
     data: cuData,
     isLoading: loadingCU,
     error: cuError,
-    refetch: refetchCU
-  } = useGetAllContactUsQuery({limit: 10, page: 1});
+    refetch: refetchCU,
+  } = useGetAllContactUsQuery({ limit: 10, page: 1 });
   // ** Context
   const { colors } = useContext(ThemeColors);
-  
+
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const [openDropdownId, setOpenDropdownId] = useState(null);
 
   const toggleDropdown = (id) => {
     if (openDropdownId === id) {
-      setOpenDropdownId(null); 
+      setOpenDropdownId(null);
     } else {
-      setOpenDropdownId(id); 
+      setOpenDropdownId(id);
     }
   };
 
@@ -100,11 +99,9 @@ const AnalyticsDashboard = () => {
   const { data: allCount, refetch, isLoading, error } = useGetAllCountQuery();
   const columns = [
     {
-      name: "id",
+      name: "ID",
       cell: (row, index) => <>{++index}</>,
     },
-    // { name: "Name", selector: "full_name", sortable: true },
-    // { name: "Email", selector: "email", sortable: true },
     { name: "Message", selector: "message", sortable: true },
     { name: "Status", selector: "status", sortable: true },
     {
@@ -128,17 +125,17 @@ const AnalyticsDashboard = () => {
               </DropdownToggle>
               <DropdownMenu>
                 <DropdownItem
-                onClick={() => handleStatusChange("contacted", row)}
+                  onClick={() => handleStatusChange("contacted", row)}
                 >
                   Contacted
                 </DropdownItem>
                 <DropdownItem
-                onClick={() => handleStatusChange("dismissed", row)}
+                  onClick={() => handleStatusChange("dismissed", row)}
                 >
                   Dismissed
                 </DropdownItem>
                 <DropdownItem
-                onClick={() => handleStatusChange("pending", row)}
+                  onClick={() => handleStatusChange("pending", row)}
                 >
                   Pending
                 </DropdownItem>
@@ -239,7 +236,10 @@ const AnalyticsDashboard = () => {
           <CardCongratulations />
         </Col> */}
         <Col lg="2" md="12" xs="12" sm="12">
-          <SubscribersGained count={allCount?.result?.insuranceUsersCount} />
+          <SubscribersGained
+            warning={colors.warning.main}
+            count={allCount?.result?.insuranceUsersCount}
+          />
         </Col>
 
         <Col lg="2" md="12" sm="12" xs="12">

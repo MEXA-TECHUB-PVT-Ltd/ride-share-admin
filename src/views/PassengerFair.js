@@ -236,7 +236,7 @@ const PassengerFair = () => {
         <>
           <Row>
             <Col xs="10" md="11">
-              <h1>Passenger Fair</h1>
+              <h1>Passenger Fare</h1>
             </Col>
             {/* <Col xs="2" md="1" className="text-right">
               <PlusCircle
@@ -264,12 +264,15 @@ const PassengerFair = () => {
             highlightOnHover
             responsive
             customStyles={customStyles}
-          />
+            />
+            {/* <div>
+              <p>Add fare for your passengers on time</p>
+            </div> */}
         </>
       )}
 
       <Modal isOpen={modalOpen} toggle={modalopen} centered>
-        <ModalHeader toggle={modalopen}>Add Passenger Fair</ModalHeader>
+        <ModalHeader toggle={modalopen}>Add Passenger Fare</ModalHeader>
 
         <ModalBody>
           <Formik
@@ -288,7 +291,7 @@ const PassengerFair = () => {
                 await createPR({
                   rate: values.rate,
                 }).unwrap();
-                toast.success("Passenger Fair Added Successfully !", {
+                toast.success("Passenger Fare Added Successfully !", {
                   position: toast.POSITION.BOTTOM_RIGHT, // Apply a custom class for styling
                 });
                 refetch();
@@ -344,7 +347,7 @@ const PassengerFair = () => {
       </Modal>
 
       <Modal isOpen={modaledit} toggle={modalopenedit} centered>
-        <ModalHeader toggle={modalopenedit}>Edit Passenger Fair</ModalHeader>
+        <ModalHeader toggle={modalopenedit}>Edit Passenger Fare</ModalHeader>
 
         <ModalBody>
           <Formik
@@ -364,7 +367,7 @@ const PassengerFair = () => {
                   rate: values.rate,
                 }).unwrap();
                 refetch();
-                toast.success("Passenger Fair Added Successfully !", {
+                toast.success("Passenger Fare Added Successfully !", {
                   position: toast.POSITION.BOTTOM_RIGHT, // Apply a custom class for styling
                 });
                 setEmptyfieldalert(false);

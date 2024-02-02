@@ -29,7 +29,7 @@ const monthOrder = [
 ];
 
 const GraphRepresent = (props) => {
-  const [selectedInterval, setSelectedInterval] = useState("day");
+  const [selectedInterval, setSelectedInterval] = useState("month");
   const intervals = ["day", "week", "month", "year"];
   const { data, error, isLoading } = useGetGraphicRepresentQuery({
     interval: selectedInterval,
@@ -142,16 +142,24 @@ const GraphRepresent = (props) => {
           break;
 
         case "year":
-          // Map each year in the result to its user count and sort by year
-          const yearlyData = data.result
-            .map((item) => ({
-              year: new Date(item.year).getFullYear(),
-              user_count: parseInt(item.user_count, 10),
-            }))
-            .sort((a, b) => a.year - b.year); // Sorts the array in ascending order by year
+          // Initialize an object for yearly user counts
+          const initialYear = new Date(data.result[0].year).getFullYear();
+          const finalYear = new Date(
+            data.result[data.result.length - 1].year
+          ).getFullYear();
+          const yearCounts = {};
+          for (let year = initialYear; year <= finalYear; year++) {
+            yearCounts[year] = 0;
+          }
 
-          chartDataArray = yearlyData.map((item) => item.user_count);
-          categories = yearlyData.map((item) => item.year.toString());
+          // Populate the object with user counts from the API data
+          data.result.forEach((item) => {
+            const year = new Date(item.year).getFullYear();
+            yearCounts[year] = parseInt(item.user_count, 10);
+          });
+
+          chartDataArray = Object.values(yearCounts);
+          categories = Object.keys(yearCounts);
           break;
 
         default:

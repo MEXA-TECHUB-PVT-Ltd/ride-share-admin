@@ -20,13 +20,13 @@ const SubscribersGained = ({count}) => {
   return (
     <StatsWithAreaChart
       icon={<UserPlus size={21} />}
-      color='primary'
+      color="info"
       stats={count}
-      statTitle='Non Insurance Users'
+      statTitle="Non Insurance Users"
       series={data}
-      type='area'
+      type="area"
     />
-  )
+  );
 }
 
 export default SubscribersGained

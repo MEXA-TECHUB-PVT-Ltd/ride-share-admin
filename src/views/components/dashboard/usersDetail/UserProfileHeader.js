@@ -3,6 +3,8 @@ import { Row, Col, Button, Badge } from "reactstrap";
 import { imgUrl } from "../../../../baseUrl";
 import UpdateBlockStatus from "../../modals/users/UpdateBlockStatus";
 import adimage from "@src/assets/images/pages/adimage.png";
+import user_image from "/dummy_user.png";
+
 
 
 const UserProfileHeader = ({ userData }) => {
@@ -21,16 +23,18 @@ const UserProfileHeader = ({ userData }) => {
             src={
               userData?.profile_uri
                 ? `${imgUrl}${userData.profile_uri}`
-                : adimage
+                : user_image
             }
             alt={userData?.profile_uri || "User avatar"}
             className="img-fluid rounded-circle"
             style={{ width: "120px", height: "120px" }}
           />
-          <h3 className="mt-3">{userData?.first_name}</h3>
-          <Badge color={`${userData?.block_status ? "danger" : "primary"}`}>
+          <h3 className="mt-3">
+            Username: {userData?.first_name || "Not Provided"}
+          </h3>
+          {/* <Badge color={`${userData?.block_status ? "danger" : "primary"}`}>
             {userData?.block_status ? "Unblock User" : "Block User"}
-          </Badge>
+          </Badge> */}
           {/* <Button
             color={!userData?.block_status ? "danger" : "success"}
             onClick={() => handleOpenUpdateStatusModal(userData)}

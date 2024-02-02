@@ -40,7 +40,7 @@ const PasswordUpdate = () => {
   const [updatePassword] = useUpdatePasswordMutation();
 
   const admin = JSON.parse(localStorage.getItem("admin")) || [];
-  const email = admin ? admin?.email : "";
+  const email = admin ? admin?.updatedResult?.email : "";
   return (
     <>
       <Row>

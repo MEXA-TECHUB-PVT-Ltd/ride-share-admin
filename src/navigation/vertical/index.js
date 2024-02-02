@@ -27,13 +27,13 @@ export default [
   },
   {
     id: "ridefair",
-    title: "Driver Fair",
+    title: "Driver Fare",
     icon: <Truck size={20} />,
     navLink: "/driver-fair",
   },
   {
     id: "passenger_fair",
-    title: "Passenger Fair",
+    title: "Passenger Fare",
     icon: <Truck size={20} />,
     navLink: "/passenger-fair",
   },
