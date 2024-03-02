@@ -20,7 +20,7 @@ import {
   Button,
   Alert,
 } from "reactstrap";
-import logo from "@src/assets/images/logo/logo.png";
+import logo from "@src/assets/images/logo/logo.jpg";
 import loginmain from "@src/assets/images/pages/login.png";
 
 // ** Illustrations Imports
@@ -33,6 +33,8 @@ import { useState } from "react";
 import { post } from "../urls/api";
 import { useResetPasswordMutation } from "../redux/dashboardApi";
 import SmallSpinner from "./components/loaders/SmallSpinner";
+import "./common.css"
+
 
 const SetNewPassword = () => {
   const { skin } = useSkin();
@@ -164,6 +166,7 @@ const SetNewPassword = () => {
                       type="submit"
                       disabled={isSubmitting}
                       block
+                      className="button-color"
                     >
                       {isLoading ? <SmallSpinner /> : "Reset Password"}
                     </Button>

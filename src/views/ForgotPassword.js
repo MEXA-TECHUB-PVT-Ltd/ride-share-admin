@@ -23,7 +23,7 @@ import {
 import illustrationsLight from "@src/assets/images/pages/forgot-password-v2.svg";
 import illustrationsDark from "@src/assets/images/pages/forgot-password-v2-dark.svg";
 
-import logo from "@src/assets/images/logo/logo.png";
+import logo from "@src/assets/images/logo/logo.jpg";
 
 // ** Styles
 import "@styles/react/pages/page-authentication.scss";
@@ -32,15 +32,16 @@ import { useForgotPasswordMutation } from "../redux/dashboardApi";
 import { useState } from "react";
 import SmallSpinner from "./components/loaders/SmallSpinner";
 
+import "./common.css"
+
 const ForgotPassword = () => {
   // ** Hooks
   const navigate = useNavigate();
   const { skin } = useSkin();
 
   const source = skin === "dark" ? illustrationsDark : illustrationsLight;
-    const [error, setError] = useState("");
-    const [forgotPassword, { isLoading }] = useForgotPasswordMutation();
-
+  const [error, setError] = useState("");
+  const [forgotPassword, { isLoading }] = useForgotPasswordMutation();
 
   return (
     <div className="auth-wrapper auth-cover">
@@ -138,7 +139,8 @@ const ForgotPassword = () => {
                     </div>
 
                     <Button
-                      color="primary"
+                      // color="primary"
+                      className="button-color"
                       type="submit"
                       disabled={isSubmitting}
                       block

@@ -28,10 +28,10 @@ body,
     }
     a.active {
       z-index: 1;
-      background: black;
+      background: #ffd300;
       // background: linear-gradient(118deg, rgba($primary, 1), rgba($primary, 0.7));
       // box-shadow: 0 0 10px 1px rgba($primary, 0.7);
-      color: $white;
+      color: #000;
       font-weight: 400;
       border-radius: 4px;
     }
@@ -115,7 +115,11 @@ body #root .wrapper .ps__rail-y {
       }
       .nav-item:not(.dropdown):not(.dropdown-submenu) {
         a.nav-link.active {
-          background: linear-gradient(118deg, rgba($primary, 1), rgba($primary, 0.7));
+          background: linear-gradient(
+            118deg,
+            rgba($primary, 1),
+            rgba($primary, 0.7)
+          );
           box-shadow: 0 0 6px 1px rgba($primary, 0.6);
           color: $white;
           border-radius: 4px;

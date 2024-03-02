@@ -17,8 +17,9 @@ import {
   Button,
   Alert,
 } from "reactstrap";
-import logo from "@src/assets/images/logo/logo.png";
+import logo from "@src/assets/images/logo/logo.jpg";
 import loginmain from "@src/assets/images/pages/login.png";
+import './common.css';
 
 // ** Illustrations Imports
 import illustrationsLight from "@src/assets/images/pages/login-v2.svg";
@@ -37,7 +38,6 @@ const Login = () => {
   const navigate = useNavigate();
   const [error, setError] = useState("");
 
-  
   const [signIn, { isLoading }] = useSignInMutation();
 
   return (
@@ -181,10 +181,12 @@ const Login = () => {
                       </Link>
                     </div>
                     <Button
-                      color="primary"
+                      // color="primary"
+                      className="button-color"
                       type="submit"
                       disabled={isSubmitting}
                       block
+                      style={{ backgroundColor: "#ffd300 !important" }}
                     >
                       {isLoading ? <SmallSpinner /> : "Sign in"}
                     </Button>

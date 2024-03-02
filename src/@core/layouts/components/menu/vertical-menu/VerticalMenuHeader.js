@@ -1,16 +1,14 @@
 // ** React Imports
 import { useEffect } from "react";
 import { NavLink } from "react-router-dom";
-import {
-  CardLink,
-} from "reactstrap";
+import { CardLink } from "reactstrap";
 // ** Icons Imports
 import { Disc, X, Circle } from "react-feather";
 
 // ** Config
 import themeConfig from "@configs/themeConfig";
-// import logo from "@assets/images/logo/logo.png";
-import logo from "@src/assets/images/logo/logo.png";
+// import logo from "@assets/images/logo/logo.jpg";
+import logo from "@src/assets/images/logo/logo.jpg";
 
 // ** Utils
 import { getUserData, getHomeRouteForLoggedInUser } from "@utils";
@@ -57,10 +55,9 @@ const VerticalMenuHeader = (props) => {
   };
 
   return (
-    <div className="navbar-header">
+    <div className="navbar-header d-flex justify-content-center">
       <ul className="nav navbar-nav flex-row">
-
-      <li className="">
+        <li className="">
           <div className="">
             {/* <Toggler /> */}
             <X
@@ -70,14 +67,19 @@ const VerticalMenuHeader = (props) => {
             />
           </div>
         </li>
-        
+
         <li className="nav-item me-auto">
           <NavLink
             to={user ? getHomeRouteForLoggedInUser(user.role) : "/"}
             className="navbar-brand"
           >
-            <span className="brand-logo">
-              <img className="img-fluid" src={logo} alt="Login Cover" style={{ width: '95px' }} />
+            <span className="brand-logo" style={{ textAlign: "center" }}>
+              <img
+                className="img-fluid"
+                src={logo}
+                alt="Login Cover"
+                style={{ width: "97px" }}
+              />
 
               {/* <span style={{ fontWeight: "bold", fontSize: "20px", marginTop: "5vh", marginLeft: "5px" }}>
                 Ride Share
@@ -87,8 +89,7 @@ const VerticalMenuHeader = (props) => {
             </span>
             <h2 className="brand-text mb-0">{themeConfig.app.appName}</h2>
           </NavLink>
-        </li> 
-       
+        </li>
       </ul>
     </div>
   );

@@ -20,7 +20,7 @@ import {
   Input,
   Button,
 } from "reactstrap";
-import logo from "@src/assets/images/logo/logo.png";
+import logo from "@src/assets/images/logo/logo.jpg";
 import loginmain from "@src/assets/images/pages/login.png";
 
 // ** Illustrations Imports
@@ -33,6 +33,9 @@ import { useState } from "react";
 
 import "@styles/base/pages/page-misc.scss";
 import { useUpdatePasswordMutation } from "../redux/dashboardApi";
+import "./common.css";
+
+
 const PasswordUpdate = () => {
   const navigate = useNavigate();
   const [error, setError] = useState();
@@ -209,7 +212,8 @@ const PasswordUpdate = () => {
 
                     <div className="mb-1">
                       <Button
-                        color="primary"
+                        // color="primary"
+                        className="button-color"
                         type="submit"
                         disabled={isSubmitting}
                         block
