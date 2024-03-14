@@ -34,24 +34,25 @@ const Home = lazy(() => import("../../views/Home"));
 const UpdatePassword = lazy(() => import("../../views/UpdatePassword"));
 const PrivacyPolicy = lazy(() => import("../../views/PrivacyPolicy"));
 const PasswordUpdate = lazy(() => import("../../views/passwordupdate"));
-const TermsAndConditions = lazy(() => import("../../views/TermsAndConditions"));  
+const TermsAndConditions = lazy(() => import("../../views/TermsAndConditions"));
 const Login = lazy(() => import("../../views/Login"));
 const Register = lazy(() => import("../../views/Register"));
 const ForgotPassword = lazy(() => import("../../views/ForgotPassword"));
 const Otpverification = lazy(() => import("../../views/Otpverification"));
-const SetNewPassword = lazy(() => import("../../views/Setnewpassword"));  
+const SetNewPassword = lazy(() => import("../../views/Setnewpassword"));
 const Error = lazy(() => import("../../views/Error"));
-const AnalyticsDashboard = lazy(() => import("../../views/dashboard/analytics"));
-const UserList = lazy(() => import('../../views/user/list'));
-const RidePrice = lazy(() => import('../../views/Rideprice')); 
-const Users = lazy(() => import('../../views/Users'));
-const Complaints = lazy(() => import('../../views/Complaints')); 
-const NonInsuranceUsers = lazy(() => import('../../views/Noninsuranceusers'));  
-const Deletedusers = lazy(() => import('../../views/Deletedusers'));  
-const PresetQuestions = lazy(() => import('../../views/Presetquestions'));
-const CarType = lazy(() => import('../../views/Cartype')); 
-const FileUpload = lazy(() => import('../../views/FileUpload'))
-
+const AnalyticsDashboard = lazy(() =>
+  import("../../views/dashboard/analytics")
+);
+const UserList = lazy(() => import("../../views/user/list"));
+const RidePrice = lazy(() => import("../../views/Rideprice"));
+const Users = lazy(() => import("../../views/Users"));
+const Complaints = lazy(() => import("../../views/Complaints"));
+const NonInsuranceUsers = lazy(() => import("../../views/Noninsuranceusers"));
+const Deletedusers = lazy(() => import("../../views/Deletedusers"));
+const PresetQuestions = lazy(() => import("../../views/Presetquestions"));
+const CarType = lazy(() => import("../../views/Cartype"));
+const FileUpload = lazy(() => import("../../views/FileUpload"));
 
 const isAdminLoggedIn = () => {
   return localStorage.getItem("admin") !== null;
@@ -59,7 +60,7 @@ const isAdminLoggedIn = () => {
 
 const PublicOnlyRoute = ({ children }) => {
   if (isAdminLoggedIn()) {
-    console.log("your are logged in")
+    console.log("your are logged in");
     return <Navigate to={DefaultRoute} />;
   }
   return children;
@@ -67,7 +68,7 @@ const PublicOnlyRoute = ({ children }) => {
 
 const PrivateRoute = ({ children }) => {
   if (!isAdminLoggedIn()) {
-    console.log("your are not logged in")
+    console.log("your are not logged in");
     return <Navigate to="/login" />;
   }
   return children;
@@ -277,8 +278,6 @@ const Routes = [
   },
 ];
 
-
-
 const getRouteMeta = (route) => {
   if (isObjEmpty(route.element.props)) {
     if (route.meta) {
@@ -327,7 +326,6 @@ const MergeLayoutRoutes = (layout, defaultLayout) => {
   }
   return LayoutRoutes;
 };
-
 
 const getRoutes = (layout) => {
   const defaultLayout = layout || "vertical";

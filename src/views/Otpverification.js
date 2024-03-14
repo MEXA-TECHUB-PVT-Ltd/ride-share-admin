@@ -9,7 +9,7 @@ import { ChevronLeft } from "react-feather";
 import otpmain from "@src/assets/images/pages/otp.png";
 // ** Reactstrap Imports
 
-import logo from "@src/assets/images/logo/logo.png";
+import logo from "@src/assets/images/logo/logo.jpg";
 
 import {
   Row,
@@ -33,6 +33,8 @@ import ReactInputVerificationCode from "react-input-verification-code";
 import { useState } from "react";
 import { useVerifyOtpMutation } from "../redux/dashboardApi";
 import SmallSpinner from "./components/loaders/SmallSpinner";
+import "./common.css";
+
 
 const Otpverification = () => {
   // ** Hooks
@@ -109,8 +111,8 @@ const Otpverification = () => {
                   await verifyOtp({
                     email: email,
                     otp: values.otp,
-                      role: "admin",
-                    type: 'forgot_password'
+                    role: "admin",
+                    type: "forgot_password",
                   }).unwrap();
                   navigate("/setnewpassword?email" + email);
                 } catch (error) {
@@ -151,7 +153,12 @@ const Otpverification = () => {
                       </div>
                     )}
                   </Field>
-                  <Button color="primary" block type="submit">
+                  <Button
+                    className="button-color"
+                    // color="primary"
+                    block
+                    type="submit"
+                  >
                     {isLoading ? <SmallSpinner /> : "Verify"}
                   </Button>
                   <p className="text-center mt-2">
