@@ -40,6 +40,8 @@ export const dashboardApi = createApi({
     "getAllCC",
     "getAllRecentlyDeleted",
     "deleteUser",
+    "getAdminTransactions",
+    "getAdminWallet",
   ],
 
   endpoints: (builder) => ({
@@ -310,6 +312,14 @@ export const dashboardApi = createApi({
       }),
       invalidatesTags: ["deleteUser"],
     }),
+    getAdminTransactions: builder.query({
+      query: () => "payments/getAdminTransactionHistory",
+      providedTags: ["getAdminTransactions"],
+    }),
+    getAdminWallet: builder.query({
+      query: () => "payments/getAdminWallet",
+      providedTags: ["getAdminWallet"],
+    }),
   }),
 });
 
@@ -349,4 +359,6 @@ export const {
   useDeleteCCMutation,
   useGetAllRecentlyDeletedQuery, 
   useDeleteUserMutation,
+  useGetAdminTransactionsQuery,
+  useGetAdminWalletQuery
 } = dashboardApi;

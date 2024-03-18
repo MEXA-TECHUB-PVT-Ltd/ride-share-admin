@@ -61,6 +61,12 @@ export default [
     icon: <UserMinus size={20} />,
     navLink: "/deleteduseraccounts",
   },
+  {
+    id: "Wallet",
+    title: "Wallet",
+    icon: <UserMinus size={20} />,
+    navLink: "/wallet",
+  },
   // {
   //   id: "userList",
   //   title: "User List",

@@ -17,7 +17,7 @@ import {
   Button,
   Alert,
 } from "reactstrap";
-import logo from "@src/assets/images/logo/logo.jpg";
+import logo from "@src/assets/images/logo/logo.png";
 import loginmain from "@src/assets/images/pages/login.png";
 import './common.css';
 

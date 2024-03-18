@@ -23,7 +23,7 @@ import {
 import illustrationsLight from "@src/assets/images/pages/forgot-password-v2.svg";
 import illustrationsDark from "@src/assets/images/pages/forgot-password-v2-dark.svg";
 
-import logo from "@src/assets/images/logo/logo.jpg";
+import logo from "@src/assets/images/logo/logo.png";
 
 // ** Styles
 import "@styles/react/pages/page-authentication.scss";
