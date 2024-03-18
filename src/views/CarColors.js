@@ -41,8 +41,6 @@ const btnchnge = {
   paddingLeft: "40px",
   paddingRight: "40px",
   font: "normal normal normal 12px/14px Arial",
-  borderRadius: "50px",
-  boxShadow: "none",
   fontWeight: "medium",
   boxShadow: "none",
   borderRadius: "50px",

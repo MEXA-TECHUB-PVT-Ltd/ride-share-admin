@@ -9,7 +9,7 @@ import { ChevronLeft } from "react-feather";
 import otpmain from "@src/assets/images/pages/otp.png";
 // ** Reactstrap Imports
 
-import logo from "@src/assets/images/logo/logo.jpg";
+import logo from "@src/assets/images/logo/logo.png";
 
 import {
   Row,

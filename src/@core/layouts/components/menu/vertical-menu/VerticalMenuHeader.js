@@ -8,7 +8,7 @@ import { Disc, X, Circle } from "react-feather";
 // ** Config
 import themeConfig from "@configs/themeConfig";
 // import logo from "@assets/images/logo/logo.jpg";
-import logo from "@src/assets/images/logo/logo.jpg";
+import logo from "@src/assets/images/logo/logo.png";
 
 // ** Utils
 import { getUserData, getHomeRouteForLoggedInUser } from "@utils";

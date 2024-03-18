@@ -17,6 +17,7 @@ import AddDocument from "../../views/addDocument";
 import PassengerFair from "../../views/PassengerFair";
 import UserDetails from "../../views/UserDetails";
 import CarColor from "../../views/CarColors";
+import Wallet from "../../views/Wallet";
 
 const getLayout = {
   blank: <BlankLayout />,
@@ -207,6 +208,14 @@ const Routes = [
   {
     path: "/deleteduseraccounts",
     element: <Deletedusers />,
+    meta: {
+      // layout: "blank",
+      publicOnly: false,
+    },
+  },
+  {
+    path: "/wallet",
+    element: <Wallet />,
     meta: {
       // layout: "blank",
       publicOnly: false,
