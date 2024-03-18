@@ -18,15 +18,12 @@ import {
 } from "reactstrap";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import userimage from "@src/assets/images/logo/avatar.jpg";
-import adimage from "@src/assets/images/pages/adimage.png";
 import { useGetAllUsersQuery } from "../redux/dashboardApi";
 import moment from "moment";
 import { imgUrl } from "../baseUrl";
 import { useNavigate } from "react-router-dom";
 import UpdateBlockStatus from "./components/modals/users/UpdateBlockStatus";
 import user_image from "/dummy_user.png";
-
 
 const Users = () => {
   const [currentPage, setCurrentPage] = useState(1);
@@ -411,7 +408,10 @@ const Users = () => {
 
         <ModalBody className="text-center mt-1 mb-1">
           <div>
-            <p>Do you want to { rowData?.block_status ? "Block" : "UnBlock" } the users status?</p>
+            <p>
+              Do you want to {rowData?.block_status ? "Block" : "UnBlock"} the
+              users status?
+            </p>
           </div>
         </ModalBody>
 

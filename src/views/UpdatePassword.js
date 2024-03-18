@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Formik, Form, Field, ErrorMessage } from "formik";
-import { Row, Col, Label, Button, ToastContainer } from "reactstrap";
-import InputPasswordToggle from "./InputPasswordToggle"; // Assuming this is a custom component
+import { Row, Col, Label, Button } from "reactstrap";
+import InputPasswordToggle from "../@core/components/input-password-toggle"; // Assuming this is a custom component
+import { ToastContainer } from "react-toastify";
 
 const UpdatePassword = () => {
   const navigate = useNavigate();

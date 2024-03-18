@@ -20,7 +20,6 @@ import {
   Input,
   Button,
 } from "reactstrap";
-import logo from "@src/assets/images/logo/logo.jpg";
 import loginmain from "@src/assets/images/pages/login.png";
 
 // ** Illustrations Imports
