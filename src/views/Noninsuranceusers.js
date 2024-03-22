@@ -22,7 +22,6 @@ import {
 } from "reactstrap";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import userimage from "@src/assets/images/logo/avatar.jpg";
 import adimage from "@src/assets/images/pages/adimage.png";
 import {
   useGetAllByInsQuery,

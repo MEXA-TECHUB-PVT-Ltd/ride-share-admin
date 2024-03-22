@@ -5,7 +5,7 @@ import { useState, useEffect } from "react";
 // ** Store & Actions
 import { useSelector, useDispatch } from "react-redux";
 import { handleMenuHidden, handleContentWidth } from "@store/layout";
-import logo from "@assets/images/logo/logo.jpg";
+import logo from "@assets/images/logo/logo.png";
 
 // ** Third Party Components
 import classnames from "classnames";

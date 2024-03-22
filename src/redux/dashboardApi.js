@@ -42,16 +42,39 @@ export const dashboardApi = createApi({
     "deleteUser",
     "getAdminTransactions",
     "getAdminWallet",
+    "getAllRidesByUser",
+    "deleteRide",
+    "getVerificationRequests",
+    "verifyDriver",
   ],
 
   endpoints: (builder) => ({
     // dashboard page api's
     // all users api also use on the all users page
     getAllUsers: builder.query({
-      query: ({ page = 1, sortColumn = "id", sortOrder = "desc" }) =>
-        `users/getAllUsersWithDetails?page=${1}&limit=${100000}&sortField=${sortColumn}&sortOrder=${sortOrder}`,
+      query: ({
+        page = 1,
+        sortColumn = "id",
+        sortOrder = "desc",
+        is_verified_driver,
+      }) => {
+        console.log(is_verified_driver);
+        let queryParams = `?page=${page}&limit=${100000}&sortField=${sortColumn}&sortOrder=${sortOrder}`;
+
+        // Check if is_verified_driver is provided and not undefined
+        // if (is_verified_driver !== undefined || is_verified_driver !== "all") {
+        //   queryParams += `&is_verified_driver=${is_verified_driver}`;
+        // }
+        queryParams +=
+          is_verified_driver === undefined
+            ? ""
+            : `&is_verified_driver=${is_verified_driver}`;
+
+        return `users/getAllUsersWithDetails${queryParams}`;
+      },
       providesTags: ["getAllUsers"],
     }),
+
     // universal api for getting all counts on the dashboard
     getAllCount: builder.query({
       query: () => `universal/getAllCount`,
@@ -320,6 +343,39 @@ export const dashboardApi = createApi({
       query: () => "payments/getAdminWallet",
       providedTags: ["getAdminWallet"],
     }),
+    // rides
+    getAllRidesByUser: builder.query({
+      query: ({ user_id }) => `rides/getAllRideStatusByUsers/${user_id}`,
+      providedTags: ["getAllRidesByUser"],
+    }),
+    deleteRide: builder.mutation({
+      query: ({ id }) => {
+        return {
+          url: `rides/delete/${id}`,
+          method: "DELETE",
+        };
+      },
+      invalidatesTags: ["deleteRide"],
+    }),
+    // driver verification status update
+    verifyDriver: builder.mutation({
+      query: (body) => {
+        return {
+          url: `users/verifyDriver`,
+          method: "PATCH",
+          body: body,
+        };
+      },
+      invalidatesTags: ["verifyDriver"],
+    }),
+    // request for verification
+    getVerificationRequests: builder.query({
+      query: ({ limit, page = 1 }) => {
+        console.log({ limit, page }); // Add this before the API call
+        return `driver_verification_request/getAll?limit=${limit}&page=${page}`;
+      },
+      providedTags: ["getVerificationRequests"],
+    }),
   }),
 });
 
@@ -357,8 +413,12 @@ export const {
   useCreateCCMutation,
   useUpdateCCMutation,
   useDeleteCCMutation,
-  useGetAllRecentlyDeletedQuery, 
+  useGetAllRecentlyDeletedQuery,
   useDeleteUserMutation,
   useGetAdminTransactionsQuery,
-  useGetAdminWalletQuery
+  useGetAdminWalletQuery,
+  useGetAllRidesByUserQuery,
+  useDeleteRideMutation,
+  useGetVerificationRequestsQuery,
+  useVerifyDriverMutation,
 } = dashboardApi;

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import DataTable from "react-data-table-component";
 import { Search, Eye } from "react-feather";
 import {
@@ -15,11 +15,11 @@ import {
   ModalFooter,
   Spinner,
   Badge,
+  FormGroup,
+  Label,
 } from "reactstrap";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import userimage from "@src/assets/images/logo/avatar.jpg";
-import adimage from "@src/assets/images/pages/adimage.png";
 import { useGetAllUsersQuery } from "../redux/dashboardApi";
 import moment from "moment";
 import { imgUrl } from "../baseUrl";
@@ -27,15 +27,26 @@ import { useNavigate } from "react-router-dom";
 import UpdateBlockStatus from "./components/modals/users/UpdateBlockStatus";
 import user_image from "/dummy_user.png";
 
-
 const Users = () => {
   const [currentPage, setCurrentPage] = useState(1);
+  const [filterOption, setFilterOption] = useState("all");
+  const [isVerifiedDriver, setIsVerifiedDriver] = useState(false);
+  // non-verified;
+  const options =
+    filterOption == "verified"
+      ? true
+      : filterOption == "non-verified"
+      ? false
+      : undefined;
   const {
     data: allUsers,
     refetch,
     isLoading,
     error,
-  } = useGetAllUsersQuery({ page: currentPage });
+  } = useGetAllUsersQuery({
+    page: currentPage,
+    is_verified_driver: options,
+  });
   const navigate = useNavigate();
 
   // Handler for page change
@@ -50,12 +61,23 @@ const Users = () => {
 
   const toggleTooltipview = () => setTooltipOpenview(!tooltipOpenview);
 
-  // search
   const [searchTerm, setSearchTerm] = useState("");
-  const filteredData = hasData?.result?.response?.filter((item) => {
-    const filterName = item?.first_name || item?.email;
-    return filterName?.toLowerCase()?.includes(searchTerm?.toLowerCase());
-  });
+
+  const handleFilterChange = (e) => {
+    setFilterOption(e.target.value);
+    setCurrentPage(1); // Reset currentPage to 1 when filter changes
+  };
+
+  const filteredData = useMemo(() => {
+    if (!allUsers || error) return [];
+    return allUsers?.result?.response?.filter((item) => {
+      const filterName = item?.first_name || item?.email;
+      return (
+        filterName?.toLowerCase()?.includes(searchTerm?.toLowerCase()) &&
+        (filterOption === "all" || item?.is_verified_driver)
+      );
+    });
+  }, [allUsers, error, filterOption, searchTerm]);
 
   const highlightMatch = (text, term) => {
     const lowerText = text?.toLowerCase();
@@ -227,20 +249,41 @@ const Users = () => {
     },
   };
 
+  // console.log(allUsers);
+
   return (
     <>
       {isLoading ? (
         <Spinner color="primary" />
       ) : (
         <>
-          <Row>
+          <Row className="mb-2">
             <Col xs="4" md="8">
               <h1>Users</h1>
             </Col>
-
-            <Col xs="8" md="4" className="text-right">
+            <Col
+              xs="8"
+              md="4"
+              className="d-flex align-items-center sm:flex-wrap"
+            >
+              <div>
+                <FormGroup>
+                  {/* <Label for="filterOption">Filter:</Label> */}
+                  <Input
+                    type="select"
+                    name="filterOption"
+                    id="filterOption"
+                    value={filterOption}
+                    onChange={handleFilterChange}
+                  >
+                    <option value="all">All Users</option>
+                    <option value="verified">Verified Drivers</option>
+                    <option value="all">Non Verified Drivers</option>
+                  </Input>
+                </FormGroup>
+              </div>
               <div
-                className="mb-2"
+                className="mb-3 ms-1"
                 style={{ borderRadius: "5px", width: "90%" }}
               >
                 <InputGroup>
@@ -411,7 +454,10 @@ const Users = () => {
 
         <ModalBody className="text-center mt-1 mb-1">
           <div>
-            <p>Do you want to { rowData?.block_status ? "Block" : "UnBlock" } the users status?</p>
+            <p>
+              Do you want to {rowData?.block_status ? "Block" : "UnBlock"} the
+              users status?
+            </p>
           </div>
         </ModalBody>
 
