@@ -32,6 +32,10 @@ const UserDetails = () => {
   const rowData = location?.state?.user;
   const deleted_users = location?.state?.deleted_users;
 
+
+  const user_id = rowData?.id;
+  const is_verified = rowData?.is_verified_driver
+
   const exportToCSV = () => {
     try {
       const transforms = [
@@ -75,7 +79,11 @@ const UserDetails = () => {
           smoking_preferences: rowData?.smoking_preferences,
         }}
       />
-      <RideDetailsTable rideDetails={rowData?.ride_details} />
+        {/* // rideDetails={rowData?.ride_details} */}
+      <RideDetailsTable
+        user_id={user_id}
+        is_verified={is_verified}
+      />
       <ToastContainer />
     </div>
   );

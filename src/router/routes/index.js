@@ -18,6 +18,8 @@ import PassengerFair from "../../views/PassengerFair";
 import UserDetails from "../../views/UserDetails";
 import CarColor from "../../views/CarColors";
 import Wallet from "../../views/Wallet";
+import NonVerifiedUsers from "../../views/NonVerifiedUsers";
+import VerificationRequests from "../../views/VerificationRequests";
 
 const getLayout = {
   blank: <BlankLayout />,
@@ -216,6 +218,22 @@ const Routes = [
   {
     path: "/wallet",
     element: <Wallet />,
+    meta: {
+      // layout: "blank",
+      publicOnly: false,
+    },
+  },
+  {
+    path: "/non-verify-users",
+    element: <NonVerifiedUsers />,
+    meta: {
+      // layout: "blank",
+      publicOnly: false,
+    },
+  },
+  {
+    path: "/verification-requests",
+    element: <VerificationRequests />,
     meta: {
       // layout: "blank",
       publicOnly: false,

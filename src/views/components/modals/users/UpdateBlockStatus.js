@@ -12,7 +12,6 @@ const UpdateBlockStatus = ({
   const [updateBlockStatus, { isLoading: updatedLoading }] =
     useUpdateBlockStatusMutation();
 
-  console.log(userData);
   const handeupdatestatus = async () => {
     try {
       await updateBlockStatus({

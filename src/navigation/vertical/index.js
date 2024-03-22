@@ -1,4 +1,20 @@
-import { Mail, Home, Truck, Activity, Book, UserX, Users, MessageSquare, UserMinus, HelpCircle } from "react-feather";
+import {
+  Mail,
+  Home,
+  Truck,
+  Activity,
+  Book,
+  UserX,
+  Users,
+  MessageSquare,
+  UserCheck,
+  UserMinus,
+  HelpCircle,
+  CreditCard,
+  ShieldOff,
+  FileText,
+  Sliders,
+} from "react-feather";
 
 export default [
   {
@@ -7,34 +23,28 @@ export default [
     icon: <Activity size={20} />,
     navLink: "/dashbaord/default",
   },
-  // {
-  //   id: "presetquestions",
-  //   title: "Car Type",
-  //   icon: <HelpCircle size={20} />,
-  //   navLink: "/presetquestions",
-  // },
   {
     id: "cartype",
     title: "Car Type",
-    icon: <Book size={20} />,
+    icon: <Truck size={20} />,
     navLink: "/cartype",
   },
   {
     id: "carcolors",
     title: "Car Colors",
-    icon: <Book size={20} />,
+    icon: <Sliders size={20} />,
     navLink: "/car-colors",
   },
   {
     id: "ridefair",
     title: "Driver Fare",
-    icon: <Truck size={20} />,
+    icon: <CreditCard size={20} />,
     navLink: "/driver-fair",
   },
   {
     id: "passenger_fair",
     title: "Passenger Fare",
-    icon: <Truck size={20} />,
+    icon: <CreditCard size={20} />,
     navLink: "/passenger-fair",
   },
   {
@@ -52,7 +62,7 @@ export default [
   {
     id: "noninsuranceusers",
     title: "Non-Insurance Users",
-    icon: <UserX size={20} />,
+    icon: <ShieldOff size={20} />,
     navLink: "/noninsuranceusers",
   },
   {
@@ -64,13 +74,19 @@ export default [
   {
     id: "Wallet",
     title: "Wallet",
-    icon: <UserMinus size={20} />,
+    icon: <CreditCard size={20} />,
     navLink: "/wallet",
   },
-  // {
-  //   id: "userList",
-  //   title: "User List",
-  //   icon: <Mail size={20} />,
-  //   navLink: "/apps/user/list",
-  // },
+  {
+    id: "NonVerifiedUsers",
+    title: "Non-Verified Users",
+    icon: <UserX size={20} />,
+    navLink: "/non-verify-users",
+  },
+  {
+    id: "VerificationRequests",
+    title: "Verification Requests",
+    icon: <FileText size={20} />,
+    navLink: "/verification-requests",
+  },
 ];
