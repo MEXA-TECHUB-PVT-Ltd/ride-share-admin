@@ -1,5 +1,6 @@
 import React from "react";
 import { Modal, ModalBody, ModalHeader, Row, Col } from "reactstrap";
+import user_image from "/dummy_user.png";
 
 // Define a mapping for key to label transformation
 const keyToLabel = {
@@ -139,7 +140,11 @@ const VerificationViewModal = ({ modalOpen, toggleModal, selectedRequest }) => {
               <Col md={6} className="fw-bold d-flex flex-column">
                 Front Image:
                 <img
-                  src={selectedRequest?.front_image}
+                  src={
+                    selectedRequest?.front_image
+                      ? selectedRequest?.front_image
+                      : user_image
+                  }
                   alt={"Front Image"}
                   style={{
                     maxWidth: "200px",
@@ -151,7 +156,11 @@ const VerificationViewModal = ({ modalOpen, toggleModal, selectedRequest }) => {
               <Col md={6} className="fw-bold d-flex flex-column">
                 Back Image:
                 <img
-                  src={selectedRequest?.back_image}
+                  src={
+                    selectedRequest?.back_image
+                      ? selectedRequest?.back_image
+                      : user_image
+                  }
                   alt={"Front Image"}
                   style={{
                     maxWidth: "200px",

@@ -22,10 +22,10 @@ const UserProfileHeader = ({ userData }) => {
           <img
             src={
               userData?.profile_uri
-                ? `${imgUrl}${userData.profile_uri}`
+                ? `${userData.profile_uri}`
                 : user_image
             }
-            alt={userData?.profile_uri || "User avatar"}
+            alt={"User avatar"}
             className="img-fluid rounded-circle"
             style={{ width: "120px", height: "120px" }}
           />
