@@ -114,9 +114,7 @@ const Users = () => {
             }}
           >
             <img
-              src={
-                row?.profile_uri ? `${imgUrl}${row.profile_uri}` : user_image
-              }
+              src={row?.profile_uri ? `${row.profile_uri}` : user_image}
               alt={row?.profile_uri || "User avatar"}
               style={{ borderRadius: "50px", width: "40px", height: "40px" }}
             />
@@ -276,9 +274,9 @@ const Users = () => {
                     value={filterOption}
                     onChange={handleFilterChange}
                   >
-                    <option value="all">All Users</option>
-                    <option value="verified">Verified Drivers</option>
                     <option value="all">Non Verified Drivers</option>
+                    <option value="verified">Verified Drivers</option>
+                    {/* <option value="all">Non Verified Drivers</option> */}
                   </Input>
                 </FormGroup>
               </div>
