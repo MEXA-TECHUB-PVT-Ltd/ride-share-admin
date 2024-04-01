@@ -1,18 +1,12 @@
 import React, { useState } from "react";
 import DataTable from "react-data-table-component";
 import {
-  Badge,
-  Button,
   Col,
   Input,
   InputGroup,
   InputGroupText,
   Row,
   Spinner,
-  Modal,
-  ModalHeader,
-  ModalBody,
-  ModalFooter,
 } from "reactstrap";
 import { Search } from "react-feather";
 import {
@@ -31,7 +25,6 @@ const VerificationRequests = () => {
   const [selectedRequest, setSelectedRequest] = useState(null); // For storing the selected request
   const [modalOpen, setModalOpen] = useState(false); // For controlling the modal open/close
   const [modalVerifyOpen, setModalVerifyOpen] = useState(false); // For controlling the modal open/close
-  console.log("Before API call:", { limit, page });
   const { data, isLoading, refetch } = useGetVerificationRequestsQuery({
     limit,
     page,

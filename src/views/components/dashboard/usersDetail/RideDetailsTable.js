@@ -27,11 +27,10 @@ const RideDetailsTable = ({ user_id, is_verified }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedRideId, setSelectedRideId] = useState(null);
 
-  const pageSize = 5; // Number of items per page
+  const pageSize = 50; // Number of items per page
 
   const rides = data && data?.result?.response;
-
-  const pageCount = data && Math.ceil(rides?.length / pageSize);
+  const pageCount = Math.ceil(rides?.length / pageSize);
 
   const handlePageClick = (e, index) => {
     e.preventDefault();
@@ -90,14 +89,16 @@ const RideDetailsTable = ({ user_id, is_verified }) => {
                     <th>Price per seat</th>
                     <th>Pickup Time</th>
                     <th>Ride Status</th>
-                    {is_verified && <th>Actions</th>}
+                    {!is_verified && <th>Actions</th>}
                   </tr>
                 </thead>
                 <tbody>
                   {data &&
                     currentData?.map((ride, index) => (
                       <tr key={ride?.id}>
-                        <th scope="row">{index + 1}</th>
+                        <th scope="row">
+                          {currentPage * pageSize + index + 1}
+                        </th>
                         <td>{ride?.pickup_address}</td>
                         <td>{ride?.drop_off_address}</td>
                         <td>{moment(ride?.ride_date).format("YYYY-MM-DD")}</td>
@@ -110,7 +111,7 @@ const RideDetailsTable = ({ user_id, is_verified }) => {
                             : "Not Provided"}
                         </td>
                         <td>{ride?.ride_status || "Pending"}</td>
-                        {is_verified && (
+                        {!is_verified && (
                           <td>
                             <Button
                               color="danger"

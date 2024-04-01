@@ -77,12 +77,12 @@ export default [
     icon: <CreditCard size={20} />,
     navLink: "/wallet",
   },
-  {
-    id: "NonVerifiedUsers",
-    title: "Non-Verified Users",
-    icon: <UserX size={20} />,
-    navLink: "/non-verify-users",
-  },
+  // {
+  //   id: "NonVerifiedUsers",
+  //   title: "Non-Verified Users",
+  //   icon: <UserX size={20} />,
+  //   navLink: "/non-verify-users",
+  // },
   {
     id: "VerificationRequests",
     title: "Verification Requests",

@@ -13,7 +13,7 @@ const PreferencesDetailsSection = ({ userPreferences }) => {
           ([preferenceType, preferences], index) => (
             <React.Fragment key={index}>
               <h4 style={{ fontWeight: "bold" }}>{preferenceType}</h4>
-              {preferences && preferences.length > 0 ? (
+              {preferences && preferences?.length > 0 ? (
                 <Row>
                   {preferences.map((preference, idx) => (
                     <Col key={idx} xs="12" md="6" lg="4" className="mb-3">

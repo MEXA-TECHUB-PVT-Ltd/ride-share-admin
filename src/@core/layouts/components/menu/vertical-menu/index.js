@@ -68,7 +68,7 @@ const Sidebar = (props) => {
               {...props}
             />
             {/* Vertical Menu Header Shadow */}
-            <div className="shadow-bottom" ref={shadowRef}  ></div>
+            <div className="shadow-bottom" ref={shadowRef}></div>
             {/* Perfect Scrollbar */}
             <PerfectScrollbar
               style={{ marginTop: "70px" }}
@@ -76,7 +76,12 @@ const Sidebar = (props) => {
               options={{ wheelPropagation: false }}
               onScrollY={(container) => scrollMenu(container)}
             >
-              <ul className="navigation navigation-main">
+              <ul
+                className="navigation navigation-main"
+                style={{
+                  overflowY: "auto",
+                }}
+              >
                 <VerticalNavMenuItems
                   items={menuData}
                   menuData={menuData}

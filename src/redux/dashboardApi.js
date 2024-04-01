@@ -33,6 +33,7 @@ export const dashboardApi = createApi({
     "getAllContactUs",
     "updateCUStatus",
     "getAllByIns",
+    "getUserWithDetails",
     "updateInsStatus",
     "createCC",
     "updateCC",
@@ -46,6 +47,7 @@ export const dashboardApi = createApi({
     "deleteRide",
     "getVerificationRequests",
     "verifyDriver",
+    "getVerificationRequestsByUser",
   ],
 
   endpoints: (builder) => ({
@@ -319,6 +321,10 @@ export const dashboardApi = createApi({
         `users/getAllUserByInsuranceStatus/false?page=${1}&limit=${100000}`,
       providesTags: ["getAllByIns"],
     }),
+    getUserWithDetails: builder.query({
+      query: (id) => `users/getUserWithDetails/${id}`,
+      providesTags: ["getUserWithDetails"],
+    }),
     updateInsStatus: builder.mutation({
       query: (body) => ({
         url: `users/updateInsuranceStatus`,
@@ -376,6 +382,12 @@ export const dashboardApi = createApi({
       },
       providedTags: ["getVerificationRequests"],
     }),
+    getVerificationRequestsByUser: builder.query({
+      query: (id ) => {
+        return `driver_verification_request/getByUser/${id}`;
+      },
+      providedTags: ["getVerificationRequestsByUser"],
+    }),
   }),
 });
 
@@ -421,4 +433,6 @@ export const {
   useDeleteRideMutation,
   useGetVerificationRequestsQuery,
   useVerifyDriverMutation,
+  useGetUserWithDetailsQuery,
+  useGetVerificationRequestsByUserQuery,
 } = dashboardApi;

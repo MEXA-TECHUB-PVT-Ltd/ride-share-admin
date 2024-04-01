@@ -68,16 +68,13 @@ const PassengerFair = () => {
 
   const columns = [
     {
-      name: "id",
-      cell: (row, index) => <>{++index}</>,
+      name: "Rate Per Mile",
+      cell: (row, index) => <>${row?.rate}</>,
+      // selector: "rate",
+      // sortable: true,
     },
     {
-      name: "Rate",
-      selector: "rate",
-      sortable: true,
-    },
-    {
-      name: "Actions",
+      name: "Update",
       cell: (row) => (
         <>
           <div
@@ -264,8 +261,8 @@ const PassengerFair = () => {
             highlightOnHover
             responsive
             customStyles={customStyles}
-            />
-            {/* <div>
+          />
+          {/* <div>
               <p>Add fare for your passengers on time</p>
             </div> */}
         </>
@@ -309,7 +306,7 @@ const PassengerFair = () => {
                   <Form>
                     <div className="mb-2">
                       <Label className="form-label" for="login-email">
-                        Passenger Rate
+                        Passenger Rate ($)
                       </Label>
                       <Field name="rate" autoFocus as={Input} type="number" />
 
@@ -387,7 +384,13 @@ const PassengerFair = () => {
                       <Label className="form-label" for="login-email">
                         Passenger Rate
                       </Label>
-                      <Field name="rate" autoFocus as={Input} type="number" />
+                      <Field
+                        name="rate"
+                        autoFocus
+                        as={Input}
+                        type="number"
+                        placeholder="Rate in USD"
+                      />
 
                       <ErrorMessage name="rate">
                         {(msg) => (
