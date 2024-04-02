@@ -12,7 +12,7 @@ import {
   PaginationItem,
   PaginationLink,
 } from "reactstrap";
-import { useLocation } from "react-router-dom";
+import { useLocation, useSearchParams } from "react-router-dom";
 import { User, CreditCard, Calendar, Lock } from "react-feather";
 import { imgUrl } from "../baseUrl";
 import PreferencesDetailsSection from "./components/dashboard/usersDetail/PreferencesDetailsSection";
@@ -26,15 +26,32 @@ import { saveAs } from "file-saver";
 // import { Parser } from "json2csv";
 import { Parser } from "@json2csv/plainjs";
 import { unwind, flatten } from "@json2csv/transforms";
+import { useGetUserWithDetailsQuery } from "../redux/dashboardApi";
+import VerificationRequestDetails from "./components/dashboard/usersDetail/VerificationRequestDetails";
 
 const UserDetails = () => {
   const location = useLocation();
+  const [searchParams, setSearchParams] = useSearchParams();
+
+  const userId = searchParams.get("user_id");
+  let userData;
+  let refetch; // Define refetch here
+  if (userId) {
+    const { data, refetch: refetchFn } = useGetUserWithDetailsQuery(userId);
+    userData = data;
+    refetch = refetchFn;
+  }
   const rowData = location?.state?.user;
   const deleted_users = location?.state?.deleted_users;
 
+  const profileData = rowData ? rowData : userData?.result;
 
-  const user_id = rowData?.id;
-  const is_verified = rowData?.is_verified_driver
+  console.log(profileData);
+
+  const user_id = rowData?.id || userId;
+  const is_verified =
+    rowData?.is_verified_driver || profileData?.is_verified_driver;
+  console.log(user_id, is_verified);
 
   const exportToCSV = () => {
     try {
@@ -66,24 +83,27 @@ const UserDetails = () => {
           Export as CSV
         </Button>
       )}
-      <UserProfileHeader userData={rowData} />
-      <UserDetailCard title="User Information" rowData={rowData} />
-      <AboutSection about={rowData?.about} />
-      <BankDetailsSection bankDetails={rowData?.bank_details} />
-      <VehiclesDetailsSection vehiclesDetails={rowData?.vehicles_details} />
+      <UserProfileHeader userData={profileData} />
+      <UserDetailCard title="User Information" rowData={profileData} />
+      {refetch && (
+        <VerificationRequestDetails
+          user_id={user_id}
+          is_verified={is_verified}
+          refetch={refetch}
+        />
+      )}
+      <AboutSection about={profileData?.about} />
+      <BankDetailsSection bankDetails={profileData?.bank_details} />
+      <VehiclesDetailsSection vehiclesDetails={profileData?.vehicles_details} />
       <PreferencesDetailsSection
         userPreferences={{
-          chattiness_preferences: rowData?.chattiness_preferences,
-          music_preferences: rowData?.music_preferences,
-          pets_preferences: rowData?.pets_preferences,
-          smoking_preferences: rowData?.smoking_preferences,
+          chattiness_preferences: profileData?.chattiness_preferences,
+          music_preferences: profileData?.music_preferences,
+          pets_preferences: profileData?.pets_preferences,
+          smoking_preferences: profileData?.smoking_preferences,
         }}
       />
-        {/* // rideDetails={rowData?.ride_details} */}
-      <RideDetailsTable
-        user_id={user_id}
-        is_verified={is_verified}
-      />
+      <RideDetailsTable user_id={user_id} is_verified={is_verified} />
       <ToastContainer />
     </div>
   );

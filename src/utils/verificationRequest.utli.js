@@ -1,4 +1,5 @@
 import { Eye } from "react-feather";
+import { Link } from "react-router-dom";
 import { Badge, Button, Tooltip } from "reactstrap";
 
 export const verificationColumns = (
@@ -38,7 +39,7 @@ export const verificationColumns = (
         <Badge
           color={row.user_details.is_verified_driver ? "success" : "danger"}
         >
-          {row.user_details.is_verified_driver ? "Verified" : "Not Verified"}
+          {row.user_details.is_verified_driver ? "Verified" : "UnVerified"}
         </Badge>
       ),
     },
@@ -63,7 +64,7 @@ export const verificationColumns = (
             >
               {row.user_details.is_verified_driver ? "UnVerify" : "Verify"}
             </Button>
-            <div>
+            <Link to={`/user-details?user_id=${row?.user_details?.id}`}>
               <Eye
                 style={{
                   cursor: "pointer",
@@ -83,7 +84,7 @@ export const verificationColumns = (
               >
                 View
               </Tooltip>
-            </div>
+            </Link>
           </div>
         </>
       ),

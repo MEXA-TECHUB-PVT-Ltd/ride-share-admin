@@ -49,7 +49,6 @@ const Complaints = () => {
 
   const [rowData, setRowData] = useState();
 
-  
   // search
   const [searchTerm, setSearchTerm] = useState("");
   const filteredData = complaintData?.result?.response?.filter((item) => {
@@ -57,8 +56,8 @@ const Complaints = () => {
       item?.rider_details?.first_name || item?.rider_details?.email;
     return riderName?.toLowerCase().includes(searchTerm?.toLowerCase());
   });
-  
-  const hasData = error ? [] : filteredData
+
+  const hasData = error ? [] : filteredData;
   const highlightMatch = (text, term) => {
     const lowerText = text.toLowerCase();
     const lowerTerm = term.toLowerCase();
@@ -399,8 +398,11 @@ const Complaints = () => {
             <Col xs="12" className="mt-1">
               <p>
                 {" "}
-                Do you want to {" "}
-                {!rowData?.rider_details?.block_status ? "Block" : "UnBlock"}
+                Do you want to{" "}
+                {!rowData?.rider_details?.block_status
+                  ? "Block"
+                  : "UnBlock"}{" "}
+                this rider?
               </p>
               <Button
                 className={`text-right ${

@@ -16,11 +16,11 @@ import { User, CreditCard, Calendar, Lock } from "react-feather";
 const BankDetailsSection = ({ bankDetails }) => {
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 5;
-  if (!Array.isArray(bankDetails) || bankDetails.length === 0) {
+  if (!Array.isArray(bankDetails) || bankDetails?.length === 0) {
     return <p>No bank details available.</p>;
   }
 
-  const pages = Math.ceil(bankDetails.length / itemsPerPage);
+  const pages = Math.ceil(bankDetails?.length / itemsPerPage);
   const currentBankDetails = bankDetails.slice(
     (currentPage - 1) * itemsPerPage,
     currentPage * itemsPerPage

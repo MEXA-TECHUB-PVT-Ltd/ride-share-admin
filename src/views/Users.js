@@ -23,7 +23,7 @@ import "react-toastify/dist/ReactToastify.css";
 import { useGetAllUsersQuery } from "../redux/dashboardApi";
 import moment from "moment";
 import { imgUrl } from "../baseUrl";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import UpdateBlockStatus from "./components/modals/users/UpdateBlockStatus";
 import user_image from "/dummy_user.png";
 
@@ -171,7 +171,7 @@ const Users = () => {
             >
               {!row.block_status ? "Block" : "Unblock"}
             </Button>
-            <div>
+            <Link to={`/user-details?user_id=${row?.id}`}>
               <Eye
                 style={{
                   cursor: "pointer",
@@ -195,7 +195,7 @@ const Users = () => {
               >
                 View
               </Tooltip>
-            </div>
+            </Link>
           </div>
         </>
       ),
@@ -265,25 +265,24 @@ const Users = () => {
               className="d-flex align-items-center sm:flex-wrap"
             >
               <div>
-                <FormGroup>
-                  {/* <Label for="filterOption">Filter:</Label> */}
+                <FormGroup className="d-flex align-items-center gap-2">
+                  <Label for="filterOption" style={{ fontSize: "1rem" }}>
+                    Filter:
+                  </Label>
                   <Input
                     type="select"
                     name="filterOption"
                     id="filterOption"
                     value={filterOption}
                     onChange={handleFilterChange}
+                    style={{ width: "100%" }} // Consider adjusting this width
                   >
-                    <option value="all">Non Verified Drivers</option>
-                    <option value="verified">Verified Drivers</option>
-                    {/* <option value="all">Non Verified Drivers</option> */}
+                    <option value="all">Unverified Users</option>
+                    <option value="verified">Verified Users</option>
                   </Input>
                 </FormGroup>
               </div>
-              <div
-                className="mb-3 ms-1"
-                style={{ borderRadius: "5px", width: "90%" }}
-              >
+              <div className="mb-3 ms-1" style={{ borderRadius: "5px" }}>
                 <InputGroup>
                   <Input
                     placeholder="Search ...."

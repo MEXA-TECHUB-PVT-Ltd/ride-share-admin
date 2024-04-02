@@ -29,12 +29,12 @@ export default [
     icon: <Truck size={20} />,
     navLink: "/cartype",
   },
-  {
-    id: "carcolors",
-    title: "Car Colors",
-    icon: <Sliders size={20} />,
-    navLink: "/car-colors",
-  },
+  // {
+  //   id: "carcolors",
+  //   title: "Car Colors",
+  //   icon: <Sliders size={20} />,
+  //   navLink: "/car-colors",
+  // },
   {
     id: "ridefair",
     title: "Driver Fare",
@@ -61,7 +61,7 @@ export default [
   },
   {
     id: "noninsuranceusers",
-    title: "Non-Insurance Users",
+    title: "Insurance",
     icon: <ShieldOff size={20} />,
     navLink: "/noninsuranceusers",
   },
@@ -77,15 +77,15 @@ export default [
     icon: <CreditCard size={20} />,
     navLink: "/wallet",
   },
-  {
-    id: "NonVerifiedUsers",
-    title: "Non-Verified Users",
-    icon: <UserX size={20} />,
-    navLink: "/non-verify-users",
-  },
+  // {
+  //   id: "NonVerifiedUsers",
+  //   title: "Non-Verified Users",
+  //   icon: <UserX size={20} />,
+  //   navLink: "/non-verify-users",
+  // },
   {
     id: "VerificationRequests",
-    title: "Verification Requests",
+    title: "Verify Users",
     icon: <FileText size={20} />,
     navLink: "/verification-requests",
   },

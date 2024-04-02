@@ -56,6 +56,9 @@ const Sidebar = (props) => {
         )}
         onMouseEnter={onMouseEnter}
         onMouseLeave={() => setMenuHover(false)}
+        style={{
+          overflowY: "auto",
+        }}
       >
         {menu ? (
           menu({ ...props })
@@ -68,7 +71,7 @@ const Sidebar = (props) => {
               {...props}
             />
             {/* Vertical Menu Header Shadow */}
-            <div className="shadow-bottom" ref={shadowRef}  ></div>
+            <div className="shadow-bottom" ref={shadowRef}></div>
             {/* Perfect Scrollbar */}
             <PerfectScrollbar
               style={{ marginTop: "70px" }}
