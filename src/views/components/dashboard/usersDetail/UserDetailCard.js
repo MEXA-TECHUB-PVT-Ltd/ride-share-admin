@@ -71,12 +71,12 @@ const UserDetailCard = ({ title, rowData }) => {
             }
           />
           <UserInfoSection
-            title="Is Verified Driver"
+            title="Verification Status"
             value={
               rowData?.is_verified_driver ? (
-                <Badge color="success">Yes</Badge>
+                <Badge color="success">Verified</Badge>
               ) : (
-                <Badge color="secondary">No</Badge>
+                <Badge color="secondary">Unverified</Badge>
               )
             }
           />

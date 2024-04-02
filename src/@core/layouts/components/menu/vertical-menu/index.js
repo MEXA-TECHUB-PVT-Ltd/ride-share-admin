@@ -56,6 +56,9 @@ const Sidebar = (props) => {
         )}
         onMouseEnter={onMouseEnter}
         onMouseLeave={() => setMenuHover(false)}
+        style={{
+          overflowY: "auto",
+        }}
       >
         {menu ? (
           menu({ ...props })
@@ -76,12 +79,7 @@ const Sidebar = (props) => {
               options={{ wheelPropagation: false }}
               onScrollY={(container) => scrollMenu(container)}
             >
-              <ul
-                className="navigation navigation-main"
-                style={{
-                  overflowY: "auto",
-                }}
-              >
+              <ul className="navigation navigation-main">
                 <VerticalNavMenuItems
                   items={menuData}
                   menuData={menuData}

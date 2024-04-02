@@ -34,11 +34,12 @@ const UserDetails = () => {
   const [searchParams, setSearchParams] = useSearchParams();
 
   const userId = searchParams.get("user_id");
-  console.log(userId);
   let userData;
+  let refetch; // Define refetch here
   if (userId) {
-    const { data } = useGetUserWithDetailsQuery(userId);
+    const { data, refetch: refetchFn } = useGetUserWithDetailsQuery(userId);
     userData = data;
+    refetch = refetchFn;
   }
   const rowData = location?.state?.user;
   const deleted_users = location?.state?.deleted_users;
@@ -84,7 +85,13 @@ const UserDetails = () => {
       )}
       <UserProfileHeader userData={profileData} />
       <UserDetailCard title="User Information" rowData={profileData} />
-      <VerificationRequestDetails user_id={user_id} />
+      {refetch && (
+        <VerificationRequestDetails
+          user_id={user_id}
+          is_verified={is_verified}
+          refetch={refetch}
+        />
+      )}
       <AboutSection about={profileData?.about} />
       <BankDetailsSection bankDetails={profileData?.bank_details} />
       <VehiclesDetailsSection vehiclesDetails={profileData?.vehicles_details} />

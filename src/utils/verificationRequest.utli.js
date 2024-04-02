@@ -39,7 +39,7 @@ export const verificationColumns = (
         <Badge
           color={row.user_details.is_verified_driver ? "success" : "danger"}
         >
-          {row.user_details.is_verified_driver ? "Verified" : "Not Verified"}
+          {row.user_details.is_verified_driver ? "Verified" : "UnVerified"}
         </Badge>
       ),
     },
