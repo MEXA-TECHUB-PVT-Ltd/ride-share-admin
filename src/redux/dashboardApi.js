@@ -48,6 +48,8 @@ export const dashboardApi = createApi({
     "getVerificationRequests",
     "verifyDriver",
     "getVerificationRequestsByUser",
+    "getWithdrawErrors",
+    "getAllTransactionHistory",
   ],
 
   endpoints: (builder) => ({
@@ -345,6 +347,10 @@ export const dashboardApi = createApi({
       query: () => "payments/getAdminTransactionHistory",
       providedTags: ["getAdminTransactions"],
     }),
+    getAllTransactionHistory: builder.query({
+      query: () => "payments/getAllTransactionHistory",
+      providedTags: ["getAllTransactionHistory"],
+    }),
     getAdminWallet: builder.query({
       query: () => "payments/getAdminWallet",
       providedTags: ["getAdminWallet"],
@@ -383,10 +389,17 @@ export const dashboardApi = createApi({
       providedTags: ["getVerificationRequests"],
     }),
     getVerificationRequestsByUser: builder.query({
-      query: (id ) => {
+      query: (id) => {
         return `driver_verification_request/getByUser/${id}`;
       },
       providedTags: ["getVerificationRequestsByUser"],
+    }),
+    // Errors
+    getWithdrawErrors: builder.query({
+      query: () => {
+        return `error_logs/getWithdrawErrors`;
+      },
+      providedTags: ["getWithdrawErrors"],
     }),
   }),
 });
@@ -435,4 +448,6 @@ export const {
   useVerifyDriverMutation,
   useGetUserWithDetailsQuery,
   useGetVerificationRequestsByUserQuery,
+  useGetWithdrawErrorsQuery,
+  useGetAllTransactionHistoryQuery,
 } = dashboardApi;

@@ -28,20 +28,24 @@ const formatDate = (dateString) => {
 };
 
 const VerificationRequestDetails = ({ user_id, is_verified, refetch }) => {
-  console.log(user_id);
   const { data, isLoading, isError, error } =
     useGetVerificationRequestsByUserQuery(user_id);
   const [verifyDriver, { isLoading: isVerifying }] = useVerifyDriverMutation();
   const [modalOpen, setModalOpen] = useState(false);
-  const [modal, setModal] = useState(false);
+  const [modalImage, setModalImage] = useState(false);
   const [selectedImage, setSelectedImage] = useState(null);
   const toggleModal = () => {
     setModalOpen(!modalOpen);
   };
 
+  const toggleImageModal = () => {
+    setModalImage(!modalImage);
+  };
+
   const handleImageClick = (imageSrc) => {
+    console.log("Image clicked", imageSrc);
     setSelectedImage(imageSrc);
-    toggleModal();
+    toggleImageModal();
   };
 
   const handleDriverVerification = async () => {
@@ -60,7 +64,7 @@ const VerificationRequestDetails = ({ user_id, is_verified, refetch }) => {
 
   if (isError) {
     if (error.status === 404) {
-      return <p>No Records Added By User.</p>;
+      return <p>No License Details are available</p>;
     } else {
       return <p>We are proceeding the request</p>;
     }
@@ -100,66 +104,78 @@ const VerificationRequestDetails = ({ user_id, is_verified, refetch }) => {
             </Col>
             <Col md={8}>{data?.result?.response?.[0]?.user_details?.email}</Col>
           </Row>
-          {/* <Row className="mb-2">
-          <Col md={4} className="fw-bold">
-            Is Verified:
-          </Col>
-          <Col md={8}>
-            {data?.result?.response?.[0]?.user_details?.is_verified_driver
-              ? "Yes"
-              : "No"}
-          </Col>
-        </Row> */}
           <Row className="mb-2">
             <Col md={6} className="fw-bold d-flex flex-column">
               Front Image:
-              <img
-                src={data?.result?.response?.[0]?.front_image || user_image}
-                alt="Front Image"
+              <div
+                className="image-container"
                 style={{
-                  maxWidth: "200px",
-                  height: "auto",
+                  width: "300px",
+                  height: "300px",
                   marginTop: "10px",
+                  overflow: "hidden",
+                  position: "relative",
                   cursor: "pointer",
                 }}
-                onClick={() =>
-                  handleImageClick(
-                    data?.result?.response?.[0]?.front_image || user_image
-                  )
-                }
-                onError={(e) => {
-                  e.target.src = user_image;
-                }}
-              />
+              >
+                <img
+                  src={data?.result?.response?.[0]?.front_image || user_image}
+                  alt="Front Image"
+                  style={{
+                    width: "100%",
+                    aspectRatio: "2/2",
+                    objectFit: "contain",
+                  }}
+                  onClick={() =>
+                    handleImageClick(
+                      data?.result?.response?.[0]?.front_image || user_image
+                    )
+                  }
+                  onError={(e) => {
+                    e.target.src = user_image;
+                  }}
+                />
+              </div>
             </Col>
             <Col md={6} className="fw-bold d-flex flex-column">
               Back Image:
-              <img
-                src={data?.result?.response?.[0]?.back_image || user_image}
-                alt="Back Image"
+              <div
+                className="image-container"
                 style={{
-                  maxWidth: "200px",
-                  height: "auto",
+                  width: "300px",
+                  height: "300px",
                   marginTop: "10px",
+                  overflow: "hidden",
+                  position: "relative",
                   cursor: "pointer",
                 }}
-                onClick={() =>
-                  handleImageClick(
-                    data?.result?.response?.[0]?.back_image || user_image
-                  )
-                }
-                onError={(e) => {
-                  e.target.src = user_image;
-                }}
-              />
+              >
+                <img
+                  src={data?.result?.response?.[0]?.back_image || user_image}
+                  alt="Back Image"
+                  style={{
+                    width: "100%",
+                    aspectRatio: "2/2",
+                    objectFit: "contain",
+                  }}
+                  onClick={() =>
+                    handleImageClick(
+                      data?.result?.response?.[0]?.back_image || user_image
+                    )
+                  }
+                  onError={(e) => {
+                    e.target.src = user_image;
+                  }}
+                />
+              </div>
             </Col>
           </Row>
+
           <Row className="mb-2"></Row>
           <p>Do you want to {is_verified ? "un verify" : "verify"} the user?</p>
           <Button
             className="button-color"
             type="submit"
-            // disabled={}
             onClick={toggleModal}
             block
             style={{ backgroundColor: "#ffd300 !important" }}
@@ -168,13 +184,16 @@ const VerificationRequestDetails = ({ user_id, is_verified, refetch }) => {
           </Button>
         </Card>
       )}
-      <Modal isOpen={modal} toggle={toggleModal} size="md">
-        <ModalHeader toggle={toggleModal}></ModalHeader>
+      <Modal isOpen={modalImage} toggle={toggleImageModal} size="md">
+        <ModalHeader toggle={toggleImageModal}></ModalHeader>
         <ModalBody className="text-center">
           <img
             src={selectedImage}
             alt="Selected"
             style={{ width: "100%", height: "auto" }}
+            onError={(e) => {
+              e.target.src = user_image;
+            }}
           />
         </ModalBody>
         <ModalFooter></ModalFooter>
