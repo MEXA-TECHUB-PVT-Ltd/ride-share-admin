@@ -64,7 +64,7 @@ const VerificationRequestDetails = ({ user_id, is_verified, refetch }) => {
 
   if (isError) {
     if (error.status === 404) {
-      return <p>No Records Added By User.</p>;
+      return <p>No License Details are available</p>;
     } else {
       return <p>We are proceeding the request</p>;
     }
@@ -107,47 +107,70 @@ const VerificationRequestDetails = ({ user_id, is_verified, refetch }) => {
           <Row className="mb-2">
             <Col md={6} className="fw-bold d-flex flex-column">
               Front Image:
-              <img
-                src={data?.result?.response?.[0]?.front_image || user_image}
-                alt="Front Image"
+              <div
+                className="image-container"
                 style={{
-                  maxWidth: "200px",
-                  height: "auto",
+                  width: "300px",
+                  height: "300px",
                   marginTop: "10px",
+                  overflow: "hidden",
+                  position: "relative",
                   cursor: "pointer",
                 }}
-                onClick={() =>
-                  handleImageClick(
-                    data?.result?.response?.[0]?.front_image || user_image
-                  )
-                }
-                onError={(e) => {
-                  e.target.src = user_image;
-                }}
-              />
+              >
+                <img
+                  src={data?.result?.response?.[0]?.front_image || user_image}
+                  alt="Front Image"
+                  style={{
+                    width: "100%",
+                    aspectRatio: "2/2",
+                    objectFit: "contain",
+                  }}
+                  onClick={() =>
+                    handleImageClick(
+                      data?.result?.response?.[0]?.front_image || user_image
+                    )
+                  }
+                  onError={(e) => {
+                    e.target.src = user_image;
+                  }}
+                />
+              </div>
             </Col>
             <Col md={6} className="fw-bold d-flex flex-column">
               Back Image:
-              <img
-                src={data?.result?.response?.[0]?.back_image || user_image}
-                alt="Back Image"
+              <div
+                className="image-container"
                 style={{
-                  maxWidth: "200px",
-                  height: "auto",
+                  width: "300px",
+                  height: "300px",
                   marginTop: "10px",
+                  overflow: "hidden",
+                  position: "relative",
                   cursor: "pointer",
                 }}
-                onClick={() =>
-                  handleImageClick(
-                    data?.result?.response?.[0]?.back_image || user_image
-                  )
-                }
-                onError={(e) => {
-                  e.target.src = user_image;
-                }}
-              />
+              >
+                <img
+                  src={data?.result?.response?.[0]?.back_image || user_image}
+                  alt="Back Image"
+                  style={{
+                    width: "100%",
+                    aspectRatio: "2/2",
+                    objectFit: "contain",
+                  }}
+                  onClick={() =>
+                    handleImageClick(
+                      data?.result?.response?.[0]?.back_image || user_image
+                    )
+                  }
+                  onError={(e) => {
+                    e.target.src = user_image;
+                  }}
+                />
+              </div>
             </Col>
           </Row>
+
           <Row className="mb-2"></Row>
           <p>Do you want to {is_verified ? "un verify" : "verify"} the user?</p>
           <Button
