@@ -21,7 +21,7 @@ const WithdrawIssues = () => {
   const [currentIssue, setCurrentIssue] = useState({});
   const navigate = useNavigate()
 
-  const toggleModal = () => setModal(!modal);
+  const toggleModal = () => setModal(!modal); 
 
   const columns = [
     {
