@@ -11,18 +11,31 @@ import {
   Card,
   CardBody,
   CardTitle,
+  Modal,
+  ModalHeader,
+  ModalBody,
+  ModalFooter,
+  Button,
 } from "reactstrap";
 import moment from "moment";
 import {
   useGetAdminTransactionsQuery,
   useGetAdminWalletQuery,
+  useGetAllTransactionHistoryQuery,
 } from "../redux/dashboardApi";
+import { useNavigate } from "react-router-dom";
 
 const Wallet = () => {
   const [currentPage, setCurrentPage] = useState(1);
-  const [searchTerm, setSearchTerm] = useState("");
-  const { data, refetch, isLoading } = useGetAdminTransactionsQuery();
+  const { data, refetch, isLoading } = useGetAllTransactionHistoryQuery();
   const { data: wallet } = useGetAdminWalletQuery();
+  const [modal, setModal] = useState(false);
+  const [currentTransaction, setCurrentTransaction] = useState({});
+  const navigate = useNavigate();
+
+  const toggleModal = () => {
+    setModal(!modal);
+  };
 
   // Extract transactions from the response
   const transactions = data?.transactions || [];
@@ -33,25 +46,15 @@ const Wallet = () => {
     refetch();
   };
 
-  // Assuming the need to integrate a search feature
-  // This would require adjustments based on your actual data structure and requirements
-  const filteredData = searchTerm
-    ? transactions.filter((transaction) =>
-        transaction.username.toLowerCase().includes(searchTerm.toLowerCase())
-      )
-    : transactions;
-
   const columns = [
-    // Adjust these columns according to your actual data
-    // Here's an example based on the provided data structure
     {
-      name: "ID",
-      selector: (row) => row.id,
+      name: "Total Amount",
+      selector: (row) => `$${parseFloat(row.amount.total).toFixed(2)}`,
       sortable: true,
     },
     {
-      name: "Amount",
-      selector: (row) => `$${parseFloat(row.amount).toFixed(2)}`,
+      name: "Admin Amount",
+      selector: (row) => `$${parseFloat(row.admintax).toFixed(2)}`,
       sortable: true,
     },
     {
@@ -64,6 +67,22 @@ const Wallet = () => {
       selector: (row) => moment(row.created_at).format("YYYY-MM-DD HH:mm:ss"),
       sortable: true,
     },
+    {
+      name: "Actions",
+      button: true,
+      cell: (row) => (
+        <Button
+          color="primary"
+          onClick={() => {
+            setCurrentTransaction(row);
+            toggleModal();
+          }}
+        >
+          Details
+        </Button>
+      ),
+    },
+
     // Add or adjust columns as needed
   ];
 
@@ -109,29 +128,13 @@ const Wallet = () => {
                   </CardBody>
                 </Card>
               </div>
-
-              {/* <div
-                className="mb-2"
-                style={{ borderRadius: "5px", width: "90%" }}
-              >
-                <InputGroup>
-                  <Input
-                    placeholder="Search ...."
-                    value={searchTerm}
-                    onChange={(e) => setSearchTerm(e.target.value)}
-                  />
-                  <InputGroupText>
-                    <Search style={{ width: "15px" }} />
-                  </InputGroupText>
-                </InputGroup>
-              </div> */}
             </Col>
           </Row>
 
           <div className="mb-2">
             <DataTable
               columns={columns}
-              data={filteredData}
+              data={transactions || []}
               pagination
               highlightOnHover
               responsive
@@ -141,6 +144,61 @@ const Wallet = () => {
           </div>
         </>
       )}
+
+      <Modal isOpen={modal} toggle={toggleModal}>
+        <ModalHeader toggle={toggleModal}>Transaction Details</ModalHeader>
+        <ModalBody>
+          <p>
+            <strong>Total Amount:</strong> $
+            {parseFloat(currentTransaction?.amount?.total)?.toFixed(2)}
+          </p>
+          <p>
+            <strong>Admin Tax:</strong> $
+            {parseFloat(currentTransaction?.admintax)?.toFixed(2)}
+          </p>
+          <p>
+            <strong>Status:</strong> {currentTransaction?.status}
+          </p>
+          <p>
+            <strong>Created At:</strong>{" "}
+            {moment(currentTransaction?.created_at)?.format(
+              "YYYY-MM-DD HH:mm:ss"
+            )}
+          </p>
+          <p>
+            <strong>Description:</strong> {currentTransaction?.description}
+          </p>
+          <hr />
+          <h5>Joiner Details</h5>
+          <p>
+            <strong>ID:</strong> {currentTransaction?.joiner_details?.id}
+          </p>
+          <p>
+            <strong>First Name:</strong>{" "}
+            {currentTransaction?.joiner_details?.first_name || "Not Provided"}
+          </p>
+          <p>
+            <strong>Last Name:</strong>{" "}
+            {currentTransaction?.joiner_details?.last_name || "Not Provided"}
+          </p>
+          <p>
+            <strong>Email:</strong> {currentTransaction?.joiner_details?.email}
+          </p>
+        </ModalBody>
+
+        <ModalFooter>
+          <Button
+            color="secondary"
+            onClick={() =>
+              navigate(
+                `/user-details?user_id=${currentTransaction?.joiner_details?.id}`
+              )
+            }
+          >
+            See joiner details
+          </Button>
+        </ModalFooter>
+      </Modal>
     </>
   );
 };

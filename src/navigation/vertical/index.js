@@ -14,6 +14,7 @@ import {
   ShieldOff,
   FileText,
   Sliders,
+  AlertCircle,
 } from "react-feather";
 
 export default [
@@ -88,5 +89,11 @@ export default [
     title: "Verify Users",
     icon: <FileText size={20} />,
     navLink: "/verification-requests",
+  },
+  {
+    id: "WithdrawIssues",
+    title: "Error Log",
+    icon: <AlertCircle size={20} />,
+    navLink: "/withdraw-issues",
   },
 ];

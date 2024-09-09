@@ -9,10 +9,11 @@ import {
   PaginationLink,
 } from "reactstrap";
 import moment from "moment";
+import user_image from "/doc.png";
 
 const VehiclesDetailsSection = ({ vehiclesDetails }) => {
   const [currentPage, setCurrentPage] = useState(1);
-  const itemsPerPage = 5; 
+  const itemsPerPage = 5;
   const totalPages = Math.ceil(vehiclesDetails?.length / itemsPerPage);
 
   const handlePageChange = (page) => {
@@ -41,6 +42,7 @@ const VehiclesDetailsSection = ({ vehiclesDetails }) => {
               <th>License Plate</th>
               <th>Color</th>
               <th>License Expiry Date</th>
+              <th>Insurance Image</th>
             </tr>
           </thead>
           <tbody>
@@ -58,6 +60,22 @@ const VehiclesDetailsSection = ({ vehiclesDetails }) => {
                     {vehicle.license_expiry_date
                       ? moment(vehicle.license_expiry_date).format("DD-MM-YYYY")
                       : "N/A"}
+                  </td>
+                  <td>
+                    <a
+                      href={vehicle?.insurance_image}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      <img
+                        src={vehicle?.insurance_image || user_image}
+                        alt=""
+                        style={{ width: "100px", height: "auto" }}
+                        onError={(e) => {
+                          e.target.src = user_image;
+                        }}
+                      />
+                    </a>
                   </td>
                 </tr>
               </React.Fragment>

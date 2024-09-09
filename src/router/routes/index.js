@@ -20,6 +20,7 @@ import CarColor from "../../views/CarColors";
 import Wallet from "../../views/Wallet";
 import NonVerifiedUsers from "../../views/NonVerifiedUsers";
 import VerificationRequests from "../../views/VerificationRequests";
+import WithdrawIssues from "../../views/WithdrawIssues";
 
 const getLayout = {
   blank: <BlankLayout />,
@@ -218,6 +219,14 @@ const Routes = [
   {
     path: "/wallet",
     element: <Wallet />,
+    meta: {
+      // layout: "blank",
+      publicOnly: false,
+    },
+  },
+  {
+    path: "/withdraw-issues",
+    element: <WithdrawIssues />,
     meta: {
       // layout: "blank",
       publicOnly: false,
